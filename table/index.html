@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<head>
+    <style>
+        .staff-list-sheet {
+            padding: 0;
+            border:1px solid orange;
+        }
+
+        #left_div {
+            width: 150px;
+            float: left;
+            background: #fff;
+            border:1px solid red;
+        }
+
+        #left_div1 {
+            width: 100%;
+        }
+
+        #left_div2 {
+            margin-top: -20px;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+
+        #left_table2 {
+            margin-bottom: 0;
+        }
+
+        #left_table1 th {
+            background: #ef7550;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            font-size: 14px;
+            color: #fff;
+            display: inline-block;
+            width: 150px;
+        }
+
+        #left_table2 th {
+            width: 150px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            font-size: 14px;
+            color: #000;
+            border: 1px solid #f0f0f0;
+            display: inline-block;
+            border-bottom: 0;
+        }
+
+        #right_divx {
+            width: 100%;
+        }
+
+        #right_div {
+            float: left;
+            overflow: scroll;
+        }
+
+        #right_div1 {
+            width: 250%;
+            overflow: hidden;
+        }
+
+        #right_div2 {
+            width: 250%;
+            height: 400px;
+            overflow: auto;
+        }
+
+        #right_table1 {
+            width: 100%;
+            margin-bottom: 0;
+        }
+
+        #right_table1 th {
+            display: inline-block;
+        }
+
+        #right_table1 th.jiaban-th {
+            width: 451px;
+            font-size: 0;
+            position: relative;
+        }
+
+        #right_table1 th.jiaban-th p {
+            margin: 0;
+            padding: 0;
+        }
+
+        #right_table1 th.jiaban-th p:nth-of-type(2) {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            font-size: 0;
+        }
+
+        #right_table1 th.jiaban-th p,
+        #right_table1 th.jiaban-th p span {
+            display: inline-block;
+            height: 13px;
+            line-height: 20px;
+            font-size: 12px;
+            color: #fff;
+        }
+
+        #right_table1 th.jiaban-th p span:nth-of-type(2) {
+            border-right: 1px solid #fff;
+            border-left: 1px solid #fff;
+        }
+
+        #right_table1 th.jiaban-th p span {
+            display: inline-block;
+            width: 150px;
+        }
+
+        #right_table2 {
+            width: 100%;
+            max-width: 100%;
+            white-space: nowrap;
+            background: #fff;
+            margin-bottom: 0;
+        }
+
+        #right_table1 th {
+            background: #ef7550;
+            text-align: center;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        #right_table2 td {
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            text-align: center;
+            display: inline-block;
+        }
+
+        .table-bordered>thead>tr>th,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>th {
+            border: 1px solid #fff;
+            border-top: 0;
+            border-left: 0;
+        }
+
+        .table-bordered>thead>tr>td,
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tfoot>tr>td {
+            border: 1px solid #f0f0f0;
+            border-bottom: 0;
+            border-left: 0;
+        }
+
+        .table-bordered {
+            border: #fff;
+        }
+
+        #right_table2 .status span {
+            width: 60px;
+            height: 20px;
+            border-radius: 20px;
+            background: #31b5f0;
+            padding-left: 0;
+            line-height: 20px;
+            color: #fff;
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        #right_table2 .zhengshi span {
+            background: #21BCC2;
+        }
+
+        #right_table2 .shiyong span {
+            background: #fb5755;
+        }
+
+        #right_table2 .dairuzhi span {
+            background: #31b5f0;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="container">
+        <div id="left_div">
+            <!--左上角固定不变的位置-->
+            <div id="left_div1">
+                <table id="left_table1" class="table table-bordered">
+                    <tr>
+                        <th>姓名</th>
+                    </tr>
+                </table>
+            </div>
+            <!--首列，不包含左上角固定位置-->
+            <div id="left_div2">
+                <table id="left_table2" class="table table-bordered">
+                </table>
+            </div>
+        </div>
+        <div id="right_div">
+            <!--右侧表头-->
+            <div id="right_div1">
+                <div id="right_divx">
+                    <table id="right_table1" class="table-bordered">
+                        <tr>
+                            <th>员工状态</th>
+                            <th>部门</th>
+                            <th>应出勤天数</th>
+                            <th>实际出勤天数</th>
+                            <th>迟到次数</th>
+                            <th>迟到时长</th>
+                            <th>早退次数</th>
+                            <th>早退时长</th>
+                            <th>漏打卡次数</th>
+                            <th>外勤次数</th>
+                            <th>旷工天数</th>
+                            <th class="jiaban-th">
+                                <p>加班-按加班规则计算</p>
+                                <p>
+                                    <span>工作日加班</span>
+                                    <span>休息日加班</span>
+                                    <span>节假日加班</span>
+                                </p>
+                            </th>
+                            <th>本月共请假时间（天）</th>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!--右侧底部-->
+            <div id="right_div2">
+                <table id="right_table2" class="table table-bordered">
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script>
+    //固定和滚动
+    var right_div2 = document.getElementById("right_div2");
+    right_div2.onscroll = function () {
+        var right_div2_top = this.scrollTop;
+        var right_div2_left = this.scrollLeft;
+        document.getElementById("left_div2").scrollTop = right_div2_top;
+        document.getElementById("right_div1").scrollLeft = right_div2_left;
+    }
+
+    //设置右边div宽度
+    document.getElementById("right_div").style.width = "" + 1200 - 150 + "px";
+    setInterval(function () {
+        document.getElementById("right_div").style.width = "" + 1200 - 150 + "px";
+    }, 0);
+
+    for (var i = 0; i < 24; i++) {
+
+        /*
+         * left_table2  是左侧姓名第一列，单独设置
+         * right_table2 是右侧除了表头剩余的其他部分，单独设置
+         */
+
+        var strRightTable2 = '<tr>' +
+            '<td class="zhengshi status"><span>正式</span></td>' +
+            '<td>产品</td>' +
+            '<td>31</td>' +
+            '<td>3</td>' +
+            '<td>12分钟</td>' +
+            '<td>2</td>' +
+            '<td>32分钟</td>' +
+            '<td>1</td>' +
+            '<td>2</td>' +
+            '<td>3</td>' +
+            '<td>3</td>' +
+            '<td class="jiaban-gongzuo">3</td>' +
+            '<td class="jiaban-xiuxi">3</td>' +
+            '<td class="jiaban-jiejia">3</td>' +
+            '<td>1</td>' +
+            '<td>2</td>' +
+            '</tr>'
+
+        $("#left_table2").append("<tr><th>张大毛</th></tr>");
+        $("#right_table2").append(strRightTable2);
+    }
+
+    //动态计算滚动区域宽度
+    var th_list = $("#right_table1 th");
+    var _width = 0;
+    for (var i = 0; i < th_list.length; i++) {
+        var th_wisth = $("#right_table1 th").eq(i).width();
+        //加上border的宽度
+        _width += th_wisth;
+    }
+    _width = _width + th_list.length;
+    $("#right_div1").width(_width);
+    $("#right_div2").width(_width);
+
+
+</script>
+
+</html>
