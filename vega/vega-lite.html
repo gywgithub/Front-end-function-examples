@@ -1,58 +1,67 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>Vega-Lite Bar Chart</title>
     <meta charset="utf-8" />
-
     <script src="https://cdn.jsdelivr.net/npm/vega@5.3.4/build/vega.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-lite@3.1.0/build/vega-lite.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@4.0.0/build/vega-embed.js"></script>
-
     <style media="screen">
-      /* Add space between Vega-Embed links  */
-      .vega-actions a {
+    /* Add space between Vega-Embed links  */
+    .vega-actions a {
         margin-right: 5px;
-      }
+    }
     </style>
-  </head>
-  <body>
+</head>
+
+<body>
     <h1>Template for Embedding Vega-Lite Visualization</h1>
     <!-- Container for the visualization -->
     <div id="vis"></div>
-
     <script>
-      // Assign the specification to a local variable vlSpec.
-      var vlSpec = {
-        $schema: 'https://vega.github.io/schema/vega-lite/v3.json',
-        data: {
-          values: [
-            {a: 'C', b: 2},
-            {a: 'C', b: 7},
-            {a: 'C', b: 4},
-            {a: 'D', b: 1},
-            {a: 'D', b: 2},
-            {a: 'D', b: 6},
-            {a: 'E', b: 8},
-            {a: 'E', b: 4},
-            {a: 'E', b: 7}
-          ]
+    var vlSpec = {
+        "$schema": "https://vega.github.io/schema/vega-lite/v3.json",
+        "data": {
+            "name": "table",
+            "values": [
+                { "category": "ADDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDBDDCCCCCC", "value": 0.2 },
+                { "category": "BCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCGGGGGG", "value": 0.4 },
+                { "category": "C", "value": 0.7 },
+                { "category": "D", "value": 0.5 },
+                { "category": "C234234234", "value": 0.1 }
+            ]
         },
-        mark: 'bar',
-        encoding: {
-          y: {field: 'a', type: 'nominal'},
-          x: {
-            // aggregate: 'average',
-            field: 'b',
-            type: 'quantitative',
-            axis: {
-              title: 'Average of b'
+        "encoding": {
+            "y": { "field": "category", "type": "ordinal", "sort": {"encoding": "x", "order":"descending"} },
+            "x": { "field": "value", "type": "quantitative" }
+        },
+        "layer": [{
+            "mark": "bar"
+        }, {
+            "mark": {
+                "type": "text",
+                "align": "left",
+                "baseline": "middle",
+                "dx": 3
+            },
+            "encoding": {
+                "text": { "field": "value", "type": "quantitative" }
             }
-          }
-        }
-      };
+        }]
+    }
 
-      // Embed the visualization in the container with id `vis`
-      vegaEmbed('#vis', vlSpec);
+    let vegaObj = null
+    vegaEmbed('#vis', vlSpec, embed_options = {'actions': false }).then(function (res) {
+        console.log('res: ', res)
+        vegaObj = res
+
+    });
+
+    setTimeout(() => {
+        console.log('vega obj ', vegaObj)
+    }, 1000)
     </script>
-  </body>
+</body>
+
 </html>
