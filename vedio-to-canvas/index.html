@@ -3,21 +3,25 @@
   <head>
     <style>
       div {
-        float: left;
-        border :1px solid #ccc;
         padding:10px;
         margin: 10px;
       }
     </style>
   </head>
 
-  <body>
+  <body style="background-color: black;">
+    <div>
+      <input id="add" type="button" value="Add Keypoint">&nbsp;&nbsp;&nbsp;&nbsp;
+      <input id="clear" type="button" value="clear">&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
     <div>
       <video id="video" src="media/video.mp4" controls="true"/>
     </div>
     <div>
-      <canvas id="c1" width="160" height="96"></canvas>
+      <canvas id="c1" width="400" height="300" style="border:1px solid white;position:absolute;top:50px;left:500px;z-index:1;"></canvas>
+      <canvas id="c2" width="400" height="300" style="border:1px solid green;cursor:crosshair;position:absolute;top:500px;left:500px;z-index:2;"></canvas>
+      <!-- <canvas id="c3" width="400" height="300" style="border:1px solid blue;position:absolute;top:50px;left:500px;z-index:2;"></canvas> -->
     </div>
-  <script type="text/javascript" src="processor.js"></script>
+  <script type="text/javascript" src="main.js"></script>
   </body>
 </html>
