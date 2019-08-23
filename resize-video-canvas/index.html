@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<body onresize="myFunction()">
+
+  <div style="border:1px solid yellow;position:relative;">
+    <p id="demo"></p>
+
+    <video id="video" src="http://192.168.199.106:9001/sports/video/yoga/d6c8b828146a4e66d93ce41e7b59b358.mp4"
+      style="width:100%; position: absolute; top: 50px;z-index: 1;" controls autoplay></video>
+
+
+    <canvas id="c1" style="width: 100%; top: 50px;position: absolute;z-index:9;border:1px solid red;"></canvas>
+
+  </div>
+  <script>
+    function myFunction() {
+      var w = window.outerWidth;
+      var h = window.outerHeight;
+      var txt = "Window size: width=" + w + ", height=" + h;
+      document.getElementById("demo").innerHTML = txt;
+
+      console.log('video width')
+
+      let videoClientWidth = document.getElementById("video").clientWidth
+      let videoClientHeight = document.getElementById("video").clientHeight
+      console.log('w: ' + videoClientWidth + ' h: ' + videoClientHeight)
+
+      let canvas = document.getElementById('c1')
+      canvas.width = videoClientWidth
+      canvas.height = videoClientHeight
+    }
+
+    setTimeout(() => {
+      let videoClientWidth = document.getElementById("video").clientWidth
+      let videoClientHeight = document.getElementById("video").clientHeight
+      console.log('w: ' + videoClientWidth + ' h: ' + videoClientHeight)
+
+      let canvas = document.getElementById('c1')
+      canvas.width = videoClientWidth
+      canvas.height = videoClientHeight
+    }, 50)
+  </script>
+
+</body>
+
+</html>
