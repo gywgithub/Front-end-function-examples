@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Choose Camera Devices</title>
+</head>
+
+<body>
+  <label for="select">Choose Camera Devices</label>
+  <select id="select">
+    <option></option>
+  </select>
+
+  <br><br>
+  <input type="button" value="Open Camera" onclick="openCamera()" />
+  <br><br>
+  Media
+  <br><br>
+  <video id="video" width="640" height="480"  autoplay="true" controls="controls"></video>
+</body>
+<script>
+  try {
+    let select = document.getElementById('select')
+    let video = document.getElementById('video')
+
+    if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
+      console.log("enumerateDevices() not supported.")
+    }
+
+    // List cameras and microphones.
+    navigator.mediaDevices.enumerateDevices()
+      .then(function (devices) {
+        console.log(devices)
+
+        devices.forEach(function (device) {
+          console.log(device.kind + ": " + device.label + " id = " + device.deviceId)
+          let opt = document.createElement('option')
+          opt.value = device.deviceId
+          opt.text = device.kind + ": " + device.label + " id = " + device.deviceId
+
+          select.appendChild(opt, null)
+        })
+      })
+      .catch(function (err) {
+        console.log(err.name + ": " + err.message)
+      })
+
+    function openCamera() {
+      let selectedValue = select.value
+      console.log('selectedValue: ', selectedValue)
+      if (selectedValue) {
+        let constraints = { video: { deviceId: selectedValue } }
+        console.log('constraints: ', constraints)
+        navigator.mediaDevices.getUserMedia(constraints)
+          .then(async (stream) => {
+            console.log('stream')
+            console.log(stream)
+            video.srcObject = stream
+          })
+      } else {
+        console.error('no selected device!')
+      }
+    }
+
+
+  } catch (error) {
+    console.error(error)
+  }
+</script>
+
+</html>
