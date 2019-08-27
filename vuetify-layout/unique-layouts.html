@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Unique layouts</title>
+</head>
+
+<body>
+  <div id="app">
+    <v-app id="inspire">
+      <v-container fluid grid-list-sm>
+        <v-layout row wrap>
+          <v-flex d-flex xs12 order-xs5>
+            <v-layout column>
+              <v-flex d-flex>
+                <v-card color="blue-grey" dark tile flat>
+                  <v-card-text>{{ lorem }}111</v-card-text>
+                </v-card>
+              </v-flex>
+              <v-flex d-flex>
+                <v-card color="brown" dark tile flat>
+                  <v-card-text>{{ lorem }}222</v-card-text>
+                </v-card>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex d-flex xs12 sm7>
+            <v-layout row wrap>
+              <v-flex d-flex>
+                <v-card color="indigo lighten-2" dark tile flat>
+                  <v-card-text>{{ lorem.slice(0, 70) }}333</v-card-text>
+                </v-card>
+              </v-flex>
+              <v-flex d-flex>
+                <v-layout row>
+                  <v-flex d-flex>
+                    <v-card color="amber lighten-2" tile flat>
+                      <v-card-text>{{ lorem.slice(0, 70) }}444</v-card-text>
+                    </v-card>
+                  </v-flex>
+                  <v-flex d-flex>
+                    <v-card color="amber lighten-2" tile flat>
+                      <v-card-text>{{ lorem }}777</v-card-text>
+                    </v-card>
+                  </v-flex>
+                </v-layout>
+              </v-flex>
+            </v-layout>
+          </v-flex>
+          <v-flex d-flex xs12 sm2>
+            <v-card color="orange lighten-2" tile flat>
+              <v-card-text>{{ lorem.slice(0, 90) }}555</v-card-text>
+            </v-card>
+          </v-flex>
+          <v-flex d-flex xs12 sm3>
+            <v-card color="red lighten-2" dark tile flat>
+              <v-card-text>{{ lorem.slice(0, 100) }}666</v-card-text>
+            </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </v-app>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vuetify@1.x/dist/vuetify.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        lorem: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum posidonium mediocritatem, explicari dissentiunt cu mea. Repudiare disputationi vim in, mollis iriure nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`
+      })
+    })
+  </script>
+</body>
+
+</html>
