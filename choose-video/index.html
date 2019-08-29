@@ -12,7 +12,9 @@
   </select>
 
   <br><br>
-  <input type="button" value="Open Camera" onclick="openCamera()" />
+  <input type="button" value="Open Camera" onclick="openCamera()" /> 
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" value="Stop Camera" onclick="stopCamera()" />
   <br><br>
   Media
   <br><br>
@@ -20,6 +22,7 @@
 </body>
 <script>
   try {
+    var localStream = null
     let select = document.getElementById('select')
     let video = document.getElementById('video')
 
@@ -56,10 +59,16 @@
             console.log('stream')
             console.log(stream)
             video.srcObject = stream
+            localStream = stream
           })
       } else {
         console.error('no selected device!')
       }
+    }
+
+    function stopCamera() { 
+      console.log(localStream)
+      localStream.getTracks()[0].stop()
     }
 
 
