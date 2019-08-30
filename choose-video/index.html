@@ -22,16 +22,24 @@
   <input type="button" value="Open Camera" onclick="openCamera()" /> 
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <input type="button" value="Stop Camera" onclick="stopCamera()" />
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" value="Screen Shot" onclick="screenShot()" />
+  
   <br><br>
   Media
   <br><br>
   <video id="video" width="640" height="480"  autoplay="true" controls="controls"></video>
+  <br><br>
+  <canvas id="canvas" width="640" height="480"></canvas>
+
 </body>
 <script>
   try {
     var localStream = null
     let select = document.getElementById('select')
     let video = document.getElementById('video')
+    let canvas = document.getElementById('canvas')
+    let ctx = canvas.getContext('2d')
 
     if (!navigator.mediaDevices || !navigator.mediaDevices.enumerateDevices) {
       console.log("enumerateDevices() not supported.")
@@ -79,9 +87,20 @@
     }
 
 
+    // add translate
+    ctx.translate(640, 0)
+    ctx.scale(-1, 1)
+
+    function screenShot() {
+      console.log('screen shot')
+      ctx.drawImage(video, 0, 0, 640, 480); 
+    }
+
+
   } catch (error) {
     console.error(error)
   }
+
 
   // JS canvas flip
   // https://stackoverflow.com/questions/47742208/horizontally-flipping-getusermedias-webcam-image-stream
