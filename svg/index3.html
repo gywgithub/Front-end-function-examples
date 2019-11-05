@@ -1,0 +1,43 @@
+<html>
+
+<head>
+  <title>Static Tree Diagram</title>
+</head>
+
+<body>
+  <?xml version="1.0" standalone="no"?>
+  <!-- 三次贝塞尔曲线 C  -->
+  <!-- size: 1000  -->
+  <svg width="2000" height="2000" version="1.1" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #ccc;">
+    <!-- 第一级圆点 -->
+    <circle cx="500" cy="200" r="5" fill="red" />
+
+    <!-- 第二级圆点 -->
+    <circle cx="100" cy="900" r="5" fill="red" />
+    <circle cx="300" cy="900" r="5" fill="red" />
+    <circle cx="500" cy="900" r="5" fill="red" />
+    <circle cx="700" cy="900" r="5" fill="red" />
+    <circle cx="900" cy="900" r="5" fill="red" />
+
+    <!-- 第二级曲线 -->
+    <path d="M500 200 C 500 500, 100 500, 100 900" fill="transparent" stroke="black" />
+    <path d="M500 200 C 500 500, 300 500, 300 900" fill="transparent" stroke="black" />
+    <path d="M500 200 C 500 500, 500 500, 500 900" fill="transparent" stroke="black" />
+    <path d="M500 200 C 500 500, 700 500, 700 900" fill="transparent" stroke="black" />
+    <path d="M500 200 C 500 500, 900 500, 900 900" fill="transparent" stroke="black" />
+
+    <!-- 第三级级曲线 -->
+    <path d="M100 900 C 100 1350, 33 1350, 33 1800" fill="transparent" stroke="black" />
+    <path d="M100 900 C 100 1350, 100 1350, 100 1800" fill="transparent" stroke="black" />
+    <path d="M100 900 C 100 1350, 165 1350, 165 1800" fill="transparent" stroke="black" />
+
+
+    <!-- 第三级圆点 -->
+    <circle cx="33" cy="1800" r="5" fill="red" />
+    <circle cx="100" cy="1800" r="5" fill="red" />
+    <circle cx="165" cy="1800" r="5" fill="red" />
+  </svg>
+
+</body>
+
+</html>
