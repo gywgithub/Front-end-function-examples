@@ -26,7 +26,41 @@
 <script src="https://d3js.org/d3.v4.min.js"></script>
 <script>
 
-var treeData2 =
+var treeData44 = {
+      'name': 'flare',
+      'value': 43434,
+      'children': [{
+        'name': 'util',
+        'value': 23,
+        'children': [{
+          'name': 'Geometry',
+          'value': 10993
+        },
+        {
+          'name': 'heap',
+          'value': 24,
+          'children': [{
+            'name': 'FibonacciHeap',
+            'value': 9354
+          }]
+        },
+        {
+          'name': 'math',
+          'value': 49
+        }]
+      },
+      {
+        'name': 'vis',
+        'value': 38,
+        'children': [{
+          'name': 'Visualization',
+          'value': 16540
+        }]
+      }]
+    }
+  // }
+
+var treeData =
   {
     "name": "Top Level",
     "children": [
@@ -41,7 +75,7 @@ var treeData2 =
     ]
   };
 
-var treeData = {
+var treeData3 = {
  "name": "flare",
  "children": [
   {
@@ -452,18 +486,18 @@ root.x0 = height / 2;
 root.y0 = 0;
 
 // Collapse after the second level
-root.children.forEach(collapse);
+// root.children.forEach(collapse);
 
 update(root);
 
 // Collapse the node and all it's children
-function collapse(d) {
-  if(d.children) {
-    d._children = d.children
-    d._children.forEach(collapse)
-    d.children = null
-  }
-}
+// function collapse(d) {
+//   if(d.children) {
+//     d._children = d.children
+//     d._children.forEach(collapse)
+//     d.children = null
+//   }
+// }
 
 function update(source) {
 
@@ -595,6 +629,7 @@ function update(source) {
 
   // Toggle children on click.
   function click(d) {
+    console.log('d: ', d)
     if (d.children) {
         d._children = d.children;
         d.children = null;
