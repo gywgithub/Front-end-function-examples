@@ -5,10 +5,10 @@
   <title>Choose Camera Devices</title>
   <style type="text/css">
   /* transform video */
-  video {
+  /* video {
     -webkit-transform: scaleX(-1);
     transform: scaleX(-1);
-  }
+  } */
   </style>
 </head>
 
@@ -49,6 +49,8 @@
     navigator.mediaDevices.enumerateDevices()
       .then(function (devices) {
         console.log(devices)
+        console.log('devices')
+        console.log(JSON.stringify(devices))
 
         devices.forEach(function (device) {
           console.log(device.kind + ": " + device.label + " id = " + device.deviceId)
@@ -88,8 +90,8 @@
 
 
     // add translate
-    ctx.translate(640, 0)
-    ctx.scale(-1, 1)
+    // ctx.translate(640, 0)
+    // ctx.scale(-1, 1)
 
     function screenShot() {
       console.log('screen shot')

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+  <title>Nested layouts</title>
+  <style type="text/css">
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    {{title}}
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: () => ({
+        title: 'SVG Tree Diagram'
+      }),
+      mounted() {
+        console.log('mounted')
+      }
+    })
+  </script>
+</body>
+
+</html>

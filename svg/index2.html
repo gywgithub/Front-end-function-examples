@@ -1,0 +1,81 @@
+<html>
+
+<head>
+  <title>SVG</title>
+</head>
+
+<body>
+
+  <!-- 曲线 -->
+  
+  <?xml version="1.0" standalone="no"?>
+
+  <!-- 快捷命令T会通过前一个控制点，推断出一个新的控制点。这意味着，在你的第一个控制点后面，可以只定义终点，就创建出一个相当复杂的曲线。需要注意的是，T命令前面必须是一个Q命令，或者是另一个T命令，才能达到这种效果。如果T单独使用，那么控制点就会被认为和终点是同一个点，所以画出来的将是一条直线 -->
+  <svg width="190px" height="160px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 80 Q 52.5 10, 95 80 T 180 80" stroke="black" fill="transparent"/>
+
+    <circle cx="52.5" cy="10" r="2" fill="red" />
+    <circle cx="95" cy="80" r="2" fill="red" />
+    <circle cx="180" cy="80" r="2" fill="red" />
+  </svg>
+
+  <!-- 二次贝赛尔曲线 Q，它比三次贝塞尔曲线简单，只需要一个控制点，用来确定起点和终点的曲线斜率。因此它需要两组参数，控制点和终点坐标 -->
+  <svg width="190px" height="160px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 80 Q 95 10 180 80" stroke="black" fill="transparent"/>
+
+    <circle cx="95" cy="10" r="2" fill="red" />
+    <circle cx="180" cy="80" r="2" fill="red" />
+  </svg>
+
+
+  <!-- S命令可以用来创建与前面一样的贝塞尔曲线，但是，如果S命令跟在一个C或S命令后面，则它的第一个控制点会被假设成前一个命令曲线的第二个控制点的中心对称点。如果S命令单独使用，前面没有C或S命令，那当前点将作为第一个控制点。下面是S命令的语法示例，图中左侧红色标记的点对应的控制点即为蓝色标记点 -->
+  <svg width="190px" height="160px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 80 C 40 10, 65 10, 95 80 S 150 150, 180 80" stroke="black" fill="transparent"/>
+
+    <circle cx="150" cy="150" r="2" fill="red" />
+    <circle cx="180" cy="80" r="2" fill="red" />
+  </svg>
+
+  <!-- 三次贝塞尔曲线 C , 二次贝赛尔曲线 Q -->
+  <svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #ccc;background-color:#eee;">
+    <path d="M10 10 C 20 20, 40 20, 50 10" fill="transparent" stroke="black" />
+    <path d="M70 10 C 70 20, 120 20, 120 10" stroke="black" fill="transparent"/>
+    <path d="M130 10 C 120 20, 180 20, 170 10" stroke="black" fill="transparent"/>
+    <path d="M10 60 C 20 80, 40 80, 50 60" stroke="black" fill="transparent"/>
+    <path d="M70 60 C 70 80, 110 80, 110 60" stroke="black" fill="transparent"/>
+    <path d="M130 60 C 120 80, 180 80, 170 60" stroke="black" fill="transparent"/>
+    <path d="M10 110 C 20 140, 40 140, 50 110" stroke="black" fill="transparent"/>
+    <path d="M70 110 C 70 140, 110 140, 110 110" stroke="black" fill="transparent"/>
+    <path d="M130 110 C 120 140, 180 140, 170 110" stroke="black" fill="transparent"/>
+  </svg>
+
+  <!-- 三次贝塞尔曲线 C  -->
+  <svg width="1000" height="1050" version="1.1" xmlns="http://www.w3.org/2000/svg" style="border:1px solid red;background-color:#eee;">
+    <circle cx="500" cy="200" r="5" fill="red" />
+    <path d="M500 200 C 500 500, 100 500, 100 900" fill="transparent" stroke="black" />
+  </svg>
+
+  <svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg" style="border:1px solid #ccc;background-color:#eee;">
+    <path d="M10 10 H 90 V 90 H 10 H 10 Z" fill="transparent" stroke="black" />
+  </svg>
+
+  <svg width="200" height="250" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+    <rect x="10" y="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5" />
+    <rect x="60" y="10" rx="10" ry="10" width="30" height="30" stroke="black" fill="transparent" stroke-width="5" />
+
+    <circle cx="25" cy="75" r="20" stroke="red" fill="transparent" stroke-width="5" />
+    <ellipse cx="75" cy="75" rx="20" ry="5" stroke="red" fill="transparent" stroke-width="5" />
+
+    <line x1="10" x2="50" y1="110" y2="150" stroke="orange" fill="transparent" stroke-width="5" />
+    <polyline points="60 110 65 120 70 115 75 130 80 125 85 140 90 135 95 150 100 145" stroke="orange"
+      fill="transparent" stroke-width="5" />
+
+    <polygon points="50 160 55 180 70 180 60 190 65 205 50 195 35 205 40 190 30 180 45 180" stroke="green"
+      fill="transparent" stroke-width="5" />
+
+    <path d="M20,230 Q40,205 50,230 T90,230" fill="none" stroke="blue" stroke-width="5" />
+  </svg>
+</body>
+
+</html>
