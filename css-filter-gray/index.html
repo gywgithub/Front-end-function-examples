@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>filter gray</title>
+    <style type="text/css">
+      h2 {
+        color: red;
+      }
+      .filter-gray {
+        filter: progid:DXImagetransform.Microsoft.BasicImage(grayscale=1);
+        -webkit-filter: grayscale(100%);
+        -moz-filter: grayscale(100%);
+        -ms-filter: grayscale(100%);
+        -o-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h2 class="filter-gray">filter gray</h2>
+      <img class="filter-gray" src="../img/1.jpg" />
+    </div>
+  </body>
+</html>
