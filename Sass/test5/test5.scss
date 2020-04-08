@@ -1,0 +1,74 @@
+@mixin important-text {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+}
+
+@mixin card-margin {
+  margin-top: 20px;
+  padding: 10px;
+  @include important-text;
+}
+
+.content {
+  @include important-text;
+  background-color: #fff;
+}
+
+.card {
+  @include card-margin;
+  background-color: #f0f0f0;
+}
+
+$color: orange;
+$width: 200px;
+
+@mixin bordered($color: red, $width: 1px) {
+  border: $width solid $color;
+}
+
+.myCard {
+  @include bordered(black, 2px);
+}
+
+.myCard2 {
+  @include bordered(green);
+}
+
+@mixin sexy-border($color, $width: 1in) {
+  border: {
+    color: $color;
+    width: $width;
+    style: dashed;
+  }
+}
+
+p {
+  @include sexy-border(blue, 2px);
+  font-size: 20px;
+}
+
+h1 {
+  @include sexy-border(blue)
+}
+
+@mixin box-shadow($shadows...) {
+  -moz-box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  box-shadow: $shadows;
+}
+
+.shadows {
+  @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+}
+
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -moz-transform: $property;
+  transform: $property;
+}
+
+.myBox {
+  @include transform(rotate(20deg));
+}

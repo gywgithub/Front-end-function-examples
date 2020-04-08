@@ -1,0 +1,22 @@
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav li {
+  display: inline-block;
+}
+nav a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+}
+
+p {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  text-align: center;
+  text-transform: lowercase;
+}
+
+/*# sourceMappingURL=text3.css.map */

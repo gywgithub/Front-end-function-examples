@@ -1,0 +1,52 @@
+.content {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+  background-color: #fff;
+}
+
+.card {
+  margin-top: 20px;
+  padding: 10px;
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+  background-color: #f0f0f0;
+}
+
+.myCard {
+  border: 2px solid black;
+}
+
+.myCard2 {
+  border: 1px solid green;
+}
+
+p {
+  border-color: blue;
+  border-width: 2px;
+  border-style: dashed;
+  font-size: 20px;
+}
+
+h1 {
+  border-color: blue;
+  border-width: 1in;
+  border-style: dashed;
+}
+
+.shadows {
+  -moz-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  -webkit-box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+  box-shadow: 0px 4px 5px #666, 2px 6px 10px #999;
+}
+
+.myBox {
+  -webkit-transform: rotate(20deg);
+  -moz-transform: rotate(20deg);
+  transform: rotate(20deg);
+}
+
+/*# sourceMappingURL=test5.css.map */

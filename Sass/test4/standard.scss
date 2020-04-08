@@ -1,0 +1,12 @@
+@import "reset";
+@import "colors";
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  color: red;
+}
+
+h1 {
+  color: $myBlue;
+}
