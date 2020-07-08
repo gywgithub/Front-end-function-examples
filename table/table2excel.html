@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Table To Excel</title>
+    <style type="text/css">
+      table {
+        border-collapse: collapse;
+      }
+      table, th, td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        min-width: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <table id="table1">
+      <tr>
+        <th>th1</th>
+        <th>th2</th>
+      </tr>
+      <tr>
+        <td>d1</td>
+        <td>d2</td>
+      </tr>
+      <tr>
+        <td>d3</td>
+        <td>d4</td>
+      </tr>
+    </table><br>
+    <button onclick="exportTableToExcel('table1')">Export Table Data To Excel File</button>
+  </body>
+  <script type="text/javascript">
+    function exportTableToExcel(tableID, filename = '') {
+      console.log('export')
+      var downloadLink
+      var dataType = 'application/vnd.ms-excel'
+      var tableSelect = document.getElementById(tableID)
+
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20')
+
+      filename = filename ? filename + '.xls' : 'excel_data.xls'
+
+      downloadLink = document.createElement('a')
+
+      document.body.appendChild(downloadLink)
+
+      if (navigator.msSaveOrOpenBlob) {
+        console.log('navigator.msSaveOrOpenBlob')
+        var blob = new Blob(['\ufeff', tableHTML], {type: dataType})
+        navigator.msSaveOrOpenBlob(blob, filename)
+      } else {
+        console.log('false')
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML
+        downloadLink.download = filename
+        downloadLink.click()
+      }
+    }
+  </script>
+</html>
