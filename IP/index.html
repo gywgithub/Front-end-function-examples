@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>获取用户地区</title>
+</head>
+
+<body>
+  打开控制台，分别查看 JavaScript内置对象，腾讯位置服务，搜狐IP服务 输出结果
+  <!-- Get user IP and country -->
+  <script>
+    // JavaScript standard built-in object
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    console.log(Intl.DateTimeFormat().resolvedOptions())
+    console.log(timeZone)
+    if (timeZone === 'Asia/Shanghai') {
+      console.log('china')
+    }
+
+    // qq api callback function
+    function f(res) {
+      console.log(res)
+      if (res.result.ad_info.nation === '中国') {
+        console.log('china')
+      } else {
+        console.log(res.result.ad_info)
+      }
+    }
+  </script>
+  <script charset="utf-8" src="https://apis.map.qq.com/ws/location/v1/ip?key=MOJBZ-2IPCG-V22QU-I4MN6-3BBA2-5XB7F&callback=f&output=jsonp"></script>
+  <script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+  <script>
+    console.log(returnCitySN['cname'] + ' ' + returnCitySN['cid'] + ' ' + returnCitySN['cip']);
+  </script>
+</body>
+
+</html>
