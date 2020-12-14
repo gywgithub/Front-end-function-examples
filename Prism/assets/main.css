@@ -1,0 +1,9 @@
+body {
+  overflow: hidden;
+  padding: 0 0;
+  margin: 0 0;
+}
+
+p {
+	font: 100% Rockwell, Arvo, serif;
+}
