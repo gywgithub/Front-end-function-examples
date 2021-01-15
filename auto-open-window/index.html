@@ -281,16 +281,29 @@
     console.log(postsArr)
     let max = postsArr.length - 1
     let min = 0
+
+    let setIntervalTime = 10000
+    let min2 = 10000
+    let max2 = 60000
+
     setInterval(async () => {
       const index = parseInt((Math.random() * (max - min + 1) + min), 10);
       console.log('index: ' + index)
       const url = postsArr[index]
       console.log('url: ' + url)
-      let win = window.open(url);
-      await setTimeout(() => {
-        win.close()
-      }, 8000);
-    }, 10000);
+      
+      let currentHours = (new Date()).getHours()
+      console.log('currentHours: ' + currentHours)
+      if (currentHours < 20 && currentHours > 8) {
+        let win = window.open(url);
+        await setTimeout(() => {
+          win.close()
+        }, 8000);
+      }
+
+      setIntervalTime = parseInt((Math.random() * (max2 - min2 + 1) + min2), 10);
+      console.log('setIntervalTime: ' + setIntervalTime)
+    }, setIntervalTime);
   </script>
 </body>
 
