@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>div 水平两边对齐</title>
+  <style>
+    body {
+      padding: 10px;
+    }
+
+    code {
+      color: red;
+      background-color: #eee;
+    }
+
+    /* 方法一 */
+    .div-container {
+      margin: 10px 0;
+      padding: 10px;
+      width: 400px;
+      border: 2px solid #ccc;
+      position: relative;
+    }
+
+    .div1 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+    }
+
+    .div2 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+      position: absolute;
+      /* 边距设置 */
+      right: 10px;
+      top: 10px;
+    }
+
+    /* 方法二 */
+    .div-container2 {
+      margin: 10px 0;
+      padding: 10px;
+      width: 400px;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .div3 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+    }
+
+    .div4 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+    }
+
+    /* 方法三 */
+    .div-container3 {
+      margin: 10px 0;
+      padding: 10px;
+      width: 400px;
+      border: 2px solid #ccc;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .div5 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+    }
+
+    .div6 {
+      width: 100px;
+      height: 50px;
+      border: 2px solid red;
+    }
+
+    .div7 {
+      width: calc(100% - 100px - 100px);
+      height: 50px;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  方法一, 父容器div使用 <code>position: relative</code>,子div使用 <code>position:absolute</code>定位，注意边距问题
+  <div class="div-container">
+    <div class="div1">1</div>
+    <div class="div2">2</div>
+  </div>
+  <br><br>
+  方法二，父容器div使用 <code>display:flex; justify-content:space-between;</code>
+  <div class="div-container2">
+    <div class="div3">3</div>
+    <div class="div4">4</div>
+  </div>
+  <br><br>
+  方法三，父容器div使用 <code>display: flex;</code>, 子div设置宽度进行填充占位
+  <div class="div-container3">
+    <div class="div5">5</div>
+    <div class="div7">占位div</div>
+    <div class="div6">6</div>
+  </div>
+  <br><br>
+</body>
+
+</html>
