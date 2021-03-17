@@ -7,12 +7,17 @@
   <body>
     <div id="app">
       {{msg}}
-
+      <br /><br />
+      语言选择：<select v-model="selected" @change="changeLang()">
+        <option value="en">English</option>
+        <option value="zh">简体中文</option>
+      </select>&nbsp;&nbsp;&nbsp;&nbsp;
+      Selected: {{selected}}
+      <br /><br />
       <p>{{$t("message.hello")}}</p>
       <ul>
         <li v-for="(item, key) in items" :key="key">{{item.title}}</li>
       </ul>
-      <div>{{items2}}</div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
@@ -21,17 +26,17 @@
         en: {
           message: {
             hello: "hello world",
-            li1: 'li1',
-            li2: 'li2',
-            li3: 'li3',
+            li1: "li1",
+            li2: "li2",
+            li3: "li3",
           },
         },
-        ja: {
+        zh: {
           message: {
-            hello: "こんにちは、世界",
-            li1: 'li 一つ',
-            li2: 'li 二つ',
-            li3: 'li スリー',
+            hello: "你好 世界",
+            li1: "标签一",
+            li2: "标签二",
+            li3: "标签三",
           },
         },
       };
@@ -45,30 +50,37 @@
         el: "#app",
         i18n,
         data: {
-          msg: "Hello World",
+          msg: "Hello Vue i18n",
+          selected: "en",
         },
         computed: {
-          items2: function() {
-            return '123'
+          items: function () {
+            return [
+              {
+                title: this.$t("message.li1"),
+              },
+              {
+                title: this.$t("message.li2"),
+              },
+              {
+                title: this.$t("message.li3"),
+              },
+            ];
           },
-          items: function() {
-            return [{
-              title: this.$t("message.li1")
-            },
-            {
-              title: this.$t("message.li2")
-            },
-            {
-              title: this.$t("message.li3")
-            }]
-          }
-        }
+        },
+        methods: {
+          changeLang() {
+            console.log("1");
+            console.log(this.selected)
+            i18n.locale = this.selected
+          },
+        },
       });
 
-      setTimeout(() => {
-        console.log("3s");
-        i18n.locale = "ja"; // change locale
-      }, 3000);
+      // setTimeout(() => {
+      //   console.log("3s");
+      //   i18n.locale = "ja"; // change locale
+      // }, 3000);
     </script>
   </body>
 </html>
