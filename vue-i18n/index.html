@@ -9,6 +9,10 @@
       {{msg}}
 
       <p>{{$t("message.hello")}}</p>
+      <ul>
+        <li v-for="(item, key) in items" :key="key">{{item.title}}</li>
+      </ul>
+      <div>{{items2}}</div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-i18n/dist/vue-i18n.js"></script>
@@ -16,20 +20,26 @@
       const messages = {
         en: {
           message: {
-            hello: 'hello world',
+            hello: "hello world",
+            li1: 'li1',
+            li2: 'li2',
+            li3: 'li3',
           },
         },
         ja: {
           message: {
-            hello: 'こんにちは、世界'
+            hello: "こんにちは、世界",
+            li1: 'li 一つ',
+            li2: 'li 二つ',
+            li3: 'li スリー',
           },
         },
       };
 
       const i18n = new VueI18n({
-        locale: 'en',
+        locale: "en",
         messages,
-      })
+      });
 
       var app = new Vue({
         el: "#app",
@@ -37,12 +47,28 @@
         data: {
           msg: "Hello World",
         },
+        computed: {
+          items2: function() {
+            return '123'
+          },
+          items: function() {
+            return [{
+              title: this.$t("message.li1")
+            },
+            {
+              title: this.$t("message.li2")
+            },
+            {
+              title: this.$t("message.li3")
+            }]
+          }
+        }
       });
 
       setTimeout(() => {
-        console.log('3s')       
-        i18n.locale = 'ja' // change locale
-      }, 3000)
+        console.log("3s");
+        i18n.locale = "ja"; // change locale
+      }, 3000);
     </script>
   </body>
 </html>
