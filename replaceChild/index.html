@@ -1,0 +1,62 @@
+<html>
+
+<head>
+  <title>JS replaceChild()</title>
+</head>
+
+<body>
+  需求任务：把不同标签格式字体统一改成 “微软雅黑” “14px” “黑色”
+  <br><br>
+  <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Node/replaceChild">https://developer.mozilla.org/zh-CN/docs/Web/API/Node/replaceChild</a><br><br>
+  <div id="div1" style="border:2px solid #ccc;">
+
+    <p>
+      <span style="font-family: impact, sans-serif; font-size: 24pt; color: #e03e2d">测试1</span>
+      测试&nbsp; <span style="font-size: 8pt; color: #236fa1">测试2</span>
+      <span style="font-family: 'arial black', sans-serif; font-size: 18pt">测3试</span>&nbsp; 测<span style="
+          color: #f1c40f;
+          font-family: verdana, geneva, sans-serif;
+          font-size: 24pt;
+        ">试&nbsp; &nbsp;测试</span>
+    <h1>H1</h1>
+    <h2>H2</h2>
+    <pre>pre string</pre>
+    </p>
+  </div><br><br>
+  <div id="div2" style="border:2px solid red;"></div>
+  <script>
+    let div1 = document.getElementById("div1");
+    console.log(div1);
+    console.log(div1.innerText);
+    console.log(div1.innerHTML);
+
+    setTimeout(() => {
+      let div2 = document.getElementById("div2");
+      div2.innerHTML = div1.innerHTML;
+
+      let htmlArr = ["span", "h1", "h2", "h3", "h4", "h5", "h6", "p", "pre"];
+      htmlArr.forEach((v) => {
+        for (let item of div2.getElementsByTagName(v)) {
+          item.style.fontSize = "14px";
+          item.style.fontFamily = "微软雅黑";
+          item.style.color = "black";
+          if (
+            item.tagName === "H1" ||
+            item.tagName === "H2" ||
+            item.tagName === "H3" ||
+            item.tagName === "H4" ||
+            item.tagName === "H5" ||
+            item.tagName === "H6" ||
+            item.tagName === "PRE"
+          ) {
+            let p = document.createElement("p");
+            p.innerText = item.innerText;
+            item.parentNode.replaceChild(p, item);
+          }
+        }
+      })
+    }, 100);
+  </script>
+</body>
+
+</html>

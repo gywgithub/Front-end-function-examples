@@ -32,6 +32,10 @@ Web 代码编辑器
 
 代码高亮编辑器
 
+#### replaceChild
+
+用指定节点替换当前节点
+
 #### resize-video-canvas
 
 视频，画布跟随窗口自动缩放
