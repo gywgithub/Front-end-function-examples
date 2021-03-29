@@ -1,319 +1,66 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <style>
-    html,
-    body {
-      padding: 0;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    iframe, object {
-      width: 100%;
-      height: 100vh;
-      border: none;
-    }
-  </style>
-</head>
-
-<body>
-  <!-- <iframe id="iframe1" src="https://www.jianshu.com/p/99f2d3a9b68a"></iframe> -->
-  <object id="object1" data="https://www.jianshu.com/p/99f2d3a9b68a" type="text/html">html object</object>
-  <script>
-    let jianshuArr = [
-      'https://www.jianshu.com/p/9540cd1fca3f',
-      'https://www.jianshu.com/p/99f2d3a9b68a',
-      'https://www.jianshu.com/p/688748172dc7',
-      'https://www.jianshu.com/p/e114b2e372ea',
-      'https://www.jianshu.com/p/46308e046054',
-      'https://www.jianshu.com/p/6d21dc8f7689',
-      'https://www.jianshu.com/p/3a77a4a2079f',
-      'https://www.jianshu.com/p/ecad31e694c7',
-      'https://www.jianshu.com/p/78439e1128c8',
-      'https://www.jianshu.com/p/025e28710d99',
-      'https://www.jianshu.com/p/75eb472aea80',
-      'https://www.jianshu.com/p/00ddc4cd1cd5',
-      'https://www.jianshu.com/p/2f71c52d8c78',
-      'https://www.jianshu.com/p/c68ab7e0d048',
-      'https://www.jianshu.com/p/ed09e2086c7b',
-      'https://www.jianshu.com/p/e537f781793c',
-      'https://www.jianshu.com/p/dac610ffed83',
-      'https://www.jianshu.com/p/87bf69996d6b',
-      'https://www.jianshu.com/p/363a65d4f683',
-      'https://www.jianshu.com/p/1b08dfa826b2',
-      'https://www.jianshu.com/p/5e7764b4e4fb',
-      'https://www.jianshu.com/p/3500ac6b21b1',
-      'https://www.jianshu.com/p/b2e855e5205f',
-      'https://www.jianshu.com/p/eab469c1e355',
-      'https://www.jianshu.com/p/3dd45ee4f289',
-      'https://www.jianshu.com/p/0e717f203bcd',
-      'https://www.jianshu.com/p/d7e9d68ab1bd',
-      'https://www.jianshu.com/p/720f64b4d4e2',
-      'https://www.jianshu.com/p/d014fc277be3',
-      'https://www.jianshu.com/p/218aeedd16d4',
-      'https://www.jianshu.com/p/a45d3eae40af',
-      'https://www.jianshu.com/p/f5cfb387ca29',
-      'https://www.jianshu.com/p/6be4d07a8365',
-      'https://www.jianshu.com/p/467b0b802ecf',
-      'https://www.jianshu.com/p/0a9c38ecc328',
-      'https://www.jianshu.com/p/036e01a57f88',
-      'https://www.jianshu.com/p/ac1e13a3c4db',
-      'https://www.jianshu.com/p/6ba5416a257e',
-      'https://www.jianshu.com/p/c3681035d00d',
-      'https://www.jianshu.com/p/62b17b12707e',
-      'https://www.jianshu.com/p/5bf6c7e17399',
-      'https://www.jianshu.com/p/70690d0eadff',
-      'https://www.jianshu.com/p/fe005956eeff',
-      'https://www.jianshu.com/p/7e27e973b66c',
-      'https://www.jianshu.com/p/0676cbf37498',
-      'https://www.jianshu.com/p/ce7da0b9e079',
-      'https://www.jianshu.com/p/5f13680444a1',
-      'https://www.jianshu.com/p/bd91a8819340',
-      'https://www.jianshu.com/p/6a49d6c84048',
-      'https://www.jianshu.com/p/279f2382d854',
-      'https://www.jianshu.com/p/6736a59e14cd',
-      'https://www.jianshu.com/p/1f81861030e8',
-      'https://www.jianshu.com/p/60a6cc886ce0',
-      'https://www.jianshu.com/p/26f3a5342107',
-      'https://www.jianshu.com/p/fc32e1dd36c6',
-      'https://www.jianshu.com/p/ddb630da82d6',
-      'https://www.jianshu.com/p/31f6dcaf5496',
-      'https://www.jianshu.com/p/eb8a57fe1e71',
-      'https://www.jianshu.com/p/39ad0b9c215c',
-      'https://www.jianshu.com/p/73c61274934c',
-      'https://www.jianshu.com/p/858810b219c7',
-      'https://www.jianshu.com/p/b179884c69a4',
-      'https://www.jianshu.com/p/0fd1d25d78a8',
-      'https://www.jianshu.com/p/df2d561fce3d',
-      'https://www.jianshu.com/p/dc2f5a404fda',
-      'https://www.jianshu.com/p/31ec0b8a0afa',
-      'https://www.jianshu.com/p/3926438ea7d9',
-      'https://www.jianshu.com/p/41f0b146032f',
-      'https://www.jianshu.com/p/a3ac1f86aad9',
-      'https://www.jianshu.com/p/380d5e60b405',
-      'https://www.jianshu.com/p/413646e2499c',
-      'https://www.jianshu.com/p/d83a4d74ff54',
-      'https://www.jianshu.com/p/8b2923f7ab99',
-      'https://www.jianshu.com/p/356bf68a7073',
-      'https://www.jianshu.com/p/bcd56c96ae25',
-      'https://www.jianshu.com/p/60c0ba6c141d',
-      'https://www.jianshu.com/p/19cc61f2b4ed',
-      'https://www.jianshu.com/p/dd3cc87fb01c',
-      'https://www.jianshu.com/p/2085312554d4',
-      'https://www.jianshu.com/p/cf9c5daaa566',
-      'https://www.jianshu.com/p/16e0f525690f',
-      'https://www.jianshu.com/p/89a2f68b7177',
-      'https://www.jianshu.com/p/f9ed23fa06bb',
-      'https://www.jianshu.com/p/d798433aa0ea',
-      'https://www.jianshu.com/p/14ec390fbf6e',
-      'https://www.jianshu.com/p/9be2705aac5b',
-      'https://www.jianshu.com/p/605303408fbe',
-      'https://www.jianshu.com/p/c7cc805a70db',
-      'https://www.jianshu.com/p/f4e3cff276ea',
-      'https://www.jianshu.com/p/360bfd754cd7',
-      'https://www.jianshu.com/p/0ca841a16060',
-      'https://www.jianshu.com/p/8563b77d8be4',
-      'https://www.jianshu.com/p/033f47494b30',
-      'https://www.jianshu.com/p/f59717b2c4b0',
-      'https://www.jianshu.com/p/010d09b04621',
-      'https://www.jianshu.com/p/04338d70572d',
-      'https://www.jianshu.com/p/c8d011699f5f',
-      'https://www.jianshu.com/p/74c6ea0e07f5',
-      'https://www.jianshu.com/p/9a4cfd155a3e',
-      'https://www.jianshu.com/p/9e587a0d74f7',
-      'https://www.jianshu.com/p/f3dad64d896a',
-      'https://www.jianshu.com/p/e95467fc5c02',
-      'https://www.jianshu.com/p/426f5181ea8d',
-      'https://www.jianshu.com/p/cf920d405010',
-      'https://www.jianshu.com/p/d444bda39f25',
-      'https://www.jianshu.com/p/0efc657485c5',
-      'https://www.jianshu.com/p/d333d304af4b',
-      'https://www.jianshu.com/p/0b384970449d',
-      'https://www.jianshu.com/p/43839abfdc1a',
-      'https://www.jianshu.com/p/f1e0511f8019',
-      'https://www.jianshu.com/p/042ff11de267',
-      'https://www.jianshu.com/p/0628587d743e',
-      'https://www.jianshu.com/p/a6600a891067',
-      'https://www.jianshu.com/p/e4d0e8c708de',
-      'https://www.jianshu.com/p/4d997bd855d3',
-      'https://www.jianshu.com/p/10d1d845e665',
-      'https://www.jianshu.com/p/02e3fa533b86',
-      'https://www.jianshu.com/p/d51b16fd3c5b',
-      'https://www.jianshu.com/p/f73132f303c1',
-      'https://www.jianshu.com/p/ace184775767',
-      'https://www.jianshu.com/p/078295747751',
-      'https://www.jianshu.com/p/930d8ecaf35d',
-      'https://www.jianshu.com/p/e18854d45da1',
-      'https://www.jianshu.com/p/df64a029bca8',
-      'https://www.jianshu.com/p/926368140167',
-      'https://www.jianshu.com/p/61b300a9bbac',
-      'https://www.jianshu.com/p/474be02d98ca',
-      'https://www.jianshu.com/p/2a6e78cf4278',
-      'https://www.jianshu.com/p/9c89695e9c5c',
-      'https://www.jianshu.com/p/8f7e2ce85d98',
-      'https://www.jianshu.com/p/333c6ab22379',
-      'https://www.jianshu.com/p/66da79075b5c',
-      'https://www.jianshu.com/p/1bb77da0d163',
-      'https://www.jianshu.com/p/e0ec951e126f',
-      'https://www.jianshu.com/p/ae225daf7848',
-      'https://www.jianshu.com/p/95e8fc9ae30f',
-      'https://www.jianshu.com/p/10f9b2247bc3',
-      'https://www.jianshu.com/p/14455953625d',
-      'https://www.jianshu.com/p/6d88b4d86e14',
-      'https://www.jianshu.com/p/b78d48f1d6ea',
-      'https://www.jianshu.com/p/4d2edd55b471',
-      'https://www.jianshu.com/p/f303d9d964d0',
-      'https://www.jianshu.com/p/2077ff11e467',
-      'https://www.jianshu.com/p/c6bfb84fd436',
-      'https://www.jianshu.com/p/d3e7c54384b0',
-      'https://www.jianshu.com/p/a9b6936f6043',
-      'https://www.jianshu.com/p/e7c45d68256f',
-      'https://www.jianshu.com/p/79ba3d03a3cf',
-      'https://www.jianshu.com/p/4185d0f1a6ca',
-      'https://www.jianshu.com/p/6f4537bb89b2',
-      'https://www.jianshu.com/p/c324711f12b5',
-      'https://www.jianshu.com/p/94c026e108d1',
-      'https://www.jianshu.com/p/377a7366d36b',
-      'https://www.jianshu.com/p/489091676298',
-      'https://www.jianshu.com/p/4f6c312ba740',
-      'https://www.jianshu.com/p/25dfa0b7fdfd',
-      'https://www.jianshu.com/p/466fb564b44c',
-      'https://www.jianshu.com/p/db0c2125108a',
-      'https://www.jianshu.com/p/8976da49bd4e',
-      'https://www.jianshu.com/p/38b47f097266',
-      'https://www.jianshu.com/p/b0f831025600',
-      'https://www.jianshu.com/p/df902d556aff',
-      'https://www.jianshu.com/p/8d46260374aa',
-      'https://www.jianshu.com/p/46a0e00eaadc',
-      'https://www.jianshu.com/p/6cc9db0f2c7d',
-      'https://www.jianshu.com/p/558ffcb4a17a',
-      'https://www.jianshu.com/p/c8efc4c04eec',
-      'https://www.jianshu.com/p/e37c898a2e6c',
-      'https://www.jianshu.com/p/8232fdda29c2',
-      'https://www.jianshu.com/p/96dd03b4cac8',
-      'https://www.jianshu.com/p/8f48f943780b',
-      'https://www.jianshu.com/p/c895c9a0e256',
-      'https://www.jianshu.com/p/b5174ca043fe',
-      'https://www.jianshu.com/p/47a091078c98',
-      'https://www.jianshu.com/p/fd4bc462220b',
-      'https://www.jianshu.com/p/a1c0ff49bd02',
-      'https://www.jianshu.com/p/3af95ef490e0',
-      'https://www.jianshu.com/p/6c2cd275e996',
-      'https://www.jianshu.com/p/a315aae1a66c',
-      'https://www.jianshu.com/p/f4c206376cdb',
-      'https://www.jianshu.com/p/64ccbcdf26fb',
-      'https://www.jianshu.com/p/0d3059f28f55',
-      'https://www.jianshu.com/p/199b3c2032f2',
-      'https://www.jianshu.com/p/90e1cbd93300',
-      'https://www.jianshu.com/p/27469d2fcb42',
-      'https://www.jianshu.com/p/27d837be9559',
-      'https://www.jianshu.com/p/0ff09e3ad341',
-      'https://www.jianshu.com/p/e791a550fef9',
-      'https://www.jianshu.com/p/f7430e929526',
-      'https://www.jianshu.com/p/491e3969c942',
-      'https://www.jianshu.com/p/d0b38119fbc2',
-      'https://www.jianshu.com/p/6517c849970b',
-      'https://www.jianshu.com/p/4bc3c6688e09',
-      'https://www.jianshu.com/p/78ed76f7528b',
-      'https://www.jianshu.com/p/4b07c0d636d3',
-      'https://www.jianshu.com/p/f6c7a7ec6b6e',
-      'https://www.jianshu.com/p/e15efaed37ff',
-      'https://www.jianshu.com/p/95e358084360',
-      'https://www.jianshu.com/p/11e39dba7141',
-      'https://www.jianshu.com/p/67f1969e52d1',
-      'https://www.jianshu.com/p/55b62bd9234f',
-      'https://www.jianshu.com/p/77883f7cec3a',
-      'https://www.jianshu.com/p/5347fbd65551',
-      'https://www.jianshu.com/p/1d4198a389d1',
-      'https://www.jianshu.com/p/4400579a4da2',
-      'https://www.jianshu.com/p/98dd7a38708a',
-      'https://www.jianshu.com/p/917f5cbb954a',
-      'https://www.jianshu.com/p/917b35303176',
-      'https://www.jianshu.com/p/804f1f585b35',
-      'https://www.jianshu.com/p/9f33972963cf',
-      'https://www.jianshu.com/p/a388ce3a4a61',
-      'https://www.jianshu.com/p/5a7460461f79',
-      'https://www.jianshu.com/p/a19d6e0dbf52',
-      'https://www.jianshu.com/p/515ac23c9659',
-      'https://www.jianshu.com/p/f6e054f82119',
-      'https://www.jianshu.com/p/1bff799d5cd8',
-      'https://www.jianshu.com/p/83acd04e0ca5',
-      'https://www.jianshu.com/p/7509ce25e366',
-      'https://www.jianshu.com/p/67e70fc6c2cd',
-      'https://www.jianshu.com/p/f954e2e6c494',
-      'https://www.jianshu.com/p/78dd783900ef',
-      'https://www.jianshu.com/p/00378a826648',
-      'https://www.jianshu.com/p/f0979d1d16f7',
-      'https://www.jianshu.com/p/6661024fa2e4'
-    ]
-
-    let juejinArr = [
-      'https://juejin.cn/post/6932266802227445767',
-      'https://juejin.cn/post/6915591431185055751',
-      'https://juejin.cn/post/6915238409267052552',
-      'https://juejin.cn/post/6913093177532481543',
-      'https://juejin.cn/post/6906057192975040525',
-      'https://juejin.cn/post/6900817638260375565',
-      'https://juejin.cn/post/6899707909152702471',
-      'https://juejin.cn/post/6895554569456222221',
-      'https://juejin.cn/post/6865260871402225671',
-      'https://juejin.cn/post/6859564192853131277',
-      'https://juejin.cn/post/6845166890956881928',
-      'https://juejin.cn/post/6844904200833335303',
-      'https://juejin.cn/post/6844904198341918733',
-      'https://juejin.cn/post/6844904193678016526',
-      'https://juejin.cn/post/6844904191861719054',
-      'https://juejin.cn/post/6844904186337837063',
-      'https://juejin.cn/post/6844904185306021895',
-      'https://juejin.cn/post/6844904176724475911',
-      'https://juejin.cn/post/6844904174656684040',
-      'https://juejin.cn/post/6844904168772091918',
-      'https://juejin.cn/post/6844903823861874695',
-      'https://juejin.cn/post/6844904167870300173',
-      'https://juejin.cn/post/6844904165823479821',
-      'https://juejin.cn/post/6844904117937274888',
-      'https://juejin.cn/post/6844904097649262600',
-      'https://juejin.cn/post/6844904094386126856',
-      'https://juejin.cn/post/6844904082323439630',
-      'https://juejin.cn/post/6844904073490071565',
-      'https://juejin.cn/post/6844904067097952269',
-      'https://juejin.cn/post/6844904063792840711',
-      'https://juejin.cn/post/6844904063780257805',
-      'https://juejin.cn/post/6844904055093854221',
-      'https://juejin.cn/post/6844904053848145933',
-      'https://juejin.cn/post/6844904053390966792',
-      'https://juejin.cn/post/6844904051516112903',
-      'https://juejin.cn/post/6844903972063412238',
-      'https://juejin.cn/user/501033035632093/posts'
-    ]
-
-    let postsArr = jianshuArr.concat(juejinArr)
-    let max = postsArr.length - 1
-    console.log('posts arr length: ', max)
-    let min = 0
-
-    let setIntervalTime = 10000
-    let min2 = 10000
-    let max2 = 90000
-
-    let iframe1 = document.getElementById('iframe1');
-    let object1 = document.getElementById('object1');
-    setInterval(async () => {
-      const index = parseInt((Math.random() * (max - min + 1) + min), 10);
-      const url = postsArr[index]
-
-      let currentHours = (new Date()).getHours()
-      if (currentHours < 21 && currentHours > 8) {
-        // iframe1.src = url
-        object1.data = url
+  <head>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
       }
 
-      setIntervalTime = parseInt((Math.random() * (max2 - min2 + 1) + min2), 10);
-      console.log('setIntervalTime: ', setIntervalTime)
-    }, setIntervalTime);
-  </script>
-</body>
+      iframe,
+      object {
+        width: 100%;
+        height: 100vh;
+        border: none;
+      }
+    </style>
+  </head>
 
+  <body>
+    <!-- <iframe id="iframe1" src="https://www.jianshu.com/p/99f2d3a9b68a"></iframe> -->
+    <object
+      id="object1"
+      data="https://www.jianshu.com/p/99f2d3a9b68a"
+      type="text/html"
+    >
+      html object
+    </object>
+    <script>
+      fetch("data.json").then((res) =>
+        res.json().then((data) => {
+          console.log(data);
+
+          let postsArr = data.jianshuArr.concat(data.juejinArr);
+          let max = postsArr.length - 1;
+          console.log("posts arr length: ", max);
+          let min = 0;
+
+          let setIntervalTime = 10000;
+          let min2 = 10000;
+          let max2 = 90000;
+
+          let iframe1 = document.getElementById("iframe1");
+          let object1 = document.getElementById("object1");
+          setInterval(async () => {
+            const index = parseInt(Math.random() * (max - min + 1) + min, 10);
+            const url = postsArr[index];
+
+            let currentHours = new Date().getHours();
+            if (currentHours < 21 && currentHours > 8) {
+              // iframe1.src = url
+              object1.data = url;
+            }
+
+            setIntervalTime = parseInt(
+              Math.random() * (max2 - min2 + 1) + min2,
+              10
+            );
+            console.log("setIntervalTime: ", setIntervalTime);
+          }, setIntervalTime);
+        })
+      );
+    </script>
+  </body>
 </html>
