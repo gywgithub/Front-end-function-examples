@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+  </head>
+
+  <body>
+    <script>
+      // 从 1970/01/01 到 2020/04/01 的毫秒数
+      let date1 = new Date("2020-4-1").getTime();
+      console.log(date1);
+      console.log(typeof date1);
+
+      // 从 1970/01/01 到 2021/03/01 的毫秒数
+      let date2 = new Date("2021-3-1").getTime();
+      console.log(date2);
+      console.log(typeof date2);
+
+      // 计算每年有多少毫秒
+      let minutes = 1000 * 60
+      let hours = minutes * 60
+      let days = hours * 24
+      let years = days * 366
+
+      // 四舍五入
+      let y1 = Math.round((date2 - date1) / years)
+      console.log(y1)
+
+      // 向下取整
+      let y2 = Math.floor((date2 - date1) / years)
+      console.log(y2)
+
+      let y3 = (date2 - date1) / years
+      console.log(y3)
+
+      // 判断时间间隔是否大于一年
+      if (y3 > 1) {
+        console.log('> 1')
+      } else {
+        console.log('<= 1')
+      }
+    </script>
+  </body>
+</html>
