@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>元素方向定义</title>
+</head>
+
+<body>
+  <h3>默认：从左到右</h3>
+  <div style="border:4px solid #ccc;display:flex;">
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">1</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">2</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">3</div>
+  </div>
+  <h3>1. 从右到左 float:right</h3>
+  <div style="border:4px solid #ccc;">
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;float:right;">1</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;float:right;">2</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;float:right;">3</div>
+  </div>
+  <h3>2.1 从右到左 derection:rtl</h3>
+  <div style="border:4px solid #ccc;direction: rtl;display:flex;">
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;direction:ltr;">1</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">2</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">3</div>
+  </div>
+  <h3>2.2 从右到左 dir="rtl"</h3>
+  <div style="border:4px solid #ccc;display:flex;" dir="rtl">
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;direction:ltr;">1</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">2</div>
+    <div style="border:2px solid red;backgroun-color: #eee;width:60px;height:40px;margin-right:20px;">3</div>
+  </div>
+  <script>
+  </script>
+</body>
+
+</html>
