@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React HTML Template</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const name = 'Josh Perez';
+      const element = <h1>Hello, {name}</h1>
+
+      function formatName(user) {
+        return user.firstName + ' ' + user.lastName;
+      }
+
+      const user = {
+        firstName: 'Harper',
+        lastName: 'Perez'
+      };
+
+      const title = 'abc';
+      const element2 = (
+        <div>
+          <h2>{title}</h2>
+          <h1>
+            Hello, {formatName(user)}
+          </h1>
+        </div>
+      );
+
+      const element3 = (
+        <h1 className="greeting">
+          Hello, world!!
+        </h1>
+      );
+
+      // const element3 = React.createElement(
+      //   'h1',
+      //   {className: 'greeting'},
+      //   'Hello, world!!'
+      // );
+
+      ReactDOM.render(
+        // element,
+        // element2,
+        element3,
+
+        // <h1>Hello, world!</h1>,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>

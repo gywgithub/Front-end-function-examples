@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React HTML Template</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Form() {
+        function handleSubmit(e) {
+          e.preventDefault();
+          console.log('You clicked submit.');
+        }
+      }
+      return (
+        <form onSubmit={handleSubmit}>
+          <button type="submit">Submit</button>
+        </form>
+      );
+
+      class Toggle extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {isToggleOn: true};
+
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+          this.setState(prevState => ({
+            isToggleOn: !prevState.isToggleOn
+          }));
+        }
+
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+          );
+        }
+      }
+
+      class LoggingButton extends React.Component {
+        handleClick = () => {
+          console.log('this is: ', this);
+        }
+
+        render() {
+          return (
+            <button onClick={this.handleClick}>
+              Click me
+            </button>
+          );
+        }
+      }
+
+      ReactDOM.render(
+        // <h1>Hello, world!</h1>,
+        <Toggle />,
+        document.getElementById('root')
+      );
+      // <button onClick={(e) => this.deleteRow(id, e)}>Delete Row</button>
+
+      // https://zh-hans.reactjs.org/docs/conditional-rendering.html
+    </script>
+  </body>
+</html>
