@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React HTML Template</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Blog(props) {
+        const sidebar = (
+          <ul>
+            {props.posts.map((post) =>
+              <li key={post.id}>
+                {post.title}
+              </li>
+            )}
+          </ul>
+        );
+
+        const content = props.posts.map((post) =>
+          <div key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+          </div>
+        );
+
+        return (
+          <div>
+            {sidebar}
+            <hr />
+            {content}
+          </div>
+        );
+      }
+
+      const posts = [
+        {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+        {id: 2, title: 'Installation', content: 'You can install React from npm!'}
+      ];
+      ReactDOM.render(
+        <Blog posts={posts} />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>

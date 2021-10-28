@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React HTML Template</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function WarningBanner(props) {
+        if (!props.warn) {
+          return null;
+        }
+
+        return (
+          <div className="warning">
+            Warning!
+          </div>
+        );
+      }
+
+      class Page extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {showWarning: true};
+          this.handleToggleClick = this.handleToggleClick.bind(this);
+        }
+
+        handleToggleClick() {
+          this.setState(state => ({
+            showWarning: !state.showWarning
+          }))
+        }
+
+        render() {
+          return (
+            <div>
+              <WarningBanner warn={this.state.showWarning} />
+              <button onClick={this.handleToggleClick}>
+                {this.state.showWarning ? 'Hide' : 'Show'}
+              </button>
+            </div>
+          );
+        };
+      }
+
+      ReactDOM.render(
+        <Page />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>

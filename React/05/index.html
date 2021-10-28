@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>React HTML Template</title>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function UserGreeting(props) {
+        return <h1>Welcome back!</h1>
+      }
+
+      function GuestGreeting(props) {
+        return <h1>Please sign up.</h1>
+      }
+
+      function Greeting(props) {
+        const isLoggedIn = props.isLoggedIn;
+        if (isLoggedIn) {
+          return <UserGreeting />;
+        }
+        return <GuestGreeting />;
+      }
+      ReactDOM.render(
+        <Greeting isLoggedIn={true} />,
+        document.getElementById('root')
+      );
+
+    </script>
+  </body>
+</html>
