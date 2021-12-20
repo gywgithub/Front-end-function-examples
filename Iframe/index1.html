@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>HTML-1</title>
+</head>
+
+<body>
+    page 1 <br><br><br>
+    <iframe id="iframe1" title="Inline frame example" width="500" height="400" style="border:1px solid red;"
+        src=""></iframe>
+    <script>
+        console.log('page load')
+        const a = 'abc'
+        const url = "http://127.0.0.1:8080/index2.html?token=" + a
+        console.log(url)
+        let iframe1 = document.getElementById('iframe1')
+        iframe1.src = url
+
+        const data1 = 'data1'
+        let iframeWindow = iframe1.contentWindow
+        setTimeout(() => {
+            iframeWindow.postMessage(data1, url)
+        }, 1000)
+        // iframeWindow.postMessage(data1, url)
+    </script>
+</body>
+
+</html>
