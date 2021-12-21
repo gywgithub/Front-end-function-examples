@@ -23,7 +23,19 @@
         setTimeout(() => {
             iframeWindow.postMessage(data1, url)
         }, 1000)
-        // iframeWindow.postMessage(data1, url)
+
+        function receiveMessage(event) {
+            console.log('receiveMessage')
+            console.log(event)
+            if (event.origin !== 'http://127.0.0.1:8080') {
+                console.error('danger origin')
+                return false
+            } else {
+                console.log(event.data)
+            }
+        }
+
+        window.addEventListener('message', receiveMessage, false)
     </script>
 </body>
 

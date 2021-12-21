@@ -19,6 +19,10 @@
             console.log('index2 page eventListenter')
             console.log(event.origin)
             console.dir(event.data)
+
+            setTimeout(() => {
+                event.source.postMessage('page2 data', event.origin)
+            }, 1000)
         })
     </script>
 </body>
