@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<script src="./aes2.js"></script>
+
+<body>
+    <script>
+
+
+        const key = 'pZBw8mfzgu7rMZSG9Steo5veCoDDh9Sw'
+        console.log(key)
+        const iv = '2C5A0BBE5141AAD4'
+        console.log(iv)
+
+        // const v = '4qL+YcH8mQLbphGDomvETIEkB7MhHUYrCLi8xF+mPVv7tEh3kWpMpNbj+1puKVcZNnPh0LzDR0oTGBgOP+0jIr/sMir/lF6iMKD6HG3iZp3AbaL/1Eamx5jBMWZx0ci4zS0TB3JodC5G/Oqdb8rwQ4zk93I+fl8HGcEtcX7oR55EXPJ0JEFl7oJQ2wAS93bUy43/pR7U8YQt229QKfu6q4BFtLxmrZz9qJ1fiuvFoZauxxdsgN9jZVsmquigve9CU0nHnI/LKNV2YRGYB6yH0fowsL+DfKH8SNBExGwWDJLsDia21TYz6CaAfIQ6LyH+eVwqQw7ezcTPfkwpCcrBIK5VYwxmXKko7+HTOSRUdbV7GitJw2QTCb1JDSjn5LKrZtwE+7gAqsweafH2SNltw90cY5zYsEIDnMNKStKwPx/uTpBRzYmrEbottdeY6x9/+lmO69o1rx9OhMyK1mc4PMNfoET60MfEfVtBe6UPb21ihp7ahgysQIwBDsMV0M748VOHrJfactusvglDQWyFALFbmSpn6PWMNm8SkH4M8m9QrqI+AUskWet++yBZnyR222WVgZ3JqmLTcpxoAK7fx/LxZUwCjCHi0GjTdSXxqJvfs+AYp8YrDeGIMbMKkXHgAPEXuhuMKcJibZzzFl67fYOWU5EkCagSzAmr4STGPFo='
+        // console.log('value: ', v)
+
+
+        // console.log(cryptico)
+
+        // const a = cryptico.decryptAESCBC(v, key)
+        // console.log('a: ', a)
+
+        console.log(AES)
+
+        const v2 = '4qL+YcH8mQLbphGDomvETIEkB7MhHUYrCLi8xF+mPVv7tEh3kWpMpNbj+1puKVcZNnPh0LzDR0oTGBgOP+0jIr/sMir/lF6iMKD6HG3iZp3AbaL/1Eamx5jBMWZx0ci4zS0TB3JodC5G/Oqdb8rwQ4zk93I+fl8HGcEtcX7oR55EXPJ0JEFl7oJQ2wAS93bUy43/pR7U8YQt229QKfu6q4BFtLxmrZz9qJ1fiuvFoZauxxdsgN9jZVsmquigve9CU0nHnI/LKNV2YRGYB6yH0fowsL+DfKH8SNBExGwWDJLsDia21TYz6CaAfIQ6LyH+eVwqQw7ezcTPfkwpCcrBIK5VYwxmXKko7+HTOSRUdbU6/vqFKf2KZRhXypc0D4Ytn5G6/+dfPZBPsJ+t9dqTUq+1IhB7aA+bndYhPTT3EnioYCp4RopIbLYpB1MAEVLH1ERMiudvCyQFPJ+oA2XG0C4U/xtsIulj53+USrnACuc6zgLHDJWL9bfqlYaiQQIDtmhSe8OklN1PGKwKg/5W0ErJHM0dO58Y2RISkoER4kqDW+l1gT44XnAp6d7c9urQAa/H5YpaOGqP73pdlI8QZRX9G1J4Xjjn8jwR3cwVPUfqpUoC1HNcRISA0V0MtoU9QKnYCeXshfMMWOnfptF+J4lajLGKde5yKzrD3CWthj4='
+        console.log(v2)
+        const res = AES.decrypt(v2)
+        console.log('aaaaaaaaaaaaa')
+        console.log(res)
+        console.log(JSON.parse(res))
+
+        const val = JSON.parse(res) 
+        console.log('xxxx')
+        console.log(val)
+
+        console.log(res)
+        
+        const js = JSON.stringify(JSON.parse(res))
+        const aesString = AES.encrypt(js)
+        console.log('--===--')
+        console.log(aesString.toString())
+
+        console.log('111111111111111111111111111111')
+
+    </script>
+</body>
+
+</html>
