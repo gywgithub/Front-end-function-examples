@@ -738,7 +738,7 @@ CryptoJS.pad.ZeroPadding = {
 
 var AES = {};
 (function ($) {
-    var key = CryptoJS.enc.Utf8.parse("pZBw8mfzgu7rMZSG9Steo5veCoDDh9Sw");    //密码
+    var key = CryptoJS.enc.Utf8.parse("pZBw8mfzgu7rMZSG9Steo5veCoDDh9Sw");
     var iv = CryptoJS.enc.Utf8.parse('2C5A0BBE5141AAD4');
     $.encrypt = function (word) {
         var srcs = CryptoJS.enc.Utf8.parse(word);
