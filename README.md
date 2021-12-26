@@ -1,4 +1,4 @@
-# Exercise 01
+# Front end function examples
 
 #### auto-open-window
 
