@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <style type="text/css">
+        .div-text {
+            border: 1px solid red;
+            width: 150px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .div-text-2 {
+            border: 1px solid green;
+            width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+    </style>
+</head>
+
+<body>
+    <h5>div 单行显示文字,超过用部分显示省略号</h5>
+    <div class="div-text">用计算机创造美和艺术，用代码改变世界</div>
+    <h5>div 文字显示2行,超过用部分显示省略号</h5>
+    <div class="div-text-2">用计算机创造美和艺术，用代码改变世界；用计算机创造美和艺术，用代码改变世界；用计算机创造美和艺术，用代码改变世界；</div>
+    <script>
+    </script>
+</body>
+
+</html>
