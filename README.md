@@ -1,5 +1,9 @@
 # Front end function examples
 
+#### Animation
+
+CSS 动画 - 左右移动,360°旋转
+
 #### auto-open-window
 
 自动打开窗口

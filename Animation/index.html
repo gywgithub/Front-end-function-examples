@@ -37,6 +37,28 @@
         margin-left: 10%;
       }
     }
+
+    /* img-third */
+    .img-third {
+      width: 80px;
+      height: 80px;
+      pointer-events: none;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .img-third {
+        animation: img-third-spin infinite 12s linear;
+      }
+    }
+
+    @keyframes img-third-spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+    /* ---end --*/
   </style>
 </head>
 
@@ -47,8 +69,8 @@
   <div style="border: 2px solid green;width:100%;height:100px;margin-top: 20px;">
     <img src="../Assets/Images/vue-logo.svg" class="img-second" />
   </div>
-  <div style="border: 2px solid orange;width:100%;height:100px;margin-top: 20px;">
-    <img src="../Assets/Images/vue-logo.svg" class="img-first" />
+  <div style="border: 2px solid orange;width:100%;height:100px;margin-top: 20px;padding: 20px;">
+    <img src="../Assets/Images/vue-logo.svg" class="img-third" />
   </div>
 </body>
 
