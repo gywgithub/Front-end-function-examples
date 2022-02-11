@@ -4,6 +4,10 @@
 
 CSS 动画 - 左右移动,360°旋转
 
+#### Assets
+
+资源目录
+
 #### auto-open-window
 
 自动打开窗口
