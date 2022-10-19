@@ -56,8 +56,8 @@
 
         // 方法2：pre + JSON.stringify
         function parse2(str) {
-            // 设置缩进为2个空格
-            str = JSON.stringify(JSON.parse(str), null, 2);
+            // 设置缩进为4个空格
+            str = JSON.stringify(JSON.parse(str), null, 4);
             str = str.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
             return str.replace(
                 /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
