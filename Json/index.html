@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JSON 格式化展示</title>
+    <style>
+        /* 方法1：设置textarea合适的宽高 */
+        #textarea1 {
+            float: left;
+            margin-right: 20px;
+            outline: none;
+            padding: 5px;
+        }
+
+        /* 方法2：自定义高亮样式 */
+        #pre1 {
+            float: left;
+            outline: 1px solid #ccc;
+            padding: 5px;
+            overflow: scroll;
+        }
+
+        .string {
+            color: green;
+        }
+
+        .number {
+            color: darkorange;
+        }
+
+        .boolean {
+            color: blue;
+        }
+
+        .null {
+            color: magenta;
+        }
+
+        .key {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="textarea1" style="width: 400px; height: 400px;"></textarea>
+    <pre id="pre1" style="width: 400px; height: 400px;"></pre>
+    <script>
+        var data =
+            '[{"name":"黑子","sex":"男","Age":25,"hobby":["篮球","跑步","看电影","王者荣耀"],"normal":true},{"name":"张三","sex":"男","Age":25,"hobby":["上天","入地"],"normal":false}]';
+        // 方法1：textarea + JSON.stringify
+        function parse1(str) {
+            return JSON.stringify(JSON.parse(str), null, "\t");
+        }
+        document.getElementById("textarea1").innerHTML = parse1(data)
+
+        // 方法2：pre + JSON.stringify
+        function parse2(str) {
+            // 设置缩进为2个空格
+            str = JSON.stringify(JSON.parse(str), null, 2);
+            str = str.replace(/&/g, "&").replace(/</g, "<").replace(/>/g, ">");
+            return str.replace(
+                /("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g,
+                function (match) {
+                    var cls = "number";
+                    if (/^"/.test(match)) {
+                        if (/:$/.test(match)) {
+                            cls = "key";
+                        } else {
+                            cls = "string";
+                        }
+                    } else if (/true|false/.test(match)) {
+                        cls = "boolean";
+                    } else if (/null/.test(match)) {
+                        cls = "null";
+                    }
+                    return '<span class="' + cls + '">' + match + "</span>";
+                }
+            );
+        }
+        document.getElementById('pre1').innerHTML = parse2(data)
+    </script>
+</body>
+
+</html>
