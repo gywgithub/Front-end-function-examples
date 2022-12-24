@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Copy Function</title>
+  </head>
+
+  <body style="padding: 20px;">
+    <div>
+        <input type="button" value="Copy" id="button1" />
+        <br/>
+        <br/>
+    </div>
+    <textarea name="textarea" readonly rows="10" cols="50" id="textarea1">{
+        "Data": {
+            "RETURNTABLE": [
+                {
+                    "MARKID": "OK"
+                }
+            ]
+        },
+        "Message": "",
+        "RedirectUrl": "",
+        "Success": true,
+        "TotalPage": 0,
+        "TotalRecord": 1
+    }</textarea>
+    <script>
+        const button1 = document.getElementById('button1');
+        const textareaValue = document.getElementById('textarea1').innerHTML;
+        console.log('textareaValue: ', textareaValue)
+        button1.addEventListener('click', () => {
+            console.log('button1 click')
+
+            // 复制功能 
+            // mdn 文档：https://developer.mozilla.org/zh-CN/docs/Web/API/Clipboard
+            navigator.clipboard.writeText(textareaValue).then(() => {
+                console.log('复制成功') 
+            });
+        })
+    </script>
+  </body>
+</html>
