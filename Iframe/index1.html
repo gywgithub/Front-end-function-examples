@@ -18,7 +18,11 @@
         let iframe1 = document.getElementById('iframe1')
         iframe1.src = url
 
-        const data1 = 'data1'
+        // const data1 = 'data1'
+        const data1 = {
+            name: 'abc',
+            age: 123
+        }
         let iframeWindow = iframe1.contentWindow
         setTimeout(() => {
             iframeWindow.postMessage(data1, url)
