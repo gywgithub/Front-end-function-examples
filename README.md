@@ -97,3 +97,7 @@ vuetify.js 卡片布局
 #### WebRTC-Server
 
 WebRTC js客户端，python 服务器代码示例
+
+#### Vant2
+
+Vant2, Vue2, Vue.Draggable/2.20.0  拖拽，禁用文字，图片选中，禁用右键菜单

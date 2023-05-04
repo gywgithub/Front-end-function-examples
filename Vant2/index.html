@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- import CSS -->
+    <title>Vant2</title>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"> -->
+    <link rel="stylesheet" href="https://unpkg.com/vant@2.12/lib/index.css" />
+    <style type="text/css">
+      body {
+        padding: 20px;
+      }
+
+      .button {
+        margin-top: 35px;
+      }
+      .handle {
+        float: left;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      .close {
+        float: right;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+      input {
+        display: inline-block;
+        width: 50%;
+      }
+      .text {
+        margin: 20px;
+      }
+
+      /** 移动端禁用长按复制功能 */
+      * {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+      input {
+        -webkit-user-select: auto; /*webkit浏览器*/
+      }
+      img {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <van-button type="primary" style="width: 100px; height: 40px"
+        >按钮</van-button
+      >
+
+      <div style="border: 2px solid red; height: 200px">
+        <h3>Draggable {{ draggingInfo }}</h3>
+
+        <draggable tag="ul" :list="list" handle=".handle">
+          <li
+            class="list-group-item handle"
+            v-for="(element, idx) in list"
+            :key="element.name"
+          >
+            <i class="fa fa-align-justify"> </i>
+
+            <span class="text">{{ element.name }} </span>
+
+            <input type="text" class="form-control" v-model="element.text" />
+
+            <i class="fa fa-times close" @click="removeAt(idx)"></i>
+          </li>
+        </draggable>
+      </div>
+
+      <div
+        style="
+          margin-top: 20px;
+          border: 1px solid green;
+          width: 400px;
+          height: 600px;
+        "
+      >
+        <draggable tag="div" :list="list2" handle=".handle">
+          <div
+            v-for="item in list2"
+            class="handle"
+            style="
+              width: 64px;
+              height: 80px;
+              border: 1px solid #ccc;
+              margin: 10px;
+              padding: 4px 10px;
+            "
+          >
+            <!-- <img src="./vue-logo.svg" style="width: 64px; height: 64px;border:2px solid green; user-select: none;" /> -->
+            <div style="width: 64px; height: 64px;border:1px solid green;background-image: url('./vue-logo.svg');background-repeat:no-repeat;"></div>
+            <!-- <img src="./vue-logo.svg" style="width: 64px; height: 64px;border:2px solid green; user-select: none;" /> -->
+            <div style="text-align: center">{{item.name}}</div>
+          </div>
+        </draggable>
+      </div>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/vant@2.12/lib/vant.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.8.4/Sortable.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
+  <script>
+    // import draggable from "vuedraggable";
+    new Vue({
+      el: "#app",
+      // components: {
+      //   draggable,
+      // },
+      computed: {
+        draggingInfo() {
+          return this.dragging ? "under drag" : "";
+        },
+      },
+      data: function () {
+        return {
+          list2: [
+            { name: "111", id: 0 },
+            { name: "hhh", id: 1 },
+            { name: "abb", id: 2 },
+            { name: "vvv", id: 2 },
+            { name: "222", id: 2 },
+            { name: "333", id: 2 },
+          ],
+          list: [
+            { name: "John", text: "", id: 0 },
+            { name: "Joao", text: "", id: 1 },
+            { name: "Jean", text: "", id: 2 },
+          ],
+          dragging: false,
+        };
+      },
+      mounted() {
+        console.log("vant2");
+
+        // 禁止浏览器右键菜单 -- PC端
+        // document.addEventListener(
+        //   "contextmenu",
+        //   function (e) {
+        //     console.log("111");
+        //     e.preventDefault();
+        //   },
+        //   false
+        // );
+
+        // 禁止浏览器长按
+        // document.addEventListener(
+        //   "touchstart",
+        //   function (e) {
+        //     console.log("111");
+        //     e.preventDefault();
+        //   },
+        //   false
+        // );
+      },
+      methods: {
+        removeAt(idx) {
+          this.list.splice(idx, 1);
+        },
+      },
+    });
+  </script>
+</html>
