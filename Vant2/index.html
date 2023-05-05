@@ -52,6 +52,11 @@
         -ms-user-select: none;
         user-select: none;
       }
+
+      .background-eee {
+        background-color: #ccc;
+        /* background-color: yellowgreen; */
+      }
     </style>
   </head>
 
@@ -60,6 +65,8 @@
       <van-button type="primary" style="width: 100px; height: 40px"
         >按钮</van-button
       >
+
+      <button-counter></button-counter>
 
       <div style="border: 2px solid red; height: 200px">
         <h3>Draggable {{ draggingInfo }}</h3>
@@ -81,6 +88,7 @@
         </draggable>
       </div>
 
+      <!-- PC 拖拽，点击 -->
       <div
         style="
           margin-top: 20px;
@@ -100,14 +108,56 @@
               margin: 10px;
               padding: 4px 10px;
             "
+            :class="item.IsShow === 1 ? '' : 'background-eee'"
+            @click.stop.prevent="itemClick(item)" 
+            @touchstart.stop.prevent="itemClick(item)" 
           >
-            <!-- <img src="./vue-logo.svg" style="width: 64px; height: 64px;border:2px solid green; user-select: none;" /> -->
-            <div style="width: 64px; height: 64px;border:1px solid green;background-image: url('./vue-logo.svg');background-repeat:no-repeat;"></div>
-            <!-- <img src="./vue-logo.svg" style="width: 64px; height: 64px;border:2px solid green; user-select: none;" /> -->
-            <div style="text-align: center">{{item.name}}</div>
+            <div>
+              <div
+                style="
+                  width: 64px;
+                  height: 64px;
+                  border: 1px solid green;
+                  background-image: url('./vue-logo.svg');
+                  background-repeat: no-repeat;
+                "
+              ></div>
+              <div style="text-align: center;">{{item.name}}</div>
+            </div>
           </div>
         </draggable>
       </div>
+
+      <!-- <div
+        style="
+          margin-top: 20px;
+          border: 1px solid #eee;
+          width: 400px;
+          height: 600px;
+        "
+      >
+        <draggable tag="div" :list="list2" handle=".handle" :distance="1">
+          <div
+            v-for="item in list2"
+            class="handle"
+            style="
+              width: 64px;
+              height: 80px;
+              border: 1px solid pink;
+              margin: 10px;
+              padding: 10px 20px;
+              border-radius: 4px;
+            "
+            :class="item.IsShow === 1 ? '' : 'background-eee'"
+          >
+          <div style="border:1px solid red;">
+          <drag-item :item="item" @item-click="itemClick(item)"></drag-item>
+        </div>
+          {{item.IsSho
+        </draggable>
+      </div> -->
+
+
     </div>
   </body>
   <!-- import Vue before Element -->
@@ -124,6 +174,47 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.20.0/vuedraggable.umd.min.js"></script>
   <script>
     // import draggable from "vuedraggable";
+    Vue.component("button-counter", {
+      data: function () {
+        return {
+          count: 0,
+        };
+      },
+      template:
+        '<button v-on:click="count++">You clicked me {{ count }} times.</button>',
+    });
+
+    // drag-item
+    Vue.component("drag-item", {
+      data: function () {
+        return {
+        };
+      },
+      methods: {
+        dragItemClick(item) {
+          console.log('dragItem: ', item)
+          this.$emit('item-click', item)
+        }
+      },
+      props:{
+        item: {
+          type: Object,
+          default: false
+        }
+      },
+      template:
+        `<div>
+              <div
+                style="
+                  width: 64px;
+                  height: 64px;
+                  background-image: url('./vue-logo.svg');
+                  background-repeat: no-repeat;
+                "  @click.stop.prevent="dragItemClick(item)"
+              ></div>
+              <div style="text-align: center">{{item.name}}</div>
+            </div>`,
+    });
     new Vue({
       el: "#app",
       // components: {
@@ -137,12 +228,12 @@
       data: function () {
         return {
           list2: [
-            { name: "111", id: 0 },
-            { name: "hhh", id: 1 },
-            { name: "abb", id: 2 },
-            { name: "vvv", id: 2 },
-            { name: "222", id: 2 },
-            { name: "333", id: 2 },
+            { name: "111", id: 0, IsShow: 0 },
+            { name: "hhh", id: 1, IsShow: 0 },
+            { name: "abb", id: 3, IsShow: 1 },
+            { name: "vvv", id: 4, IsShow: 0 },
+            { name: "222", id: 5, IsShow: 1 },
+            { name: "333", id: 6, IsShow: 1 },
           ],
           list: [
             { name: "John", text: "", id: 0 },
@@ -176,6 +267,14 @@
         // );
       },
       methods: {
+        itemClick(item) {
+          console.log(" itemClick item: ", item);
+          if (item.IsShow === 1) {
+            item.IsShow = 0;
+          } else {
+            item.IsShow = 1;
+          }
+        },
         removeAt(idx) {
           this.list.splice(idx, 1);
         },
