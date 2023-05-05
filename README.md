@@ -100,4 +100,8 @@ WebRTC js客户端，python 服务器代码示例
 
 #### Vant2
 
-Vant2, Vue2, Vue.Draggable/2.20.0  拖拽，禁用文字，图片选中，禁用右键菜单
+- Vant2, Vue2, Vue.Draggable/2.20.0  拖拽
+- Vue2 动态绑定图片
+- 禁止图片，文字选中
+- 禁止右键菜单
+- 禁止浏览器长按
