@@ -1,0 +1,302 @@
+/* mdnice自定义样式，实时生效，浏览器实时缓存 */
+/* version: 0.1.0 */
+/* 对应掘金主题 theme: nico  */
+
+@charset "UTF-8";
+#nice {
+  font-family: -apple-system, system-ui, Segoe UI, Roboto, Ubuntu, Cantarell,
+    Noto Sans, sans-serif, BlinkMacSystemFont, Helvetica Neue, PingFang SC,
+    Hiragino Sans GB, Microsoft YaHei, Arial;
+  color: #00325e;
+}
+
+#nice h1,
+#nice h2,
+#nice h3,
+#nice h4,
+#nice h5,
+#nice h6 {
+  margin-top: 30px;
+  margin-bottom: 15px;
+  padding: 0px;
+  font-weight: bold;
+  color: #00325e !important;
+}
+
+#nice ::selection {
+  background-color: #00325e;
+  color: #fff;
+}
+#nice blockquote {
+  padding: 10px 20px !important;
+  background-color: #fffaf0 !important;
+  box-shadow: 0 3px 10px 0 rgba(255, 172, 194, 0.24) !important;
+  border: 1px solid #f3ca8e !important;
+  transition: all 0.2s;
+  margin: 1em 0;
+  border-radius: 5px;
+}
+#nice blockquote p {
+  font-size: 14px;
+  line-height: 25px;
+  color: #795548 !important;
+}
+#nice blockquote p:last-child {
+  margin: 0;
+}
+#nice blockquote:hover {
+  border-color: #ff9800;
+  background-color: #fff8e0;
+  box-shadow: 0 6px 10px -5px rgba(225, 173, 98, 0.3803921569);
+}
+#nice blockquote code {
+  color: #ff502c;
+}
+#nice pre {
+  border: 1px solid #8cc0f3;
+  box-shadow: 0 3px 10px 0 rgba(255, 198, 198, 0.28);
+  border-radius: 5px;
+  transition: all 0.2s;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+#nice pre:hover {
+  border-color: #6d9dce;
+}
+#nice pre > code {
+  padding: 10px 20px;
+  color: #00325e;
+  background: #f0f8ff;
+  font-size: 12px;
+  line-height: 1.6;
+  display: block;
+}
+#nice code {
+  background: #f6fbff;
+  color: #0b5393;
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+#nice p {
+  font-size: 14px;
+  line-height: 28px;
+  text-align: justify;
+  margin-bottom: 17px;
+  color: #595959;
+}
+#nice a {
+  color: #00325e;
+  text-decoration: none;
+}
+#nice a:after {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAAXNSR0IArs4c6QAAAQdJREFUKFNt0DtLA0EUBeBzZle0Eks7rcUfEfBRCha7NorYa6NmVJzgyi4smUgKtdZGCJktLMVH4Y8QeztLWyE7VyLEuNFbXj4Oh0P8c8mZm+uJrEN4BJFTeP/MUVe3bnocfALwkOlo1zS7iZAzf6Cx7oXgbaqjxiDEWCcVaGyxQ8pSWo9XhqhoQ/xUFbaKjhe5V+CmR7mnSplEEF6GSmJ+F/d0KHvbCIIJCLc85U6BC5mONgbJNM3uFag++sX7z8O8MzsWBucifMx0dDGE1kmm458KDVukAlnNdDz/exEeW3dNkbfsYC0xtmgDWP6ELLZ0/F6BJu/UoFQN5AkoeUjeJPvx6+i+X5Sjah4tA6gYAAAAAElFTkSuQmCC);
+  margin-left: 2px;
+}
+#nice a:hover {
+  box-shadow: 0 1px;
+}
+#nice table {
+  max-width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  box-shadow: 0 3px 10px 0 rgba(255, 238, 172, 0.24);
+  transition: all 0.2s;
+}
+#nice table:hover {
+  box-shadow: 0 3px 10px 0 rgba(185, 169, 103, 0.24);
+}
+#nice table tr th {
+  border: 1px solid #8cc0f3;
+  background-color: #f0f8ff;
+  padding: 12px 15px;
+}
+#nice table tr td {
+  border: 1px solid rgba(243, 202, 142, 0.4);
+  padding: 12px 15px;
+}
+#nice table tbody tr {
+  transition: all 0.2s;
+}
+#nice table tbody tr:hover td {
+  border-color: #f3ca8e;
+  background-color: #fff8e0;
+  z-index: 1;
+}
+#nice img {
+  max-width: 100%;
+}
+#nice h1 {
+  font-size: 20px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 30px;
+  position: relative;
+}
+#nice h1 > code {
+  font-size: 20px;
+}
+#nice h1:before {
+  content: "🍺";
+  display: block;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  left: 0;
+  position: absolute;
+}
+#nice h2 {
+  font-size: 18px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 28px;
+  position: relative;
+}
+#nice h2 > code {
+  font-size: 18px;
+}
+#nice h2:before {
+  content: "🍻";
+  display: block;
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+  left: 0;
+  position: absolute;
+}
+#nice h3 {
+  font-size: 16px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 26px;
+  position: relative;
+}
+#nice h3 > code {
+  font-size: 16px;
+}
+#nice h3:before {
+  content: "🥂";
+  display: block;
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+  left: 0;
+  position: absolute;
+}
+#nice h4 {
+  font-size: 14px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  padding-left: 24px;
+  position: relative;
+}
+#nice h4 > code {
+  font-size: 14px;
+}
+#nice h4:before {
+  content: "🥃";
+  display: block;
+  font-size: 12px;
+  width: 12px;
+  height: 12px;
+  left: 0;
+  position: absolute;
+}
+#nice h5 {
+  font-size: 12px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+#nice h5 > code {
+  font-size: 12px;
+}
+#nice h6 {
+  font-size: 10px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+#nice h6 > code {
+  font-size: 10px;
+}
+#nice h1,
+#nice h2 {
+  color: #ff502c;
+}
+#nice hr {
+  height: 4px;
+  border: none;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  background-size: 4px 1px;
+  background-image: linear-gradient(
+    270deg,
+    #6d9dce,
+    #8cc0f3 25%,
+    transparent 50%
+  );
+}
+#nice hr:nth-child(2n) {
+  background-image: linear-gradient(
+    270deg,
+    #ff9800,
+    #fff8e0 25%,
+    transparent 50%
+  );
+}
+#nice ul {
+  padding-inline-start: 20px;
+}
+#nice ul li {
+  list-style-type: "🔸";
+}
+#nice ul li li {
+  list-style-type: "◻️";
+}
+#nice ul li li li {
+  list-style-type: "▫️";
+}
+#nice ol {
+  padding-inline-start: 20px;
+}
+#nice ol ::marker {
+  color: #ff9800;
+}
+#nice ol,
+#nice ul {
+  line-height: 2.4em !important;
+  color: #00325e;
+  font-size: 14px;
+}
+#nice li {
+  padding-inline-start: 1ch;
+}
+#nice li.task-list-item {
+  list-style: none;
+  padding-inline-start: 0;
+}
+#nice li input {
+  padding-right: 2px;
+}
+#nice li input[type="checkbox" i] {
+  appearance: none;
+}
+#nice li input:before {
+  content: "🟩";
+  display: block;
+  width: 13px;
+  height: 13px;
+}
+#nice li input:checked:before {
+  content: "✅";
+}
+@media (max-width: 720px) {
+  #nice h1 {
+    font-size: 24px;
+  }
+  #nice h2 {
+    font-size: 20px;
+  }
+  #nice h3 {
+    font-size: 18px;
+  }
+}
