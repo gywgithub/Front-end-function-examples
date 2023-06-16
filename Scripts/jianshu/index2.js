@@ -29,7 +29,7 @@ fetch("https://www.jianshu.com/author/notebooks")
                 .then((data3) => {
                   console.log(data3);
 
-                  const blob = new Blob([data.content], {
+                  const blob = new Blob([data3.content], {
                     type: "text/markdown",
                   });
 
