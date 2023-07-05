@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         用魔法打败魔法
 // @namespace    http://tampermonkey.net/
-// @version      0.1.26
+// @version      0.1.30
 // @description  自动播放，切换视频，自动点击弹框，支持自定义设置
 // @author       Mr_J, Mr_L
 // @match        *://*/*
@@ -11,14 +11,42 @@
 (async function () {
   "use strict";
 
+  let main = function () {
+    console.log("tags: ", document.getElementsByTagName("*"));
+    Array.prototype.forEach.call(
+      document.getElementsByTagName("*"),
+      function (el) {
+        ["visibilitychange", "onfocus", "onblur"].forEach((item) => {
+          el[item] = function (e) {
+            e.stopImmediatePropagation();
+          };
+        });
+
+        ["oncontextmenu"].forEach((xcanwin) => {
+          el[xcanwin] = function (e) {
+            if (e.target && e.target.points == undefined) {
+              // 处理普通的单击右键，跳过滑动右键
+              e.stopImmediatePropagation();
+            }
+          };
+        });
+      }
+    );
+
+    console.clear = () => {};
+    window.debugger = () => {};
+  };
+
+  main();
+
   // ----- 自定义配置 -----
   let stopAfter8h = false; // 超过8小时停止继续运行脚本
 
-  let r = await getContinueFlag();
-  console.log("r: ", r);
-  if (!r) {
-    return false;
-  }
+  // let r = await getContinueFlag();
+  // console.log("r: ", r);
+  // if (!r) {
+  //   return false;
+  // }
 
   console.log("script start");
   let text1 = "";
@@ -60,9 +88,9 @@
     let start_time = new Date(getFirstDay()).getTime();
     // console.log('start_time: ', start_time).getTime())
     let end_time = new Date(getLastDay()).getTime();
-    
-    console.log('start_time: ', start_time)
-    console.log('end_time: ', end_time)
+
+    console.log("start_time: ", start_time);
+    console.log("end_time: ", end_time);
 
     //获取当月最后一天的日期
     function getLastDay() {
@@ -81,7 +109,7 @@
       month = month < 10 ? "0" + month : month; //月份补 0
       return [year, month, fisrtDate].join("-");
     }
-    console.log(getFirstDay())
+    console.log(getFirstDay());
 
     return new Promise((resolve, reject) => {
       /**
@@ -187,6 +215,19 @@
         }
       });
     }
+
+    // 如果弹框出现，就点击确认
+    document.querySelectorAll(".el-dialog__wrapper").forEach((v, i) => {
+      if (
+        document.querySelectorAll(".el-dialog__wrapper")[i].style.display === ""
+      ) {
+        console.log(v, i);
+        if (i === 10) {
+          document.querySelectorAll(".dialog-footer-confirmed")[6].click();
+          console.log("触发了 已完成本章节，继续学习下一章");
+        }
+      }
+    });
 
     if (
       document.querySelectorAll(".el-dialog__wrapper")[9].style.display === ""

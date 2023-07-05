@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    body
+    <div class="target">target</div>
+    <script>
+
+      // ------------------------- TARGET --------------------- //
+      // visibilitychange 检测浏览器可见，使用了 focusable 变量
+      // changeTab
+      //  document.addEventListener('visibilitychange', this.visibilityChangeHandler),
+      // window.addEventListener('blur', this.windowBlurHandler),
+      //         window.addEventListener('focus', this.windowFocusHandler),
+
+      // ---
+
+      // 检测视口的可见性状态
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          console.log("浏览器不可见");
+        } else {
+          console.log("浏览器可见");
+        }
+      });
+
+      // 目标元素
+      let target = document.querySelector(".target");
+      // 观察者
+      let observer = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              console.log("元素在视窗中");
+            } else {
+              console.log("元素不在视窗中");
+            }
+          });
+        },
+        { rootMargin: "0px 0px 0px 0px" }
+      );
+
+      // 将目标元素添加到观察者
+      observer.observe(target);
+
+
+      // 检测当前tab
+      let lastFocused = false;
+
+      window.onfocus = function (e) {
+        console.log('tab focus')
+        lastFocused = true;
+        console.log('e: ', e)
+      };
+
+      window.onblur = function (e) {
+        console.log('tab blur')
+        lastFocused = false;
+        console.log('e2: ', e)
+      };
+
+      setInterval(function () {
+        if (lastFocused) {
+          console.log("当前 tab 页处于激活状态");
+        } else {
+          console.log("当前 tab 页处于非激活状态");
+        }
+      }, 1000);
+    </script>
+  </body>
+</html>
