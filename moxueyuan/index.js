@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         用魔法打败魔法
 // @namespace    http://tampermonkey.net/
-// @version      0.1.30
+// @version      0.1.32
 // @description  自动播放，切换视频，自动点击弹框，支持自定义设置
 // @author       Mr_J, Mr_L
 // @match        *://*/*
@@ -12,7 +12,6 @@
   "use strict";
 
   let main = function () {
-    console.log("tags: ", document.getElementsByTagName("*"));
     Array.prototype.forEach.call(
       document.getElementsByTagName("*"),
       function (el) {
@@ -200,7 +199,7 @@
         vedio.currentTime = 0;
         vedio.play();
       } else {
-        console.log("eles");
+        console.log("检测为倒计时正常");
         text1 = t;
       }
     } else {
@@ -233,6 +232,10 @@
       document.querySelectorAll(".el-dialog__wrapper")[9].style.display === ""
     ) {
       document.querySelectorAll(".dialog-footer-confirmed")[6].click();
+      // 倒计时 文本
+      console.log('倒计时文本输出：')
+      console.log(document.getElementsByClassName('f14 reward-box dis-flex flex-align')[0].childNodes[0].innerText)
+      console.log(document.getElementsByClassName('reward-tips dis-flex flex-align'))
       console.log("点击了一次");
     } else {
       console.log("没有发现弹窗");

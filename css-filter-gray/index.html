@@ -3,9 +3,10 @@
   <head>
     <title>filter gray</title>
     <style type="text/css">
-      h2 {
-        color: red;
+      .filter-blur {
+        filter: blur(2px);
       }
+      
       .filter-gray {
         filter: progid:DXImagetransform.Microsoft.BasicImage(grayscale=1);
         -webkit-filter: grayscale(100%);
@@ -15,12 +16,55 @@
         filter: grayscale(100%);
         filter: gray;
       }
+      img {
+        width: 200px;
+        height: 240px;
+        margin-right: 10px;
+      }
+      p {
+        color: red;
+      }
+      .display-flex {
+        display: flex;
+      }
     </style>
   </head>
   <body>
     <div>
-      <h2 class="filter-gray">filter gray</h2>
-      <img class="filter-gray" src="../img/1.jpg" />
+      <h2>filter blur</h2>
+      <div class="display-flex">
+        <div>
+          <h3>正常效果</h3>
+          <p>人物和(>^ω^<)喵</p>
+          <img src="../img/1.jpg" />
+        </div>
+
+        <div>
+          <h3>filter:blur(2px) 效果</h3>
+          <div class="filter-blur">
+            <p>人物和(>^ω^<)喵</p>
+            <img src="../img/1.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>filter-gray</h2>
+      <div class="display-flex">
+        <div>
+          <h3>正常效果</h3>
+          <p>人物和(>^ω^<)喵</p>
+          <img src="../img/1.jpg" />
+        </div>
+
+        <div>
+          <h3>filter-gray 效果</h3>
+          <div class="filter-gray">
+            <p>人物和(>^ω^<)喵</p>
+            <img src="../img/1.jpg" />
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>
