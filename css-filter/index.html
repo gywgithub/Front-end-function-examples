@@ -3,10 +3,14 @@
   <head>
     <title>filter gray</title>
     <style type="text/css">
+      .backdrop-filter {
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(2px);
+      }
       .filter-blur {
         filter: blur(2px);
       }
-      
+
       .filter-gray {
         filter: progid:DXImagetransform.Microsoft.BasicImage(grayscale=1);
         -webkit-filter: grayscale(100%);
@@ -27,9 +31,44 @@
       .display-flex {
         display: flex;
       }
+      .position-relative {
+        position: relative;
+      }
+      .position-border {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+      }
     </style>
   </head>
   <body>
+    <div>
+      <h2>canvas filter</h2>
+      <canvas id="canvas" style="width:400px;height: 140px;border:1px solid #ccc;"></canvas>
+    </div>
+    <div>
+      <h2>backdrop-filter</h2>
+      <div class="display-flex">
+        <div class="position-relative">
+          <div class="position-border">正常效果</div>
+          <p>人物和(>^ω^<)喵</p>
+          <img src="../img/1.jpg" />
+        </div>
+
+        <div class="position-relative">
+          <div class="position-border backdrop-filter">
+            backdrop-filter:blur(2px) 效果
+          </div>
+          <div>
+            <p>人物和(>^ω^<)喵</p>
+            <img src="../img/1.jpg" />
+          </div>
+        </div>
+      </div>
+    </div>
     <div>
       <h2>filter blur</h2>
       <div class="display-flex">
@@ -66,5 +105,13 @@
         </div>
       </div>
     </div>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+
+      ctx.filter = "blur(2px)";
+      ctx.font = "30px serif";
+      ctx.fillText("人物和(>^ω^<)喵", 10, 100);
+    </script>
   </body>
 </html>
