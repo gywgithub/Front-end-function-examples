@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>前端竞态</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <style type="text/css">
+      .wrapper {
+        width: 70%;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      video {
+        max-width: 100%;
+      }
+
+      .wrapper > div {
+        margin-bottom: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <el-container>
+        <el-header style="border: 1px solid #ccc">Header</el-header>
+        <el-container>
+          <el-aside width="200px" style="border: 1px solid #ccc; height: 500px">
+            <el-scrollbar wrap-class="scrollbar-wrapper">
+              <el-menu
+                default-active="2"
+                class="el-menu-vertical-demo"
+                @open="handleOpen"
+                @close="handleClose"
+              >
+                <el-menu-item v-for="item in list" :index="item.index">
+                  <i class="el-icon-menu"></i>
+                  <span slot="title">{{item.title}}</span>
+                </el-menu-item>
+              </el-menu>
+            </el-scrollbar>
+          </el-aside>
+        </el-container>
+      </el-container>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          visible: false,
+          list: [
+            {
+              title: "1",
+              index: 1,
+            },
+          ],
+        };
+      },
+      mounted() {
+        const arr = [
+          {
+            title: "2",
+            index: 2,
+          },
+          {
+            title: "3",
+            index: 3,
+          },
+          {
+            title: "4",
+            index: 4,
+          },
+          {
+            title: "5",
+            index: 5,
+          },
+          {
+            title: "6",
+            index: 6,
+          },
+          {
+            title: "7",
+            index: 7,
+          },
+          {
+            title: "8",
+            index: 8,
+          },
+          {
+            title: "9",
+            index: 9,
+          },
+          {
+            title: "10",
+            index: 10,
+          },
+          {
+            title: "11",
+            index: 11,
+          },
+        ];
+        setTimeout(() => {
+          this.list = this.list.concat(arr);
+        }, 500);
+      },
+      methods: {
+        handleOpen(key, keyPath) {
+          console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+          console.log(key, keyPath);
+        },
+      },
+    });
+  </script>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>表格合并</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css" />
+  <style type="text/css"></style>
+</head>
+
+<body>
+  <div id="app">
+    <el-table :data="listData" :span-method="objectSpanMethod" border style="width: 100%">
+      <el-table-column label="品种" prop="breed" align="center"></el-table-column>
+      <el-table-column label="年份" prop="year" align="center"></el-table-column>
+      <el-table-column label="出生重(kg)" align="center">
+        <el-table-column label="数量" align="center" prop="num1"></el-table-column>
+
+        <el-table-column label="平均值" align="center" prop="avg1"></el-table-column>
+
+        <el-table-column label="最大值" align="center" prop="max1"></el-table-column>
+      </el-table-column>
+
+      <el-table-column label="21日龄断奶重(kg)" align="center">
+        <el-table-column label="最大值" align="center" prop="max2"></el-table-column>
+
+        <el-table-column label="最小值" align="center" prop="min2"></el-table-column>
+
+        <el-table-column label="数量" align="center" prop="num2"></el-table-column>
+      </el-table-column>
+    </el-table>
+    <br><br>
+
+    <el-table :data="listData" :span-method="objectSpanMethod" border style="width: 100%">
+      <template v-for="(v, k) in headerList">
+        <el-table-column v-if="v.prop" :label="v.label" :prop="v.prop" align="center"></el-table-column>
+        <el-table-column v-if="!v.prop" :label="v.label" align="center">
+          <template v-if="v.children.length > 0">
+            <el-table-column v-for="(v2, k2) in v.children" :key="k2" :label="v2.label" :prop="v2.prop" align="center">
+            </el-table-column>
+          </template>
+        </el-table-column>
+      </template>
+    </el-table>
+  </div>
+</body>
+<!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+  integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: "#app",
+    data: function () {
+      return {
+        headerList: [
+          {
+            label: "品种",
+            prop: "breed",
+            children: [],
+          },
+          {
+            label: "年份",
+            prop: "year",
+            children: [],
+          },
+          {
+            label: "出生重(kg)",
+            prop: "",
+            children: [
+              {
+                label: "数量",
+                prop: "num1",
+                children: [],
+              },
+              {
+                label: "平均值",
+                prop: "avg1",
+                children: [],
+              },
+              {
+                label: "最大值",
+                prop: "max1",
+                children: [],
+              },
+            ],
+          },
+          {
+            label: "21日龄断奶重(kg)",
+            prop: "",
+            children: [
+              {
+                label: "最大值",
+                prop: "max2",
+                children: [],
+              },
+              {
+                label: "最小值",
+                prop: "min2",
+                children: [],
+              },
+              {
+                label: "数值",
+                prop: "num2",
+                children: [],
+              },
+            ],
+          },
+        ],
+        listData: [],
+        testArr1: [],
+        testArr2: [],
+        testPosition1: 0,
+        testPosition2: 0,
+      };
+    },
+    methods: {
+      // 获取数据
+      queryData() {
+        this.listData = [
+          {
+            breed: "大白猪",
+            year: "2015年",
+            num1: 10,
+            avg1: 22,
+            max1: 35,
+            max2: 89,
+            min2: 7,
+            num2: 66,
+          },
+          {
+            breed: "大白猪",
+            year: "2016年",
+            num1: 210,
+            avg1: 422,
+            max1: 5635,
+            max2: 889,
+            min2: 97,
+            num2: 166,
+          },
+          {
+            breed: "大白猪",
+            year: "2017年",
+            num1: 110,
+            avg1: 322,
+            max1: 7635,
+            max2: 289,
+            min2: 72,
+            num2: 166,
+          },
+          {
+            breed: "大白猪",
+            year: "小计",
+            num1: 106,
+            avg1: 227,
+            max1: 3598,
+            max2: 899,
+            min2: 75,
+            num2: 667,
+          },
+          {
+            breed: "杜洛克猪",
+            year: "2015年",
+            num1: 101,
+            avg1: 212,
+            max1: 315,
+            max2: 829,
+            min2: 74,
+            num2: 666,
+          },
+          {
+            breed: "杜洛克猪",
+            year: "2016年",
+            num1: 23,
+            avg1: 67,
+            max1: 345,
+            max2: 534,
+            min2: 75,
+            num2: 11,
+          },
+          {
+            breed: "杜洛克猪",
+            year: "小计",
+            num1: 67,
+            avg1: 85,
+            max1: 45,
+            max2: 23,
+            min2: 11,
+            num2: 90,
+          },
+          {
+            breed: "",
+            year: "总计",
+            num1: 11123,
+            avg1: 4467,
+            max1: 57345,
+            max2: 5394,
+            min2: 7590,
+            num2: 11898,
+          },
+        ];
+        this.rowspan(this.testArr1, this.testPosition1, "breed");
+        // this.rowspan(this.testArr2, this.testPosition2, "amount");
+      },
+      rowspan(spanArr, position, spanName) {
+        console.log("spanArr: ", spanArr);
+        console.log("position: ", position);
+        console.log("spanName: ", spanName);
+        this.listData.forEach((item, index) => {
+          if (index === 0) {
+            spanArr.push(1);
+            position = 0;
+          } else {
+            if (
+              this.listData[index][spanName] ===
+              this.listData[index - 1][spanName]
+            ) {
+              spanArr[position] += 1;
+              spanArr.push(0);
+            } else {
+              spanArr.push(1);
+              position = index;
+            }
+          }
+        });
+        console.log(this.testArr1);
+      },
+      // 表格合并行
+      objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+        // console.log()
+        if (columnIndex === 0) {
+          const _row = this.testArr1[rowIndex];
+          const _col = _row > 0 ? 1 : 0;
+          return {
+            rowspan: _row,
+            colspan: _col,
+          };
+        }
+        // if (columnIndex === 1) {
+        //   const _row = this.testArr2[rowIndex];
+        //   const _col = _row > 0 ? 1 : 0;
+        //   return {
+        //     rowspan: _row,
+        //     colspan: _col,
+        //   };
+        // }
+      },
+    },
+    mounted() {
+      this.queryData();
+    },
+  });
+</script>
+
+</html>
