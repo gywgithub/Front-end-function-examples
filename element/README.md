@@ -1,4 +1,4 @@
-### index.html ， index2.html
+### index.html，index2.html
   
 Element scrollbar 使用
 
@@ -6,6 +6,6 @@ Element scrollbar 使用
 
 前端竞态demo
 
-### merge-cell-table.html
+### merge-cell-table.html，merge-cell-table2.html
 
 动态合并表格行，列
