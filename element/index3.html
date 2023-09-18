@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>前端竞态</title>
+    <title>竞态问题:深入理解与解决方案</title>
     <link
       rel="stylesheet"
       href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
@@ -30,6 +30,13 @@
 
   <body>
     <div id="app">
+      <el-button type="primary" @click="download">下载视频请求</el-button>
+      <el-button type="warning" @click="abort">中止下载</el-button>
+      <br />
+      <br />
+      <el-button type="primary" @click="download2"
+        >异步请求(添加忽略)</el-button
+      >
     </div>
   </body>
   <!-- import Vue before Element -->
@@ -48,14 +55,80 @@
       el: "#app",
       data: function () {
         return {
-         
+          controller: null,
+          signal: null,
+          pendingRequests: new Map()
         };
       },
       mounted() {
-       
+        this.controller = new AbortController();
+        this.signal = this.controller.signal;
       },
       methods: {
-       
+
+        // --- 终止请求 ---
+        download() {
+          const url =
+            "http://v1.keepcdn.com/video/2019/12/14/21/51/15763314900925df4e8e265dcbb4382acc709.mp4";
+          fetch(url, { signal: this.signal })
+            .then((response) => {
+              console.log("Download complete", response);
+            })
+            .catch((err) => {
+              console.error(`Download error: ${err.message}`);
+            });
+        },
+        // 终止请求
+        abort() {
+          this.controller.abort();
+          console.log("Download aborted");
+        },
+        // --- 终止请求 end ---
+
+        // --- 忽略请求 start ---
+        download2() {
+          const requestManager = this.createRequestManager();
+          requestManager.sendRequest("Data 1");
+        },
+
+        makeAsyncRequest(data) {
+          return new Promise((resolve, reject) => {
+            // 模拟异步请求，这里可以是实际的网络请求
+            setTimeout(() => {
+              resolve(`Response for data: ${data}`);
+            }, 2000);
+          });
+        },
+
+        createRequestManager() {
+          const self = this;
+          function sendRequest(data) {
+            console.log('data: ', data)
+            console.log('pendingRequests: ', self.pendingRequests)
+            if (!self.pendingRequests.has(data)) {
+              const promise = self.makeAsyncRequest(data);
+
+              promise
+                .then((response) => {
+                  console.log('promise then')
+                  self.pendingRequests.delete(data);
+                })
+                .catch((error) => {
+                  console.log('promise catch')
+                  console.error(error);
+                  self.pendingRequests.delete(data);
+                });
+              
+              self.pendingRequests.set(data, promise);
+              console.log('self.pendingRequests', self.pendingRequests)
+            } else {
+              console.log(`Request for data: ${data} is already pending.`);
+            }
+          }
+          return {
+            sendRequest,
+          };
+        },
       },
     });
   </script>
