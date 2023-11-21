@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Upload Excel</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <style type="text/css"></style>
+  </head>
+
+  <body>
+    <div id="app">
+      <el-container>
+        <el-upload
+          class="upload-demo"
+          drag
+          action="https://jsonplaceholder.typicode.com/posts/"
+          :file-list="fileList"
+          :auto-upload="false"
+          :on-change="handleChange"
+        >
+          <i class="el-icon-upload"></i>
+          <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+          <div class="el-upload__tip" slot="tip">只能上传excel文件</div>
+        </el-upload>
+      </el-container>
+    </div>
+  </body>
+  <!-- import Vue before Element -->
+  <!-- <script src="https://unpkg.com/vue/dist/vue.js"></script> -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <!-- import JavaScript -->
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
+  <!-- xlsx -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.17.0/dist/xlsx.full.min.js"></script>
+
+  <script>
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          fileList: [],
+        };
+      },
+      mounted() {},
+      methods: {
+        handleChange(file) {
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              // 读取 Excel 文件内容
+              const data = e.target.result;
+              // 处理 Excel 文件内容，获取表格数据
+              this.processExcelData(data);
+            };
+
+            reader.readAsArrayBuffer(file.raw);
+          }
+        },
+        processExcelData(data) {
+          const binaryString = String.fromCharCode.apply(
+            null,
+            new Uint8Array(data)
+          );
+
+          // Convert binary string to workbook object
+          const workbook = XLSX.read(binaryString, { type: "binary" });
+
+          // Get the first sheet
+          const sheetName = workbook.SheetNames[0];
+          const worksheet = workbook.Sheets[sheetName];
+
+          // Convert sheet data to JSON object
+          const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+          console.log("Table Data:", jsonData);
+          console.log("Table Data String:", JSON.stringify(jsonData));
+
+          // 获取表头
+          const titleList = jsonData[0];
+          jsonData.forEach((item, index) => {
+            if (index > 0) {
+              console.log("len: ", item.length);
+
+              for (let i = 0; i < titleList.length; i++) {
+                if (item[i]) {
+                } else {
+                  console.log(
+                    "第 " +
+                      (index + 1) +
+                      " 行的第 " +
+                      (i + 1) +
+                      " 列 " +
+                      titleList[i] +
+                      " 为空"
+                  );
+                  console.error(
+                    "第 " +
+                      (index + 1) +
+                      " 行的第 " +
+                      (i + 1) +
+                      " 列 " +
+                      titleList[i] +
+                      " 为空"
+                  );
+                }
+              }
+            }
+          });
+        },
+      },
+    });
+  </script>
+</html>
