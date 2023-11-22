@@ -79,7 +79,7 @@
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
 
-          // 将sheet转为json对象
+          // 将sheet转为json对象·
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
           console.log("Table Data:", jsonData);
