@@ -72,14 +72,14 @@
             new Uint8Array(data)
           );
 
-          // Convert binary string to workbook object
+          // 将二进制字符串转为workbook
           const workbook = XLSX.read(binaryString, { type: "binary" });
 
-          // Get the first sheet
+          // 获取第一个sheet
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
 
-          // Convert sheet data to JSON object
+          // 将sheet转为json对象
           const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
 
           console.log("Table Data:", jsonData);
@@ -94,24 +94,8 @@
               for (let i = 0; i < titleList.length; i++) {
                 if (item[i]) {
                 } else {
-                  console.log(
-                    "第 " +
-                      (index + 1) +
-                      " 行的第 " +
-                      (i + 1) +
-                      " 列 " +
-                      titleList[i] +
-                      " 为空"
-                  );
-                  console.error(
-                    "第 " +
-                      (index + 1) +
-                      " 行的第 " +
-                      (i + 1) +
-                      " 列 " +
-                      titleList[i] +
-                      " 为空"
-                  );
+                  console.log("第 " + (index + 1) + " 行的第 " + (i + 1) + " 列 " + titleList[i] + " 为空");
+                  console.error("第 " + (index + 1) + " 行的第 " + (i + 1) + " 列 " + titleList[i] + " 为空");
                 }
               }
             }
