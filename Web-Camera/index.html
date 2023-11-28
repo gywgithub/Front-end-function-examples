@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebRTC Camera</title>
+  <style>
+    #video {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      display: block;
+    }
+    #canvas {
+      display: none;
+    }
+    #captureButton {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>WebRTC Camera</h1>
+  <video id="video" playsinline autoplay></video>
+  <canvas id="canvas" width="640" height="480"></canvas>
+  <button id="captureButton">Capture</button>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const video = document.getElementById('video');
+      const canvas = document.getElementById('canvas');
+      const captureButton = document.getElementById('captureButton');
+      const constraints = { video: true };
+
+      navigator.mediaDevices.getUserMedia(constraints)
+        .then((stream) => {
+          video.srcObject = stream;
+        })
+        .catch((error) => {
+          console.error('Error accessing media devices:', error);
+        });
+
+      captureButton.addEventListener('click', () => {
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // You can now use the captured image data as needed
+        const imageData = canvas.toDataURL('image/png');
+        console.log('Captured Image:', imageData);
+      });
+    });
+  </script>
+</body>
+</html>
