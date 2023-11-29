@@ -6,13 +6,14 @@
   <title>WebRTC Camera with Face Recognition</title>
   <style>
     #video {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      display: block;
+      /* width: 100%; */
+      width: 640px;
+      height: 480px;
+      /* margin: 0 auto; */
+      /* display: block; */
     }
     #canvas {
-      display: none;
+      /* display: none; */
     }
     #captureButton {
       margin-top: 10px;
@@ -22,24 +23,32 @@
 </head>
 <body>
   <h1>WebRTC Camera with Face Recognition</h1>
-  <video id="video" playsinline autoplay></video>
+  <div style="display: flex;">
+    <video id="video" playsinline autoplay></video >
   <canvas id="canvas" width="640" height="480"></canvas>
+  </div>
+  
   <button id="captureButton">Capture</button>
-
+  <script src="face-api.js"></script>
+  <!-- <script src="face-api.min.js"></script> -->
   <script>
+
+    setTimeout(() => {
+      console.log('faceapi: ', faceapi)
+    }, 1000)
     document.addEventListener('DOMContentLoaded', () => {
       const video = document.getElementById('video');
       const canvas = document.getElementById('canvas');
       const captureButton = document.getElementById('captureButton');
       const constraints = { video: true };
 
-      navigator.mediaDevices.getUserMedia(constraints)
-        .then((stream) => {
-          video.srcObject = stream;
-        })
-        .catch((error) => {
-          console.error('Error accessing media devices:', error);
-        });
+      // navigator.mediaDevices.getUserMedia(constraints)
+      //   .then((stream) => {
+      //     video.srcObject = stream;
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error accessing media devices:', error);
+      //   });
 
       captureButton.addEventListener('click', async () => {
         const context = canvas.getContext('2d');

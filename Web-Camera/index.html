@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>WebRTC Camera</title>
   <style>
-    #video {
-      width: 100%;
-      max-width: 600px;
-      margin: 0 auto;
-      display: block;
-    }
-    #canvas {
-      display: none;
-    }
     #captureButton {
       margin-top: 10px;
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
   <h1>WebRTC Camera</h1>
-  <video id="video" playsinline autoplay></video>
-  <canvas id="canvas" width="640" height="480"></canvas>
-  <button id="captureButton">Capture</button>
 
+  <div style="display: flex;">
+    <video id="video" playsinline autoplay style="width: 640px; height: 480px;"></video>
+    <canvas id="canvas" style="width: 640px;height:480px;border:1px solid red;"></canvas>
+
+  </div>
+
+  <button id="captureButton">Capture</button>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const video = document.getElementById('video');
@@ -33,13 +30,14 @@
       const captureButton = document.getElementById('captureButton');
       const constraints = { video: true };
 
-      navigator.mediaDevices.getUserMedia(constraints)
-        .then((stream) => {
-          video.srcObject = stream;
-        })
-        .catch((error) => {
-          console.error('Error accessing media devices:', error);
-        });
+      // 官方已经废弃
+      // navigator.mediaDevices.getUserMedia(constraints)
+      //   .then((stream) => {
+      //     video.srcObject = stream;
+      //   })
+      //   .catch((error) => {
+      //     console.error('Error accessing media devices:', error);
+      //   });
 
       captureButton.addEventListener('click', () => {
         const context = canvas.getContext('2d');
@@ -49,7 +47,19 @@
         const imageData = canvas.toDataURL('image/png');
         console.log('Captured Image:', imageData);
       });
+
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (stream) {
+          /* 使用这个 stream stream */
+          video.srcObject = stream;
+        })
+        .catch(function (err) {
+          /* 处理 error */
+          console.error('Error accessing media devices:', err);
+        });
     });
   </script>
 </body>
+
 </html>
