@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,30 +13,31 @@
       /* margin: 0 auto; */
       /* display: block; */
     }
+
     #canvas {
       /* display: none; */
     }
+
     #captureButton {
       margin-top: 10px;
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
   <h1>WebRTC Camera with Face Recognition</h1>
   <div style="display: flex;">
-    <video id="video" playsinline autoplay></video >
-  <canvas id="canvas" width="640" height="480"></canvas>
+    <video id="video" playsinline autoplay></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
   </div>
-  
+
   <button id="captureButton">Capture</button>
   <script src="face-api.js"></script>
   <!-- <script src="face-api.min.js"></script> -->
   <script>
+    // http://localhost:8080/index2.html
 
-    setTimeout(() => {
-      console.log('faceapi: ', faceapi)
-    }, 1000)
     document.addEventListener('DOMContentLoaded', () => {
       const video = document.getElementById('video');
       const canvas = document.getElementById('canvas');
@@ -50,18 +52,37 @@
       //     console.error('Error accessing media devices:', error);
       //   });
 
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function (stream) {
+          /* 使用这个 stream stream */
+          video.srcObject = stream;
+        })
+        .catch(function (err) {
+          /* 处理 error */
+          console.error('Error accessing media devices:', err);
+        });
+
+        // nets
+        console.log('nets')
+        console.log(faceapi.nets)
+
       captureButton.addEventListener('click', async () => {
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+        console.log('canvas: ', convas)
+        console.log('context: ', context)
+        await faceapi.nets.ssdMobilenetv1.loadFromDisk(path.join(__dirname, 'models'))
         // Use face-api.js for face detection
         const faceDetection = await faceapi.detectSingleFace(canvas).withFaceLandmarks();
-        
+        console.log('faceDetection: ', faceDetection)
         if (faceDetection) {
+          console.log('faceDetection true')
           // Replace face with a dog head (you can replace this with your own image)
           const dogHead = new Image();
-          dogHead.src = 'path/to/dog-head.png'; // Replace with your dog head image
+          dogHead.src = './dog.jpg'; // Replace with your dog head image
           dogHead.onload = () => {
+            console.log('doghead onload')
             context.clearRect(0, 0, canvas.width, canvas.height);
             context.drawImage(dogHead, faceDetection.detection.box.x, faceDetection.detection.box.y, faceDetection.detection.box.width, faceDetection.detection.box.height);
           };
@@ -70,4 +91,5 @@
     });
   </script>
 </body>
+
 </html>
