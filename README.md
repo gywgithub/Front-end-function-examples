@@ -131,3 +131,7 @@ Element scrollbar 使用
 #### upload-excel
 
 上传excel文件，解析excel文件数据，并进行数据非空验证
+
+#### Web-Camera
+
+WebRTC 相机在线拍照
