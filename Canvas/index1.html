@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>图片反转后，顺时针旋转</title>
+	</head>
+	<body>
+		<img src="imgs/2.webp" style="width: 200px;height:200px;" />
+		<img src="imgs/2.webp" style="width: 200px;border:2px solid darkcyan; transform: rotateX(60deg);" />
+		<img src="./imgs/2.webp" style="width: 200px;height: 200px;display: none;" id="gh1">
+		<canvas id="bootomBg1" width="672" height="181" style=""> 您的浏览器不支持 Canvas </canvas>
+
+		<script>
+			function drawAndTurn() {
+				let item1 = null
+				let _W = 800
+				var _H = 200
+				let speed = 0.1 // 旋转速度, 正值顺时针
+				let radius = 360 // 图形半径
+				// let canvas = this.bottomBg.nativeElement;
+				let canvas = document.getElementById('bootomBg1')
+				let ctx = canvas.getContext('2d')
+				canvas.width = _W
+				canvas.height = _H
+				var img = new Image()
+
+				// img.src = this.gh1.nativeElement.src
+				
+				
+				img.src = document.getElementById('gh1').src
+				img.onload = function() {
+					item1 = new CircleItem(img, radius, 400, 300, speed) // 图像, 图圆形长半径, 显示中心x,显示中心y, 旋转速度
+				}
+				let CircleItem = function(img, r, x, y, speed) {
+					this._r = r // 半径
+					this._img = img // 图片
+					this._w = r * 2 // 缓存canvas宽度
+					this._h = r * 2 // 缓存canvas高度
+					this._x = x // 外部绘制中心
+					this._y = y // 外部绘制中心
+					this._speed = speed
+					this.rectCenterPoint = {
+						x: this._r,
+						y: this._r,
+					} // 内部圆心
+					this.cache()
+				}
+				CircleItem.prototype.draw = function() {
+					this.rotate()
+					ctx.scale(1, 0.3)
+					ctx.drawImage(
+						this.cacheCanvas,
+						0,
+						0,
+						this._w,
+						this._h,
+						this._x - this._r,
+						this._y - this._r,
+						this._r * 2,
+						this._r * 2
+					)
+					ctx.scale(1, 1 / 0.3)
+				}
+				CircleItem.prototype.cache = function() {
+					this.cacheCanvas = document.createElement('canvas')
+					this.cacheCtx = this.cacheCanvas.getContext('2d')
+					this.cacheCanvas.width = this._w
+					this.cacheCanvas.height = this._h
+					this.cacheCtx.save()
+					this.cacheCtx.beginPath()
+					this.cacheCtx.drawImage(this._img, 0, 0, this._r * 2, this._r * 2)
+					this.cacheCtx.closePath()
+					this.cacheCtx.restore()
+				}
+				CircleItem.prototype.rotate = function() {
+					this.cacheCtx.clearRect(0, 0, this._w, this._h)
+					this.cacheCtx.translate(this.rectCenterPoint.x, this.rectCenterPoint.y)
+					this.cacheCtx.rotate((this._speed * Math.PI) / 180)
+					this.cacheCtx.translate(-this.rectCenterPoint.x, -this.rectCenterPoint.y)
+					this.cacheCtx.drawImage(this._img, 0, 0, this._r * 2, this._r * 2)
+				}
+
+				function animate() {
+					ctx.clearRect(0, 0, _W, _H)
+					item1 && item1.draw()
+					requestAnimationFrame(animate)
+				}
+				animate()
+			}
+
+			drawAndTurn();
+		</script>
+	</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fireworks and Firecrackers</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        background-color: black;
+      }
+      canvas {
+        position: absolute;
+        z-index: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas></canvas>
+    <script>
+      // 元素获取
+      const canvas = document.querySelector("canvas");
+      const ctx = canvas.getContext("2d");
+      // 设定画布大小
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+      // 页面缩放改变画布大小
+      window.addEventListener("resize", resizeCanvas);
+
+      let animationId = "";
+      let radius = 20;
+
+      function drawFires(x, y) {
+        // 初始半径，以及粒子数量
+        let count = 10;
+
+        for (let i = 0; i < count; i++) {
+          // 渲染出当前数据
+          // 下面是点数学题
+          // moveX，moveY是粒子开始的坐标，画个三角形，角度半径知道很容易就得出方程
+          let angle = (360 / count) * i;
+          let radians = (angle * Math.PI) / 180;
+          let moveX = x + Math.cos(radians) * radius;
+          let moveY = y + Math.sin(radians) * radius;
+          // 开始路径
+          ctx.beginPath();
+          ctx.arc(moveX, moveY, 2, Math.PI * 2, false);
+          // 结束
+          ctx.closePath();
+          ctx.fillStyle = "#ff0000";
+          ctx.fill();
+        }
+      }
+
+      function updatePoint() {
+        radius += 0.1;
+      }
+
+      function animate(x, y) {
+        drawFires(x,y)
+        updatePoint()
+        // animationId = requestAnimationFrame(animate)
+      }
+
+      function clickSite(e) {
+        console.log("e: ", e);
+        // 获取当前鼠标的坐标
+        let x = e.clientX;
+        let y = e.clientY;
+        // 绘制
+        animate(x, y);
+
+        // // 更新点
+        // // updatePoint()
+        // radius = 10
+        // setTimeout(() => {
+        //     console.log('animationId ', animationId)
+        //     cancelAnimationFrame(animationId)
+        // }, 2000)
+      }
+      document.addEventListener("click", clickSite);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+         * {
+          margin: 0;
+          padding: 0;
+        }
+        body {
+          background-color: black;
+        }
+        canvas {
+          position: absolute;
+          z-index: 0;
+          background-color: black;
+        }
+      </style
+    </style>
+    <title>Particle Explosion on Canvas</title>
+  </head>
+  <body>
+    <canvas id="myCanvas"></canvas>
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      resizeCanvas();
+
+      const particles = [];
+
+      canvas.addEventListener("click", createParticles);
+
+      function createParticles(event) {
+        const { offsetX, offsetY } = event;
+
+        // 创建粒子
+        for (let i = 0; i < 30; i++) {
+          particles.push({
+            x: offsetX,
+            y: offsetY,
+            size: Math.random() * 5 + 2,
+            speedX: (Math.random() - 0.5) * 8,
+            speedY: (Math.random() - 0.5) * 8,
+            color: `rgb(${Math.random() * 255},${Math.random() * 255},${
+              Math.random() * 255
+            })`,
+            // color: `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.5)`, // 半透明颜色
+          });
+        }
+      }
+
+      function animateParticles() {
+        // ctx.globalCompositeOperation = "destination-out";
+        // ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
+        // ctx.globalCompositeOperation = "lighter";
+
+        // 清空画布
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // 设置拖影
+        ctx.globalCompositeOperation = "destination-out";
+        ctx.fillStyle = "rgba(0,0,0," + 20 / 100 + ")";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.globalCompositeOperation = "lighter";
+
+        // 更新和绘制粒子
+        for (let i = 0; i < particles.length; i++) {
+          particles[i].x += particles[i].speedX;
+          particles[i].y += particles[i].speedY;
+
+          // 减缓粒子速度
+          particles[i].speedX *= 0.98;
+          particles[i].speedY *= 0.98;
+
+          // 绘制粒子
+          ctx.fillStyle = particles[i].color;
+          ctx.beginPath();
+          ctx.arc(
+            particles[i].x,
+            particles[i].y,
+            particles[i].size,
+            0,
+            Math.PI * 2
+          );
+          ctx.fill();
+        }
+
+        // 移除不可见的粒子
+        for (let i = particles.length - 1; i >= 0; i--) {
+          if (particles[i].size <= 0.5) {
+            particles.splice(i, 1);
+          }
+        }
+
+        requestAnimationFrame(animateParticles);
+      }
+
+      // 启动动画
+      animateParticles();
+    </script>
+  </body>
+</html>
