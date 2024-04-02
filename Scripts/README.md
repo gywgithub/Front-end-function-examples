@@ -7,3 +7,22 @@
 ## juejin
 
 将简书上下载的自定义的 Markdown 文件转成掘金导入工具的文件名称格式
+
+## darkroom 油猴自动执行任务脚本
+
+https://darkroom.lifeka.com/
+
+
+### 自动设置
+
+- 伐木
+- 查看陷阱
+- 返回
+
+### 更新库存和武器
+
+浏览器控制台执行如下脚本代码，然后就**无敌**了
+
+```
+for (let key in window.State.stores) { window.State.stores[key] = 999999999 }
+```
