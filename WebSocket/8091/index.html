@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>WebSocket Example</title>
+</head>
+
+<body>
+    <h2>这是8091页面</h2>
+    <input type="text" id="input1" />
+    <button id="sendButton">发送数据到8090</button>
+
+    <br />
+    <br />
+    <input type="text" id="input2" />
+    <button id="sendButton2">发送数据到8092</button>
+
+    <br />
+    <div id="response"></div>
+    <script>
+        const ws = new WebSocket("ws://localhost:9000");
+
+        ws.onopen = function () {
+            console.log("8091页面 与 9000 WebSocket连接成功");
+        };
+
+        ws.onmessage = function (evt) {
+            console.log('8091 message ', evt)
+            const received_msg = evt.data;
+            console.log("接收到的数据: " + received_msg);
+
+            let objData = JSON.parse(received_msg)
+            console.log('objData: ', objData)
+
+
+
+            if (objData.receiver === 8091) {
+                if (objData.sender === 8090) {
+                    document.getElementById('response').innerHTML = "来自8090的消息: " + objData.msg;
+                }
+
+                if (objData.sender === 8092) {
+                    document.getElementById('response').innerHTML = "来自8092的消息: " + objData.msg;
+                }
+            }
+        };
+
+        ws.onclose = function () {
+            console.log("WebSocket连接已关闭");
+        };
+
+        // 向8090页面发送数据
+        document.getElementById('sendButton').onclick = function () {
+            const data = document.getElementById('input1').value;
+            console.log('data1: ', data)
+
+            ws.send(JSON.stringify({
+                sender: 8091, // 发送方
+                msg: data,
+                receiver: 8090 // 接收方
+            }));
+        };
+
+        // 向8092页面发送数据
+        document.getElementById('sendButton2').onclick = function () {
+            const data = document.getElementById('input2').value;
+            console.log('data1: ', data)
+
+            ws.send(JSON.stringify({
+                sender: 8091, // 发送方
+                msg: data,
+                receiver: 8092 // 接收方
+            }));
+        };
+    </script>
+</body>
+
+</html>
