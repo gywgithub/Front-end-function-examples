@@ -61,7 +61,6 @@
 <body>
     <h2>8090页面</h2>
     <div style="display:flex;">
-
         <div class="card" style="height:120px;">
             <input type="text" id="inputData" placeholder="输入数据">
             <button id="sendButton1">向页面8091发送数据</button>
@@ -83,7 +82,6 @@
     </div>
     <div style="display:flex;">
         <div class="card">
-
             <iframe id="iframe1" src="http://localhost:8091"></iframe>
         </div>
         <div class="card">
@@ -91,9 +89,7 @@
         </div>
     </div>
 
-
     <script>
-
         const ws = new WebSocket('ws://localhost:9000');
 
         ws.onopen = function () {

@@ -17,6 +17,10 @@
 
     <br />
     <div id="response"></div>
+
+    <br>
+    <br>
+    <a href="https://www.bing.com" >Microsoft Bing</a>
     <script>
         const ws = new WebSocket("ws://localhost:9000");
 
@@ -31,8 +35,6 @@
 
             let objData = JSON.parse(received_msg)
             console.log('objData: ', objData)
-
-
 
             if (objData.receiver === 8091) {
                 if (objData.sender === 8090) {
