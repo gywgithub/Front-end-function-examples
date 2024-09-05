@@ -135,3 +135,15 @@ Element scrollbar 使用
 #### Web-Camera
 
 WebRTC 相机在线拍照
+
+### Echarts
+
+这个是关于 Echarts 图表相关的代码示例
+
+#### 3d
+
+关于3d效果的一些示例
+
+##### bar1, bar2
+
+3d柱状图

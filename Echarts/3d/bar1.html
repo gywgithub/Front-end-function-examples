@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8"></meta>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+	</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		.border {
+			border: 1px solid #000;
+		}
+ 
+		.left {
+			width: 25%;
+			height: 100%;
+			margin: 0 auto;
+		}		
+	</style>
+	<body>
+		<div class="left border">
+			<div id="litiBar1" style="width:100%;height:400px;background-color: #000;"></div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//组织数据
+		let setData = function(data, constData, showData) {
+			data.filter(function(item) {
+				if (item) {
+					constData.push(1);
+					showData.push(item);
+				} else {
+					constData.push(0);
+					showData.push({
+						value: 1,
+						itemStyle: {
+							normal: {
+								borderColor: "rgba(0,0,0,0)",
+								borderWidth: 2,
+								color: "rgba(0,0,0,0)",
+							},
+						},
+					});
+				}
+			});
+		}
+		//组织颜色
+		let setColor = function(colorArr) {
+			let color = {
+				type: "linear",
+				x: 0,
+				x2: 1,
+				y: 0,
+				y2: 0,
+				/* 此处决定阴暗面 若为横向柱状图则x,y轴调换
+					x: 0,
+					x2: 0,
+					y: 0,
+					y2: 1, */
+				colorStops: [{
+						offset: 0,
+						color: colorArr[0],
+					},
+					{
+						offset: 0.5,
+						color: colorArr[0],
+					},
+					{
+						offset: 0.5,
+						color: colorArr[1],
+					},
+					{
+						offset: 1,
+						color: colorArr[1],
+					},
+				],
+			};
+			return color
+		}
+ 
+		var vehicle = [45, 25, 48, 62, 35]
+		var controlBall = [23, 12, 52, 14, 9]
+ 
+		var barWidth = 30;
+		var constData1 = [];
+		var showData1 = [];
+ 
+ 
+		var constData2 = [];
+		var showData2 = [];
+ 
+		setData(vehicle, constData1, showData1)
+		setData(controlBall, constData2, showData2)
+ 
+		var colorArr1 = ["#345A8B", "#387ABD", "#51C0DB"];
+		var colorArr2 = ["#51C0DB", "#42D9D6", "#45F5F1"];
+ 
+		var color1 = setColor(colorArr1)
+		var color2 = setColor(colorArr2)
+ 
+		var option = {
+			tooltip: {
+				trigger: 'axis',
+				axisPointer: {
+					type: 'shadow'
+				}
+			},
+			legend: {
+				show: false
+			},
+			grid: {
+				top: '15%',
+				bottom: '15%'
+			},
+			xAxis: {
+				type: 'category',
+				axisLabel: {
+					color: '#FFFFFF'
+				},
+				axisLine: {
+					show: true,
+					lineStyle: {
+						color: '#1B3F66'
+					}
+				},
+				axisTick: {
+					show: false
+				},
+				data:  ['合肥', '安庆', '芜湖', '南京', '杭州']
+			},
+			yAxis: {
+				type: 'value',
+				axisLabel: {
+					color: '#FFFFFF'
+				},
+				axisLine: {
+					show: true,
+					lineStyle: {
+						color: '#1B3F66'
+					}
+				},
+				splitLine: {
+					lineStyle: {
+						color: '#1B3F66'
+					}
+				}
+			},
+			series: [{
+					z: 1,
+					type: 'bar',
+					name: '柱子1',
+					barGap: "35%", //相邻柱子间距
+					itemStyle: {
+						borderRadius: [0, 0, 0, 0],//柱子四周圆角
+						color: color1//柱子左右颜色（深，浅）  // 设置柱子颜色
+					},
+					data: vehicle //Y轴上的高度
+				},
+				// ---------------------------------------------
+				{
+					z: 2,
+					name: '柱子1',
+					type: "pictorialBar",
+					data: constData1,//此数据对应底部组件
+					symbol: "diamond",//底部组件形状，不写默认为椭圆
+					symbolOffset: ["-63%", "51%"],//与柱子的偏移角度  // 设置深蓝色(左边颜色柱子1)底部组件的位置
+					symbolSize: [20, 8],//底面[宽，高]
+					itemStyle: {
+						normal: {
+							color: color1//底面左右颜色（深，浅） // 设置柱子底部的颜色
+						},
+					},
+					tooltip: {
+						show: false,
+					},
+				},
+				{
+					z: 3,
+					name: '柱子1',
+					type: "pictorialBar",
+					symbolPosition: "end",
+					data: showData1,//此数据对应顶部组件
+					symbol: "diamond",
+					symbolOffset: ["-63%", "-51%"],
+					symbolSize: [barWidth - 10, (10 * (barWidth - 4)) / barWidth], // 设置顶部组件（左边柱子1）的大小
+					itemStyle: {
+						normal: {
+							/* borderColor: colorArr1[2],
+							borderWidth: 2, */ //加上棱角分明
+							color: colorArr1[2]
+						},
+					},
+					tooltip: {
+						show: false,
+					},
+				}, {
+					z: 1,
+					type: 'bar',
+					name: '柱子2',
+					itemStyle: {
+						borderRadius: [0, 0, 0, 0],
+						color: color2
+					},
+					data: controlBall
+				},
+				{
+					z: 2,
+					name: '柱子2',
+					type: "pictorialBar",
+					data: constData2,
+					symbol: "diamond",
+					symbolOffset: ["63%", "51%"], // 设置右边柱子2底部组件的位置
+					symbolSize: [20, 8], // 设置右边柱子2底部组件的大小
+					itemStyle: {
+						normal: {
+							color: color2
+						},
+					},
+					tooltip: {
+						show: false,
+					},
+				},
+				{
+					z: 3,
+					name: '柱子2',
+					type: "pictorialBar",
+					symbolPosition: "end",
+					data: showData2,
+					symbol: "diamond",
+					symbolOffset: ["63%", "-50%"], // 设置右边柱子2顶部组件的位置
+					symbolSize: [barWidth - 10, (10 * (barWidth - 4)) / barWidth], // 设置右边柱子2顶部组件的大小
+
+					itemStyle: {
+						normal: {
+						/* 	borderColor: colorArr2[2],
+							borderWidth: 2, */
+							color: colorArr2[2]
+						},
+					},
+					tooltip: {
+						show: false,
+					},
+				}
+			]
+		}
+		let chart1 = echarts.init(document.querySelector("#litiBar1"))
+		chart1.setOption(option)
+	
+	</script>
+	
+ 
+</html>
