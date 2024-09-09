@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf8">
+  </meta>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.2/echarts.min.js"></script>
+  <title>3D柱状图</title>
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+</style>
+
+<body>
+  <!-- 注意！！！ 3D柱子效果的上下组件的定位和chart图的 width 属性，直接挂钩 -->
+  <div id="litiBar1" style="width: 595px;height:400px;background-color: #4d4d4d;"></div>
+</body>
+<script type="text/javascript">
+  //组织数据
+  let setData = function (data, constData, showData) {
+    data.filter(function (item) {
+      if (item) {
+        constData.push(1);
+        showData.push(item);
+      } else {
+        constData.push(0);
+        showData.push({
+          value: 1,
+          itemStyle: {
+            normal: {
+              borderColor: "rgba(0,0,0,0)",
+              borderWidth: 2,
+              color: "rgba(0,0,0,0)",
+            },
+          },
+        });
+      }
+    });
+  };
+  //组织颜色
+  let setColor = function (colorArr) {
+    let color = {
+      type: "linear",
+      x: 0,
+      x2: 1,
+      y: 0,
+      y2: 0,
+      /* 此处决定阴暗面 若为横向柱状图则x,y轴调换
+        x: 0,
+        x2: 0,
+        y: 0,
+        y2: 1, */
+      colorStops: [
+        {
+          offset: 0,
+          color: colorArr[0],
+        },
+        {
+          offset: 0.5,
+          color: colorArr[0],
+        },
+        {
+          offset: 0.5,
+          color: colorArr[1],
+        },
+        {
+          offset: 1,
+          color: colorArr[1],
+        },
+      ],
+    };
+    return color;
+  };
+
+  var vehicle = [45, 25, 48, 62, 35];
+  var controlBall = [23, 12, 52, 14, 9];
+  var vehicledata3 = [3, 34, 22, 14, 2];
+
+  var barWidth = 30;
+  var constData1 = [];
+  var showData1 = [];
+
+  var constData2 = [];
+  var showData2 = [];
+
+  var constData3 = [];
+  var showData3 = [];
+
+  setData(vehicle, constData1, showData1);
+  setData(controlBall, constData2, showData2);
+  setData(vehicledata3, constData3, showData3);
+
+  var colorArr1 = ["#08cdf1", "#02aecd", "#30dfff"]; //
+  var colorArr2 = ["#ff9e2c", "#e17c06", "#ffb257"];
+  var colorArr3 = ["#38de67 ", "#1bb045", "#4eef7b"];
+
+  var color1 = setColor(colorArr1);
+  var color2 = setColor(colorArr2);
+  var color3 = setColor(colorArr3);
+
+  var option = {
+    tooltip: {
+      trigger: "axis",
+      axisPointer: {
+        type: "shadow",
+      },
+    },
+    legend: {
+      // show: false
+      right: "10%",
+      textStyle: {
+        color: "#f4fdff",
+      },
+    },
+    grid: {
+      top: "15%",
+      bottom: "15%",
+    },
+    xAxis: {
+      type: "category",
+      axisLabel: {
+        color: "#FFFFFF",
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: "#1B3F66",
+        },
+      },
+      axisTick: {
+        show: false,
+      },
+      data: [
+        "永定门街道",
+        "和平里街道",
+        "安定门街道",
+        "建国门街道",
+        "崇文门街道",
+      ],
+    },
+    yAxis: {
+      type: "value",
+      axisLabel: {
+        color: "#FFFFFF",
+      },
+      axisLine: {
+        show: true,
+        lineStyle: {
+          color: "#1B3F66",
+        },
+      },
+      splitLine: {
+        lineStyle: {
+          color: "#1B3F66",
+        },
+      },
+    },
+    series: [
+      {
+        z: 1,
+        type: "bar",
+        name: "人社业务",
+        barGap: "35%", //相邻柱子间距
+        itemStyle: {
+          borderRadius: [0, 0, 0, 0], //柱子四周圆角
+          color: color1, //柱子左右颜色（深，浅）  // 设置柱子颜色
+        },
+        data: vehicle, //Y轴上的高度
+      },
+      {
+        z: 2,
+        name: "人社业务",
+        type: "pictorialBar",
+        data: constData1, //此数据对应底部组件
+        symbol: "diamond", //底部组件形状，不写默认为椭圆
+        symbolOffset: ["-134%", "51%"], //与柱子的偏移角度  // 设置深蓝色(左边颜色人社业务)底部组件的位置
+        symbolSize: [20, 8], //底面[宽，高]
+        itemStyle: {
+          normal: {
+            color: color1, //底面左右颜色（深，浅） // 设置柱子底部的颜色
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+      {
+        z: 3,
+        name: "人社业务",
+        type: "pictorialBar",
+        symbolPosition: "end",
+        data: showData1, //此数据对应顶部组件
+        symbol: "diamond",
+        symbolOffset: ["-134%", "-52%"],
+        symbolSize: [barWidth - 10, (10 * (barWidth - 4)) / barWidth], // 设置顶部组件（左边人社业务）的大小
+        itemStyle: {
+          normal: {
+            /* borderColor: colorArr1[2],
+            borderWidth: 2, */ //加上棱角分明
+            color: colorArr1[2],
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+      {
+        z: 1,
+        type: "bar",
+        name: "医保业务",
+        itemStyle: {
+          borderRadius: [0, 0, 0, 0],
+          color: color2,
+        },
+        data: controlBall,
+      },
+      {
+        z: 2,
+        name: "医保业务",
+        type: "pictorialBar",
+        data: constData2,
+        symbol: "diamond",
+        symbolOffset: ["0%", "51%"], // 设置右边医保业务底部组件的位置
+        symbolSize: [20, 8], // 设置右边医保业务底部组件的大小
+        itemStyle: {
+          normal: {
+            color: color2,
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+      {
+        z: 3,
+        name: "医保业务",
+        type: "pictorialBar",
+        symbolPosition: "end",
+        data: showData2,
+        symbol: "diamond",
+        symbolOffset: ["0%", "-50%"], // 设置右边医保业务顶部组件的位置
+        symbolSize: [barWidth - 10, (10 * (barWidth - 4)) / barWidth], // 设置右边医保业务顶部组件的大小
+
+        itemStyle: {
+          normal: {
+            /* 	borderColor: colorArr2[2],
+            borderWidth: 2, */
+            color: colorArr2[2],
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+      // 新增政务业务
+      {
+        z: 1,
+        type: "bar",
+        name: "政务业务",
+        barGap: "35%", //相邻柱子间距
+        itemStyle: {
+          borderRadius: [0, 0, 0, 0], //柱子四周圆角
+          color: color3, //柱子左右颜色（深，浅）  // 设置柱子颜色
+        },
+        data: vehicledata3, //Y轴上的高度
+      },
+      {
+        z: 2,
+        name: "政务业务",
+        type: "pictorialBar",
+        data: constData3, //此数据对应底部组件
+        symbol: "diamond", //底部组件形状，不写默认为椭圆
+        symbolOffset: ["134%", "51%"], //与柱子的偏移角度  // 设置深蓝色(左边颜色政务业务)底部组件的位置
+        symbolSize: [20, 8], //底面[宽，高]
+        itemStyle: {
+          normal: {
+            color: color3, //底面左右颜色（深，浅） // 设置柱子底部的颜色
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+      {
+        z: 3,
+        name: "政务业务",
+        type: "pictorialBar",
+        symbolPosition: "end",
+        data: showData3, //此数据对应顶部组件
+        symbol: "diamond",
+        symbolOffset: ["134%", "-51%"],
+        symbolSize: [barWidth - 10, (10 * (barWidth - 4)) / barWidth], // 设置顶部组件（左边政务业务）的大小
+        itemStyle: {
+          normal: {
+            /* borderColor: colorArr1[2],
+            borderWidth: 2, */ //加上棱角分明
+            color: colorArr3[2],
+          },
+        },
+        tooltip: {
+          show: false,
+        },
+      },
+    ],
+  };
+  let chart1 = echarts.init(document.querySelector("#litiBar1"))
+  chart1.setOption(option)
+
+</script>
+
+
+</html>
