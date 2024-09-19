@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <title>DocumentFragment</title>
+  </head>
+  <body>
+    这是一个示例页面。测试 DocumentFragment (文档碎片) 对象。
+
+    <!-- p 标签内容会被添加到这个位置 -->
+
+    <script>
+      // 文档碎片 (DocumentFragment) 对象是一个轻量级的文档对象，可以包含和操作节点。
+      // 可以作为一个容器来保存和操作多个节点，然后一次性将它们添加到文档中。
+      // 主要租用是在需要频繁操作节点时，避免频繁的 DOM 操作，提高性能。
+      // 使用文档碎片可以将多个DOM操作合并成一次，减少浏览器的重绘和回流次数，从而提高性能。
+
+      // 回流 (Reflow): 回流也称为重排，是指当前页面的布局或几何属性发生变化时，浏览器需要重新计算元素的几何属性，然后重新布局的过程。例如，当元素的尺寸、位置、内容或隐藏状态发生改变时，就会出发回流。回流是一个比较耗时的操作，因为它涉及到页面中所有元素的重新计算和布局。
+
+      // 重绘 (Repaint)：重绘是指当页面元素的样式发生变化，但不影响布局时，浏览器只需要重新绘制元素的过程。例如，改变元素的颜色，背景色等，这些操作只会影响元素的外观，不会影响元素的布局。重绘是一个比较轻量级的操作，因为它只涉及到元素的外观变化。重绘比回流要快很多。
+
+
+
+      // 以下是一个示例，演示如何使用文档碎片来创建和添加多个段落元素：
+      var fragment = document.createDocumentFragment();
+
+      var p1 = document.createElement("p");
+      p1.textContent = "Paragraph 1";
+
+      var p2 = document.createElement("p");
+      p2.textContent = "Paragraph 2";
+
+      fragment.appendChild(p1);
+      fragment.appendChild(p2);
+
+      document.body.appendChild(fragment);
+    </script>
+  </body>
+</html>
