@@ -10,6 +10,8 @@ import 'ant-design-vue/dist/reset.css'
 
 const app = createApp(App)
 
+app.config.globalProperties.$myGlobalPropertyMessage = 'GlobalProperty Hello, World!';
+
 app.use(createPinia())
 app.use(router)
 app.use(Antd)

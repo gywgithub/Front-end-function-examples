@@ -113,3 +113,5 @@ const rawState = toRaw(state);
 
 console.log(rawState); // { count: 0, message: 'Hello, Vue 3!' }
 ```
+
+## pinia
