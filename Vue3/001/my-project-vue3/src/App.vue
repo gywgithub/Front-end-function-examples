@@ -14,8 +14,13 @@ import { RouterLink, RouterView } from 'vue-router'
       </nav>
     </div>
   </header> -->
+  <div style="padding: 20px;">
+    <RouterLink to="/">Home</RouterLink> &nbsp;&nbsp;
+    <RouterLink to="/about">About</RouterLink> &nbsp; &nbsp;
+    <RouterLink to="/form">Form</RouterLink> &nbsp; &nbsp;
 
-  <RouterView />
+    <RouterView />
+  </div>
 </template>
 
 <style scoped>

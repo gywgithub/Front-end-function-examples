@@ -1,4 +1,20 @@
 <template>
+   <div style="padding: 10px 0;">
+    <div v-for="(v, i) in nameList" :key="i">
+      {{v}}
+    </div>
+
+    <hr>
+    <div v-for="(v, i) in nameList" :key="i">
+      <a-input v-model:value="nameList[i]"></a-input>
+      <!-- v-model cannot be used on v-for or v-slot scope variables because they are not writable -->
+      <!-- <a-input v-model:value="v"></a-input> -->
+    </div>
+    <a-button @click="insertInput">insert</a-button>
+    <a-button @click="handleSave">save</a-button>
+    <hr>
+
+    <hr>
   <a-form
     ref="formRef"
     :model="formState"
@@ -49,13 +65,18 @@
       <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>&nbsp;&nbsp;
     </a-form-item>
   </a-form>
+ 
+    <a-button @click="goHome">Go Home</a-button>
+  </div>
 </template>
 <script lang="ts" setup>
 import { Dayjs } from 'dayjs';
-import { reactive, ref, toRaw } from 'vue';
+import { reactive, ref, toRaw, onMounted, toRefs } from 'vue';
 import type { UnwrapRef } from 'vue';
 import type { Rule } from 'ant-design-vue/es/form';
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 interface FormState {
   name: string;
   region: string | undefined;
@@ -65,9 +86,23 @@ interface FormState {
   resource: string;
   desc: string;
 }
+
+// interface state {
+//   nameList: any
+// }
+
 const formRef = ref();
 const labelCol = { span: 5 };
 const wrapperCol = { span: 13 };
+
+const state = reactive<state>({
+  nameList: ['ab', 'c']
+})
+
+// const { nameList } = toRefs(state) 
+
+const nameList = ref<string[]>(['ab', 'c'])
+
 const formState: UnwrapRef<FormState> = reactive({
   name: '',
   region: undefined,
@@ -95,6 +130,23 @@ const rules: Record<string, Rule[]> = {
   resource: [{ required: true, message: 'Please select activity resource', trigger: 'change' }],
   desc: [{ required: true, message: 'Please input activity form', trigger: 'blur' }],
 };
+
+onMounted(() => {
+  console.log('nameList')
+  console.log(nameList.value)
+})
+
+function handleSave() {
+  console.log('nameList2')
+  console.log(nameList.value)
+}
+function insertInput() {
+  nameList.value.push('')
+}
+
+const goHome = () => {
+  router.push('/home')
+}
 
 const onSubmit2 = () => {
   console.log('formRef', formRef)
