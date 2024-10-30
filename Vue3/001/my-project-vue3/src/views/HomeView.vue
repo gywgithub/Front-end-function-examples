@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
+import { ref, nextTick } from 'vue'
 
 const instance = getCurrentInstance()
 const myGlobalPropertyMessage =
@@ -24,10 +25,45 @@ function print(text: string) {
 
 const atttributeName = 'href'
 const eventName = 'click'
+
+const count = ref(0)
+console.log(count)  // Ref对象
+console.log(count.value) // 0
+count.value++
+console.log(count.value) // 1
+
+// const count1 = 0
+// count1++
+// console.log(count1)
+
+function decrement() {
+  count.value--
+}
+
+const obj = ref({
+  nested: {
+    count: 0
+  },
+  arr: ['foo', 'bar']
+})
+
+async function mutateDeeply() {
+  obj.value.nested.count++;
+  obj.value.arr.push('baz')
+  await nextTick();
+}
 </script>
 
 <template>
   <main>
+    <div>
+      <button @click="count++">increment</button>
+      <br>
+      <br>
+      <button @click="decrement">decrement</button>
+    </div>
+    <div>{{ count }}</div>
+    
     <div>Hello World</div>
     <div v-bind="objectOfAttrs">11</div>
 
