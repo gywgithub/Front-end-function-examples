@@ -1,6 +1,54 @@
 <script setup lang="ts">
 import { getCurrentInstance } from 'vue'
-import { ref, nextTick } from 'vue'
+import { ref, nextTick, reactive } from 'vue'
+
+const object = { id: ref(1) }
+
+
+const books = reactive([ref('Vue 3 Guide')])
+// 这里需要 .value
+console.log(books[0].value)
+
+const map = reactive(new Map([['count', ref(0)]]))
+// 这里需要 .value
+console.log(map.get('count').value)
+
+console.log('--1--')
+
+const proxy = reactive({})
+const raw = {}
+proxy.nested = raw
+console.log(1)
+console.log(proxy.nested === raw) // false;
+
+const state = reactive({
+  count: 0
+})
+
+console.log('---')
+
+const state2 = reactive({
+  count2: 0
+})
+
+let { count2 } = state2
+
+count2++
+
+console.log('count2: ', count2)
+console.log('state2.count2: ', state2.count2)
+
+console.log('===')
+
+// const raw = {}
+// const proxy = reactive(raw)
+
+// console.log(proxy === raw); // false
+
+// console.log(reactive(raw) === proxy); // true
+// console.log(reactive(proxy) === proxy); // true
+
+
 
 const instance = getCurrentInstance()
 const myGlobalPropertyMessage =
@@ -56,7 +104,11 @@ async function mutateDeeply() {
 
 <template>
   <main>
+    <!-- <div style="background-color: red;">{{ object.id + 1 }}</div> -->
     <div>
+      <button @click="state.count++">{{ state.count }}</button>
+      <br>
+      <br>
       <button @click="count++">increment</button>
       <br>
       <br>
