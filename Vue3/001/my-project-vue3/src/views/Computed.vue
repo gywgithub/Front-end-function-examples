@@ -5,6 +5,14 @@
     <p>平方：{{ squaredNumber }}</p>
     <p>格式化后的数字：{{ formattedNumber }}</p>
     <input v-model="number" type="number" placeholder="输入一个数字">
+
+    <br/>
+    <br/>
+  
+    <div>可写计算属性示例</div>
+    <p>原始数字：{{ number2 }}</p>
+    <p>平方：{{ squaredNumber2 }}</p>
+    <input v-model="squaredNumber2" type="number" placeholder="输入一个数字">
   </div>
 </template>
 <script lang="ts" setup>
@@ -22,6 +30,27 @@ const squaredNumber = computed(() => {
 const formattedNumber = computed(() => {
   return number.value.toLocaleString()
 })
+
+console.log(squaredNumber.value) // 25
+
+// --- 可写计算属性 ---
+const number2 = ref<number>(5)
+
+const squaredNumber2 = computed({
+  get() {
+    return number2.value * number2.value; // 计算平方
+  },
+  set(newValue) {
+    number2.value = Math.sqrt(newValue); // 更新原始数字
+  }
+})
+
+const basePrice = ref(100);
+const taxRate = ref(0.2);
+const tatalPrice = computed(() => {
+  return basePrice.value + basePrice.value * taxRate.value;
+})
+console.log(tatalPrice.value)
 </script>
 
 <!-- toString 和 toLocaleString 的区别 -->
