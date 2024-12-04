@@ -10,6 +10,33 @@
 
 宏是一种强大的工具，它可以帮助开发者减少重复代码、提高代码的可读性和可维护性，以及实现一些在运行时难以完成的任务
 
+## defineOptions()
+
+`defineOptions` 是一个用于定义组件选项的函数，主要用于组合式API中。它允许开发者在 `setup` 函数中声明组件的选项，如 `name`、`props`、`emits` 等
+
+```js
+<script setup lang="ts">
+import { defineOptions } from 'vue';
+
+defineOptions({
+  name: 'MyComponent',
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  },
+  emits: ['update']
+});
+</script>
+```
+
+### 作用
+
+- 定义组件选项：通过 `defineOptions()` 可以在 `setup` 函数中清晰地定义组件的选项，增强代码的可读性和可维护性
+
+- 类型推到：在 TypeScript 中，使用 defineOptions 可以让你在定义组件选项时，使用类型推导，而不是手动指定每个选项的类型
+
 ## UnwrapRef
 
 UnwrapRef 是 Vue 3 中的一个类型工具，用于处理响应式引用（ref）时的类型推导。它的主要作用是从一个响应式引用中提取出其原始值的类型。
@@ -94,7 +121,7 @@ const goHome = () => {
 - sort():对数组进行排序，并返回排序后的数组。会直接修改原始数组
 - reverse():将数组中的元素顺序颠倒，并返回颠倒后的数组。会直接修改原始数组
 
-> 小结一下，Vue中的数组响应式变化，Vue都是监听的能够修改原始数组的方法
+> Vue中的数组响应式变化，Vue都是监听的能够修改原始数组的方法
 
 ## toRaw
 

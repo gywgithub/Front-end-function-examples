@@ -51,6 +51,15 @@ const tatalPrice = computed(() => {
   return basePrice.value + basePrice.value * taxRate.value;
 })
 console.log(tatalPrice.value)
+
+
+const numbers = ref([1, 2, 3, 4, 5])
+
+const evenNumbers = computed(() => {
+  return numbers.value.filter((n) => n % 2 === 0)
+})
+
+console.log('evenNumbers: ', evenNumbers.value)
 </script>
 
 <!-- toString 和 toLocaleString 的区别 -->

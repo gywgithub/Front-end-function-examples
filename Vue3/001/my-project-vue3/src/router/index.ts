@@ -27,6 +27,11 @@ const router = createRouter({
       name: 'computed',
       component: () => import('../views/Computed.vue')
     },
+    {
+      path: '/event',
+      name: 'event',
+      component: () => import('../views/Event.vue')
+    },
   ]
 })
 
