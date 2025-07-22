@@ -1,0 +1,30 @@
+[
+    {
+        "dirname": "1",
+        "description": "目录一",
+        "files": [
+            {
+                "name": "24216-340670744_tiny",
+                "path": "/videos/1/24216-340670744_tiny.mp4"
+            },
+            {
+                "name": "2135658-764361528_tiny",
+                "path": "/videos/1/135658-764361528_tiny.mp4"
+            }
+        ]
+    },
+    {
+        "dirname": "2",
+        "description": "目录二",
+        "files": [
+            {
+                "name": "138588-770315514_tiny",
+                "path": "/videos/2/138588-770315514_tiny.mp4"
+            },
+            {
+                "name": "140111-774507949_large",
+                "path": "/videos/2/140111-774507949_large.mp4"
+            }
+        ]
+    }
+]

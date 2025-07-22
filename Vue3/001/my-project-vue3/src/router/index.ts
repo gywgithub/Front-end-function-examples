@@ -17,6 +17,16 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
+     {
+      path: '/Table1',
+      name: 'Table1',
+      component: () => import('../views/Table1.vue')
+    },
+     {
+      path: '/Table2',
+      name: 'Table2',
+      component: () => import('../views/Table2.vue')
+    },
     {
       path: '/form',
       name: 'form',
@@ -31,6 +41,21 @@ const router = createRouter({
       path: '/event',
       name: 'event',
       component: () => import('../views/Event.vue')
+    },
+    {
+      path: '/map-street',
+      name: 'map-street',
+      component: () => import('../views/Map/MapStreet.vue')
+    },
+    {
+      path: '/heat-map-1',
+      name: 'heat-map-1',
+      component: () => import('../views/Map/heatmap1.vue')
+    },
+    {
+      path: '/heat-map-2',
+      name: 'heat-map-2',
+      component: () => import('../views/Map/heatmap2.vue')
     },
   ]
 })

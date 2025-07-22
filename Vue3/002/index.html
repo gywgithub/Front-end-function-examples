@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tree Data Flatten and Render</title>
+
+  <!-- 引入 Vue 3 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+
+  <!-- 引入 Ant Design Vue 样式 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ant-design-vue@3/dist/antd.css" />
+
+  <!-- 引入 Ant Design Vue 组件库 -->
+  <script src="https://cdn.jsdelivr.net/npm/ant-design-vue@3/dist/antd.min.js"></script>
+</head>
+<body>
+  <div id="app">
+    <a-table 
+      :dataSource="flattenedData" 
+      :columns="columns"
+      rowKey="id"
+    />
+  </div>
+
+  <script>
+    const { createApp } = Vue;
+
+    // 创建 Vue 应用
+    const app = createApp({
+      setup() {
+        // 原始树结构数据
+        const treeData = [
+          {
+            id: 1,
+            name: '111',
+            age: 19,
+            parentId: 0,
+            children: [
+              {
+                id: 2,
+                name: '222',
+                age: 18,
+                parentId: 1,
+                children: [
+                  { id: 4, name: '444', age: 16, parentId: 2 },
+                  { id: 5, name: '555', age: 15, parentId: 2 },
+                  { id: 6, name: '666', age: 14, parentId: 2 }
+                ]
+              },
+              {
+                id: 3,
+                name: '333',
+                age: 17,
+                parentId: 1,
+                children: [
+                  { id: 7, name: '777', age: 13, parentId: 3 },
+                  { id: 8, name: '888', age: 12, parentId: 3 },
+                  { id: 9, name: '999', age: 11, parentId: 3 }
+                ]
+              }
+            ]
+          }
+        ];
+
+        // 拍平树结构数据
+        const flattenTree = (data) => {
+          let result = [];
+          
+          const traverse = (node) => {
+            result.push({ ...node });
+            if (node.children && node.children.length > 0) {
+              node.children.forEach(child => traverse(child));
+            }
+          };
+
+          data.forEach(traverse);
+          return result;
+        };
+
+        const flattenedData = flattenTree(treeData);
+
+        // 表格列定义
+        const columns = [
+          { title: 'ID', dataIndex: 'id', key: 'id' },
+          { title: 'Name', dataIndex: 'name', key: 'name' },
+          { title: 'Age', dataIndex: 'age', key: 'age' }
+        ];
+
+        return {
+          flattenedData,
+          columns
+        };
+      }
+    });
+
+    // ✅ 正确注册 Ant Design Vue 插件
+    Vue.use(antd);
+
+    // 挂载应用
+    app.mount('#app');
+  </script>
+</body>
+</html>

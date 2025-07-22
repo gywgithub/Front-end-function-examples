@@ -78,6 +78,10 @@ svg 示例
 
 ### video-to-canvas
 
+### video-thumbnail
+
+根据视频内容创建缩略图
+
 ### vue-form-json-schema
 
 ### vue-i18n

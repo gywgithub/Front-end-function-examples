@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Title</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/element-ui/lib/theme-chalk/index.css"
+    />
+    <style type="text/css">
+      .video-page {
+        padding: 0 20px 20px 20px;
+      }
+
+      .thumbnail-container {
+        text-align: center;
+        cursor: pointer;
+        margin-bottom: 15px;
+      }
+
+      .thumbnail {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .video-name {
+        margin-top: 10px;
+        font-size: 14px;
+      }
+
+      .video-player {
+        margin-top: 30px;
+      }
+
+      .player {
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+      }
+
+      .dialog-video-container {
+        position: relative;
+        width: 100%;
+        height: calc(100vh - 100px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .dialog-video {
+
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* 视频自适应容器，保持比例，裁剪多余部分 */
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app">
+      <el-tabs
+        v-model="activeTab"
+        @tab-click="handleTabClick"
+        style="margin-top: 4px"
+      >
+        <el-tab-pane
+          v-for="(tab, index) in tabs"
+          :key="index"
+          :label="tab"
+          :name="String(index)"
+        >
+          <!-- 视频列表 -->
+          <el-row :gutter="20">
+            <el-col
+              v-for="(video, idx) in videos"
+              :key="idx"
+              :xs="24"
+              :sm="12"
+              :md="8"
+              :lg="6"
+              :xl="4"
+              class="video-item"
+              @click.native="openVideoDialog(video)"
+            >
+              <div class="thumbnail-container">
+                <img :src="video.thumbnail" class="thumbnail" />
+                <div class="video-name">{{ video.name }}</div>
+              </div>
+            </el-col>
+          </el-row>
+
+        </el-tab-pane>
+      </el-tabs>
+
+      <el-dialog
+        :visible.sync="dialogVisible"
+        :fullscreen="true"
+        :show-close="true"
+        :close-on-click-modal="true"
+        @close="handleDialogClose"
+      >
+        <div class="dialog-video-container">
+          <video
+            ref="videoPlayer"
+            :src="selectedVideo?.url"
+            controls
+            autoplay
+            class="dialog-video"
+            @ended="onVideoEnded"
+          ></video>
+        </div>
+      </el-dialog>
+    </div>
+  </body>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.14/vue.min.js"
+    integrity="sha512-XdUZ5nrNkVySQBnnM5vzDqHai823Spoq1W3pJoQwomQja+o4Nw0Ew1ppxo5bhF2vMug6sfibhKWcNJsG8Vj9tg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  ></script>
+
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script>
+    new Vue({
+      el: "#app",
+      data: function () {
+        return {
+          tabs: [
+          ],
+          activeTab: "0", // 默认激活第一个 tab
+          videos: [], // 当前 tab 下的视频列表
+          selectedVideo: null, // 当前选中的视频
+          configData: null,
+          dialogVisible: false, // 控制弹框是否显示
+        };
+      },
+      mounted() {
+        console.log("mounted");
+        this.loadConfig();
+      },
+      methods: {
+        openVideoDialog(video) {
+          this.selectedVideo = video;
+          this.dialogVisible = true;
+        },
+
+        // 关闭弹框时停止播放
+        handleDialogClose() {
+          const videoPlayer = this.$refs.videoPlayer;
+          if (videoPlayer) {
+            videoPlayer.pause(); // 停止播放
+          }
+          this.selectedVideo = null;
+        },
+
+        // 可选：视频结束时处理
+        onVideoEnded() {
+          console.log("视频已结束");
+        },
+        loadConfig() {
+          const configUrl = "/videos/config.json";
+
+          fetch(configUrl)
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("网络响应失败");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("读取到的配置:", data);
+              // 处理你的数据
+              this.configData = data;
+
+              // 将 configData 中的 description 赋值给 tabs
+              this.tabs = data.map((item) => item.description);
+
+              this.loadVideos(0); // 初始化加载第一个 tab 的视频
+            })
+            .catch((error) => {
+              console.error("读取 config.json 失败:", error);
+            });
+        },
+        // 获取当前 tab 对应的视频目录
+        getVideoDir(tabIndex) {
+          return `/videos/${parseInt(tabIndex) + 1}`;
+        },
+
+        // 加载视频列表
+        loadVideos(tabIndex = 0) {
+          const dir = this.getVideoDir(tabIndex);
+          console.log(`加载视频目录: ${dir}`);
+         
+
+          console.log("configData:", this.configData);
+          const dirData = this.configData.find(
+            (item) => item.dirname === (parseInt(tabIndex) + 1).toString()
+          );
+          if (dirData) {
+
+            const videosWithThumbnails = dirData.files.map((file) => {
+              if (file.thumbnail) {
+                // 如果配置了缩略图，则使用缩略图
+                return {
+                  name: file.name,
+                  url: file.path,
+                  thumbnail: file.thumbnail,
+                };
+              } else {
+                // 否则使用视频第一帧图片作为缩略图
+                const video = {
+                  name: file.name,
+                  url: file.path,
+                  thumbnail: "",
+                };
+
+                const videoElement = document.createElement("video");
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                videoElement.src = video.url;
+
+                videoElement.addEventListener("loadeddata", () => {
+                  videoElement.currentTime = 0;
+                });
+
+                videoElement.addEventListener("seeked", () => {
+                  canvas.width = videoElement.videoWidth;
+                  canvas.height = videoElement.videoHeight;
+                  ctx.drawImage(
+                    videoElement,
+                    0,
+                    0,
+                    canvas.width,
+                    canvas.height
+                  );
+                  const thumbnail = canvas.toDataURL("image/png");
+
+                  // 更新对应的视频对象
+                  this.videos = this.videos.map((v) =>
+                    v.name === video.name ? { ...v, thumbnail } : v
+                  );
+                });
+
+                return video;
+              }
+            });
+
+            this.videos = videosWithThumbnails;
+          }
+
+        },
+
+        // 切换 tab
+        handleTabClick(tab) {
+          this.loadVideos(parseInt(tab.name));
+        },
+
+        // 播放视频
+        playVideo(video) {
+          this.selectedVideo = video;
+        },
+      },
+    });
+  </script>
+</html>
