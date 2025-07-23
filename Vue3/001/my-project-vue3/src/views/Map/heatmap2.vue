@@ -58,10 +58,6 @@ const initMap = async () => {
             map: map.value,
         }))
 
-        // let geo = new Loca.GeoJSONSource({
-        //     url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/tsing.json',
-        // });
-
 
         let mock_data = {
             "type": "FeatureCollection",
@@ -76,7 +72,6 @@ const initMap = async () => {
                         "count": 1159
                     }
                 },
-
                 {
                     "type": "Feature",
                     "geometry": {
@@ -89,16 +84,41 @@ const initMap = async () => {
                 }
             ]
         }
+
+        // 注意！！！
+        // 热力图为一个点时，热力图效果没有
+        let mock_data2 = {
+            "type": "FeatureCollection",
+            "features": [
+                {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": [119.518251, 35.683927]
+                    },
+                    "properties": {
+                        "count": 1159
+                    }
+                }
+            ]
+        }
+
+        // 官方Demo数据
         let geo = new Loca.GeoJSONSource({
-            data: mock_data
+            url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/tsing.json',
         });
 
+
+        // 自定义数据
+        // let geo = new Loca.GeoJSONSource({
+        //     data: mock_data
+        // });
+
         let heatmap = new Loca.HeatMapLayer({
-            // loca,
             zIndex: 10,
             opacity: 1,
             visible: true,
-            zooms: [2, 22],
+            radius: 30, // 增大半径
         });
 
         heatmap.setSource(geo, {

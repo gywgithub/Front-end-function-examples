@@ -2015,7 +2015,7 @@
             "properties": {
                 "id": "3",
                 "name": "崔各庄乡",
-                "value": 27348,
+                "value": 16387,
                 "health": 0.01,
                 "zylsd": 40.959447
             },
@@ -5882,7 +5882,7 @@
             "properties": {
                 "id": "6",
                 "name": "十八里店乡",
-                "value": 46408,
+                "value": 30614,
                 "health": 0.851,
                 "zylsd": 40.959447
             },
@@ -21706,7 +21706,7 @@
             "properties": {
                 "id": "15",
                 "name": "左家庄街道",
-                "value": 62770,
+                "value": 37,
                 "health": 0.626965,
                 "zylsd": 40.959447
             },
@@ -44403,7 +44403,7 @@
             "properties": {
                 "id": "32",
                 "name": "望京街道",
-                "value": 98233,
+                "value": 37,
                 "health": 0.1,
                 "zylsd": 40.959447
             },

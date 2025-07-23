@@ -3,6 +3,7 @@ import AMapLoader from '@amap/amap-jsapi-loader'
 import { onMounted, onUnmounted, ref } from 'vue'
 // 导入朝阳区街道数据
 import geojsonData2 from './Data/chaoyang_street.json'
+// import geojsonData2 from './Data/chaoyang_resouce.json'
 
 // 高德地图API密钥
 const API_KEY = '715ae0980e2fc7aa8af8e64cf3f862ab'
@@ -127,7 +128,7 @@ const initMap = async () => {
     // 创建地图实例
     map.value = new AMap.Map(mapContainer.value, {
       zoom: 11.14,
-      viewMode: '3D',
+    //   viewMode: '3D',
       pitch: 45,
       // pitch: 0,
       mapStyle: 'amap://styles/darkblue', // 极夜蓝
@@ -139,7 +140,7 @@ const initMap = async () => {
       // 关闭右上角控制面板
       controlBar: false,
       // features: ['bg', 'point'],
-      features: ['bg'],
+    //   features: ['bg'],
     })
 
     // console.log(2222)
@@ -286,53 +287,41 @@ const initMap = async () => {
     //   }
 
     // // 创建行政区查询对象
-    // const districtSearch = new AMap.DistrictSearch({
-    //   level: 'street', // 设置查询级别为街道级
-    //   subdistrict: 2, // 返回下一级行政区
-    //   extensions: 'all', // 返回行政区边界坐标组等具体信息
-    // })
+    const districtSearch = new AMap.DistrictSearch({
+      level: 'street', // 设置查询级别为街道级
+      subdistrict: 2, // 返回下一级行政区
+      extensions: 'all', // 返回行政区边界坐标组等具体信息
+    })
 
-    // // 查询朝阳区的街道
-    // districtSearch.search('朝阳区', (status, result) => {
-    //   console.log(3333)
-    //   console.log(status)
-    //   console.log(result)
-    //   if (status === 'complete') {
-    //     const streets = result.districtList[0].districtList
-    //     console.log('朝阳区街道数据：', streets)
+    // 查询朝阳区的街道
+    districtSearch.search('朝阳区', (status, result) => {
+      console.log(3333)
+      console.log(status)
+      console.log(result)
+      if (status === 'complete') {
+        const streets = result.districtList[0].districtList
+        console.log('朝阳区街道数据：', streets)
 
-    //     streets.forEach((street, index) => {
-    //       // 创建街道边界polygon
-    //       const polygon = new AMap.Polygon({
-    //         path: street.boundaries,
-    //         strokeWeight: 1,
-    //         strokeColor: '#0091ea',
-    //         fillColor: streetColors.getColor(index),
-    //         fillOpacity: 0.5,
-    //       })
-
-    //       // 将街道多边形添加到地图
-    //       polygon.setMap(map.value)
-
-    //       // 添加街道名称标注
-    //       const center = street.center
-    //       const text = new AMap.Text({
-    //         text: street.name,
-    //         position: [center.lng, center.lat],
-    //         anchor: 'center',
-    //         style: {
-    //           'background-color': 'rgba(0,0,0,0.5)',
-    //           'border-width': 0,
-    //           'text-align': 'center',
-    //           'font-size': '12px',
-    //           color: '#fff',
-    //           padding: '2px 5px',
-    //         },
-    //       })
-    //       text.setMap(map.value)
-    //     })
-    //   }
-    // })
+        // 添加街道名称标注
+        // streets.forEach((street, index) => {
+        //   const center = street.center
+        //   const text = new AMap.Text({
+        //     text: street.name,
+        //     position: [center.lng, center.lat],
+        //     anchor: 'center',
+        //     style: {
+        //       'background-color': 'rgba(0,0,0,0.5)',
+        //       'border-width': 0,
+        //       'text-align': 'center',
+        //       'font-size': '12px',
+        //       color: '#fff',
+        //       padding: '2px 5px',
+        //     },
+        //   })
+        //   text.setMap(map.value)
+        // })
+      }
+    })
 
     // 创建Loca容器，确保map.value正确传入
     let loca = (window.loca = new Loca.Container({
@@ -516,7 +505,7 @@ const initMap = async () => {
     // 拾取
     map.value.on('mousemove', (e) => {
       let feat = pl.queryFeature(e.pixel.toArray())
-      console.log('feat: ', feat)
+    //   console.log('feat: ', feat)
       if (feat) {
         text.show()
         let health = feat.properties.health

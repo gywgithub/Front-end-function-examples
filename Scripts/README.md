@@ -26,3 +26,7 @@ https://darkroom.lifeka.com/
 ```
 for (let key in window.State.stores) { window.State.stores[key] = 999999999 }
 ```
+
+## map-data-convert
+
+地图数据格式转换，chaoyang_resouce.json 为奥维地图数据，将此数据转为高德地图地图需要的geoJSON
