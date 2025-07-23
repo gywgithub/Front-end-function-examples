@@ -110,7 +110,7 @@ const initMap = async () => {
         // 创建地图实例
         map.value = new AMap.Map(mapContainer.value, {
             zoom: 11.14,
-            viewMode: '3D',
+            // viewMode: '3D',
             pitch: 45,
             // pitch: 0,
             mapStyle: 'amap://styles/darkblue', // 极夜蓝
@@ -215,15 +215,12 @@ const initMap = async () => {
         pl.setSource(geo)
         pl.setStyle({
             topColor: function (index, feature) {
-                let v = feature.properties.health * 100
                 return '#34b3fd'
             },
             sideTopColor: function (index, feature) {
                 return '#34b3fd'
             },
             sideBottomColor: function (index, feature) {
-                // let v = feature.properties.value;
-                let v = feature.properties.health * 100
                 return '#34b3fd'
             },
             height: 1000,
@@ -257,15 +254,15 @@ const initMap = async () => {
         // 拾取
         map.value.on('mousemove', (e) => {
             let feat = pl.queryFeature(e.pixel.toArray())
-            console.log('feat: ', feat)
+            // console.log('feat: ', feat)
             if (feat) {
                 text.show()
-                let health = feat.properties.health
+                let count = feat.properties.value
                 text.setText(
                     feat.properties.name +
-                    ' <br/><div style="margin-top: 10px;text-align:left;">数据：' +
-                    parseInt(health * 100) +
-                    '12</div> <div style="margin-top: 4px;text-align:left;">户籍人口:79811人</div><div style="margin-top: 4px;text-align:left;">流动人口:22331人</div><div style="margin-top: 4px;text-align:left;">统计日期:2025-7</div>',
+                    ' <br/><div style="margin-top: 10px;text-align:left;">人口数：' +
+                    parseInt(count) +
+                    '</div>',
                 )
                 text.setPosition(e.lnglat)
 
@@ -274,21 +271,18 @@ const initMap = async () => {
                         if (feature === feat) {
                             return [164, 241, 199, 0.5]
                         }
-                        let v = feature.properties.health * 100
                         return '#34b3fd'
                     },
                     sideTopColor: (index, feature) => {
                         if (feature === feat) {
                             return [164, 241, 199, 0.5]
                         }
-                        let v = feature.properties.health * 100
                         return '#34b3fd'
                     },
                     sideBottomColor: (index, feature) => {
                         if (feature === feat) {
                             return [164, 241, 199, 0.5]
                         }
-                        let v = feature.properties.health * 100
                         return '#34b3fd'
                     },
                     height: 1000,
@@ -676,36 +670,70 @@ const initMap = async () => {
             ]
         }
 
-    //   let mock_data2 = {
-    //         "type": "FeatureCollection",
-    //         "features": [
-    //             {
-    //                 "type": "Feature",
-    //                 "geometry": {
-    //                     "type": "Point",
-    //                     "coordinates": [119.518251, 35.683927]
-    //                 },
-    //                 "properties": {
-    //                     "count": 1159
-    //                 }
-    //             }
-    //         ]
-    //     }
+        //   let mock_data2 = {
+        //         "type": "FeatureCollection",
+        //         "features": [
+        //             {
+        //                 "type": "Feature",
+        //                 "geometry": {
+        //                     "type": "Point",
+        //                     "coordinates": [119.518251, 35.683927]
+        //                 },
+        //                 "properties": {
+        //                     "count": 1159
+        //                 }
+        //             }
+        //         ]
+        //     }
 
-        let heatData2 = {
+        let heatData2: any = {
             "type": "FeatureCollection",
             "features": []
         }
-        let geo2 = new Loca.GeoJSONSource({
-            data: heatData
+
+        // // 创建行政区查询对象
+        const districtSearch = new AMap.DistrictSearch({
+            level: 'street', // 设置查询级别为街道级
+            subdistrict: 2, // 返回下一级行政区
+            extensions: 'all', // 返回行政区边界坐标组等具体信息
+        })
+
+        // 查询朝阳区的街道
+        districtSearch.search('朝阳区', (status, result) => {
+            console.log(3333)
+            console.log(status)
+            console.log(result)
+            if (status === 'complete') {
+                const streets = result.districtList[0].districtList
+                console.log('朝阳区街道数据：', streets)
+
+                streets.forEach(item => {
+                    heatData2.features.push({
+                        type: 'Feature',
+                        geometry: {
+                            type: 'Point',
+                            coordinates: [item.center.lng, item.center.lat] // 使用街道中心点坐标,
+                        },
+                        properties: {
+                            // count: Math.floor(Math.random() * 1000) + 1, // 随机生成热力值
+                            count: geojsonData.features.find(f => f.properties.name === item.name)?.properties.value || 0, // 使用geojsonData中的健康值
+                            name: item.name, // 街道名称
+                        },
+                    })
+                })
+
+                console.log('热力图数据：', heatData2)
+
+                   let geo2 = new Loca.GeoJSONSource({
+            data: heatData2
         });
         //  let geo = new Loca.GeoJSONSource({
         //     url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/tsing.json',
         // });
         heatmap.setSource(geo2, {
-            radius: 9000,
+            radius: 3000,
             unit: 'meter',
-            height: 8000,
+            height: 2000,
             difference: true,
             gradient: {
                 1: '#FF4C2F',
@@ -722,6 +750,29 @@ const initMap = async () => {
             heightBezier: [0, 0.53, 0.37, 0.98]
         });
         loca.add(heatmap);
+
+                // 添加街道名称标注
+                // streets.forEach((street, index) => {
+                //   const center = street.center
+                //   const text = new AMap.Text({
+                //     text: street.name,
+                //     position: [center.lng, center.lat],
+                //     anchor: 'center',
+                //     style: {
+                //       'background-color': 'rgba(0,0,0,0.5)',
+                //       'border-width': 0,
+                //       'text-align': 'center',
+                //       'font-size': '12px',
+                //       color: '#fff',
+                //       padding: '2px 5px',
+                //     },
+                //   })
+                //   text.setMap(map.value)
+                // })
+            }
+        })
+
+     
 
         // 生长动画
         map.value.on('click', function () {

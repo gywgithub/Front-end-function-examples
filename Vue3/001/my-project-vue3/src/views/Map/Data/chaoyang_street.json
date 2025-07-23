@@ -10,8 +10,7 @@
                     116.408795,
                     39.971735
                 ],
-                "value": 77127,
-                "health": 0.626965
+                "value": 77127
             },
             "geometry": {
                 "type": "Polygon",
@@ -1042,9 +1041,7 @@
             "properties": {
                 "id": "2",
                 "name": "大屯街道",
-                "value": 95506,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 95506
             },
             "geometry": {
                 "type": "Polygon",
@@ -2015,9 +2012,7 @@
             "properties": {
                 "id": "3",
                 "name": "崔各庄乡",
-                "value": 27348,
-                "health": 0.01,
-                "zylsd": 40.959447
+                "value": 27348
             },
             "geometry": {
                 "type": "Polygon",
@@ -4176,9 +4171,7 @@
             "properties": {
                 "id": "4",
                 "name": "六里屯街道",
-                "value": 58536,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 58536
             },
             "geometry": {
                 "type": "Polygon",
@@ -5077,9 +5070,7 @@
             "properties": {
                 "id": "5",
                 "name": "潘家园街道",
-                "value": 75282,
-                "health": 0.5,
-                "zylsd": 40.959447
+                "value": 75282
             },
             "geometry": {
                 "type": "Polygon",
@@ -5882,9 +5873,7 @@
             "properties": {
                 "id": "6",
                 "name": "十八里店乡",
-                "value": 46408,
-                "health": 0.851,
-                "zylsd": 40.959447
+                "value": 46408
             },
             "geometry": {
                 "type": "Polygon",
@@ -8991,9 +8980,7 @@
             "properties": {
                 "id": "7",
                 "name": "东湖街道",
-                "value": 46728,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 46728
             },
             "geometry": {
                 "type": "Polygon",
@@ -9448,9 +9435,7 @@
             "properties": {
                 "id": "8",
                 "name": "三里屯街道",
-                "value": 35514,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 35514
             },
             "geometry": {
                 "type": "Polygon",
@@ -9881,9 +9866,7 @@
             "properties": {
                 "id": "9",
                 "name": "将台乡",
-                "value": 30240,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 30240
             },
             "geometry": {
                 "type": "Polygon",
@@ -12058,9 +12041,7 @@
             "properties": {
                 "id": "10",
                 "name": "孙河乡",
-                "value": 23013,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 23013
             },
             "geometry": {
                 "type": "Polygon",
@@ -16391,9 +16372,7 @@
             "properties": {
                 "id": "11",
                 "name": "呼家楼街道",
-                "value": 60807,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 60807
             },
             "geometry": {
                 "type": "Polygon",
@@ -16672,9 +16651,7 @@
             "properties": {
                 "id": "12",
                 "name": "金盏乡",
-                "value": 28512,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 28512
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -19339,9 +19316,7 @@
             "properties": {
                 "id": "13",
                 "name": "劲松街道",
-                "value": 77722,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 77722
             },
             "geometry": {
                 "type": "Polygon",
@@ -20252,8 +20227,7 @@
             "properties": {
                 "id": "14",
                 "name": "酒仙桥街道",
-                "value": 66878,
-                "health": 1
+                "value": 66878
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -21706,9 +21680,7 @@
             "properties": {
                 "id": "15",
                 "name": "左家庄街道",
-                "value": 62770,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 62770
             },
             "geometry": {
                 "type": "Polygon",
@@ -22631,9 +22603,7 @@
             "properties": {
                 "id": "16",
                 "name": "三间房乡",
-                "value": 65694,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 65694
             },
             "geometry": {
                 "type": "Polygon",
@@ -24260,9 +24230,7 @@
             "properties": {
                 "id": "17",
                 "name": "亚运村街道",
-                "value": 46839,
-                "health": 0.01,
-                "zylsd": 40.959447
+                "value": 46839
             },
             "geometry": {
                 "type": "Polygon",
@@ -25029,9 +24997,7 @@
             "properties": {
                 "id": "18",
                 "name": "团结湖街道",
-                "value": 30862,
-                "health": 0.1,
-                "zylsd": 40.959447
+                "value": 30862
             },
             "geometry": {
                 "type": "Polygon",
@@ -25430,9 +25396,7 @@
             "properties": {
                 "id": "19",
                 "name": "双井街道",
-                "value": 75585,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 75585
             },
             "geometry": {
                 "type": "Polygon",
@@ -26691,9 +26655,7 @@
             "properties": {
                 "id": "20",
                 "name": "朝外街道",
-                "value": 41730,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 41730
             },
             "geometry": {
                 "type": "Polygon",
@@ -27080,9 +27042,7 @@
             "properties": {
                 "id": "21",
                 "name": "首都机场街道",
-                "value": 22245,
-                "health": 0.7,
-                "zylsd": 40.959447
+                "value": 22245
             },
             "geometry": {
                 "type": "Polygon",
@@ -28529,9 +28489,7 @@
             "properties": {
                 "id": "22",
                 "name": "豆各庄乡",
-                "value": 22097,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 22097
             },
             "geometry": {
                 "type": "Polygon",
@@ -30098,9 +30056,7 @@
             "properties": {
                 "id": "23",
                 "name": "建外街道",
-                "value": 34536,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 34536
             },
             "geometry": {
                 "type": "Polygon",
@@ -30531,9 +30487,7 @@
             "properties": {
                 "id": "24",
                 "name": "王四营乡",
-                "value": 20952,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 20952
             },
             "geometry": {
                 "type": "Polygon",
@@ -32334,9 +32288,7 @@
             "properties": {
                 "id": "25",
                 "name": "太阳宫乡",
-                "value": 70526,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 70526
             },
             "geometry": {
                 "type": "Polygon",
@@ -34103,9 +34055,7 @@
             "properties": {
                 "id": "26",
                 "name": "南磨房乡",
-                "value": 72129,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 72129
             },
             "geometry": {
                 "type": "Polygon",
@@ -35904,9 +35854,7 @@
             "properties": {
                 "id": "27",
                 "name": "来广营乡",
-                "value": 82011,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 82011
             },
             "geometry": {
                 "type": "Polygon",
@@ -37593,9 +37541,7 @@
             "properties": {
                 "id": "28",
                 "name": "奥运村街道",
-                "value": 71422,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 71422
             },
             "geometry": {
                 "type": "Polygon",
@@ -39046,9 +38992,7 @@
             "properties": {
                 "id": "29",
                 "name": "小红门乡",
-                "value": 31887,
-                "health": 0.8,
-                "zylsd": 40.959447
+                "value": 31887
             },
             "geometry": {
                 "type": "Polygon",
@@ -41243,9 +41187,7 @@
             "properties": {
                 "id": "30",
                 "name": "常营回族乡",
-                "value": 44028,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 44028
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -42666,9 +42608,7 @@
             "properties": {
                 "id": "31",
                 "name": "管庄乡",
-                "value": 66207,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 66207
             },
             "geometry": {
                 "type": "Polygon",
@@ -44403,9 +44343,7 @@
             "properties": {
                 "id": "32",
                 "name": "望京街道",
-                "value": 98233,
-                "health": 0.1,
-                "zylsd": 40.959447
+                "value": 98233
             },
             "geometry": {
                 "type": "Polygon",
@@ -45320,9 +45258,7 @@
             "properties": {
                 "id": "33",
                 "name": "东坝乡",
-                "value": 73832,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 73832
             },
             "geometry": {
                 "type": "Polygon",
@@ -47551,9 +47487,7 @@
             "properties": {
                 "id": "34",
                 "name": "小关街道",
-                "value": 43134,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 43134
             },
             "geometry": {
                 "type": "Polygon",
@@ -47916,9 +47850,7 @@
             "properties": {
                 "id": "35",
                 "name": "垡头街道",
-                "value": 39590,
-                "health": 0.5,
-                "zylsd": 40.959447
+                "value": 39590
             },
             "geometry": {
                 "type": "MultiPolygon",
@@ -49035,9 +48967,7 @@
             "properties": {
                 "id": "36",
                 "name": "黑庄户乡",
-                "value": 22132,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 22132
             },
             "geometry": {
                 "type": "Polygon",
@@ -50708,8 +50638,7 @@
             "properties": {
                 "id": "37",
                 "name": "麦子店街道",
-                "value": 23224,
-                "health": 0.1
+                "value": 23224
             },
             "geometry": {
                 "type": "Polygon",
@@ -51356,8 +51285,7 @@
             "properties": {
                 "id": "38",
                 "name": "八里庄街道",
-                "value": 79887,
-                "health": 0.626965
+                "value": 79887
             },
             "geometry": {
                 "type": "Polygon",
@@ -51972,9 +51900,7 @@
             "properties": {
                 "id": "39",
                 "name": "东风乡",
-                "value": 37200,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 37200
             },
             "geometry": {
                 "type": "Polygon",
@@ -53445,9 +53371,7 @@
             "properties": {
                 "id": "40",
                 "name": "平房乡",
-                "value": 46959,
-                "health": 0.2,
-                "zylsd": 40.959447
+                "value": 46959
             },
             "geometry": {
                 "type": "Polygon",
@@ -55186,9 +55110,7 @@
             "properties": {
                 "id": "41",
                 "name": "香河园街道",
-                "value": 33278,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 33278
             },
             "geometry": {
                 "type": "Polygon",
@@ -55759,9 +55681,7 @@
             "properties": {
                 "id": "42",
                 "name": "安贞街道",
-                "value": 41944,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 41944
             },
             "geometry": {
                 "type": "Polygon",
@@ -56580,9 +56500,7 @@
             "properties": {
                 "id": "43",
                 "name": "高碑店乡",
-                "value": 56268,
-                "health": 0.626965,
-                "zylsd": 40.959447
+                "value": 56268
             },
             "geometry": {
                 "type": "Polygon",
