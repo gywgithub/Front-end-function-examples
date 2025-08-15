@@ -57,6 +57,46 @@ const router = createRouter({
       name: 'heat-map-2',
       component: () => import('../views/Map/heatmap2.vue')
     },
+    {
+      path: '/heat-map-3',
+      name: 'heat-map-3',
+      component: () => import('../views/Map/heatmap3.vue')
+    },
+    {
+      path: '/map-3d',
+      name: 'map-3d',
+      component: () => import('../views/Map/3d/index.vue')
+    },
+    {
+      path: '/map-3d-zhejiang',
+      name: 'map-3d-zhejiang',
+      component: () => import('../views/Map/3d/zhejiang.vue')
+    },
+    {
+      path: '/map-3d-chaoyang',
+      name: 'map-3d-chaoyang',
+      component: () => import('../views/Map/3d/chaoyang.vue')
+    },
+    {
+      path: '/map-3d-chaoyang-bg',
+      name: 'map-3d-chaoyang-bg',
+      component: () => import('../views/Map/3d/chaoyang-bg.vue')
+    },
+    {
+      path: '/map-3d-chaoyang-bg2',
+      name: 'map-3d-chaoyang-bg2',
+      component: () => import('../views/Map/3d/chaoyang-bg2.vue')
+    },
+    {
+      path: '/map-3d-chaoyang-tooltip',
+      name: 'map-3d-chaoyang-tooltip',
+      component: () => import('../views/Map/3d/chaoyang-tooltip.vue')
+    },
+    {
+      path: '/map-3d-chaoyang-tooltip-animation',
+      name: 'map-3d-chaoyang-tooltip-animation',
+      component: () => import('../views/Map/3d/chaoyang-tooltip-animation.vue')
+    },
   ]
 })
 

@@ -712,7 +712,7 @@ const initMap = async () => {
                         type: 'Feature',
                         geometry: {
                             type: 'Point',
-                            coordinates: [item.center.lng, item.center.lat] // 使用街道中心点坐标,
+                            coordinates: [item.center.lng - 0.01, item.center.lat] // 经度往西移一点点
                         },
                         properties: {
                             // count: Math.floor(Math.random() * 1000) + 1, // 随机生成热力值
@@ -724,32 +724,32 @@ const initMap = async () => {
 
                 console.log('热力图数据：', heatData2)
 
-                   let geo2 = new Loca.GeoJSONSource({
-            data: heatData2
-        });
-        //  let geo = new Loca.GeoJSONSource({
-        //     url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/tsing.json',
-        // });
-        heatmap.setSource(geo2, {
-            radius: 3000,
-            unit: 'meter',
-            height: 2000,
-            difference: true,
-            gradient: {
-                1: '#FF4C2F',
-                0.8: '#FAA53F',
-                0.6: '#FFF100',
-                0.5: '#7DF675',
-                0.4: '#5CE182',
-                0.2: '#29CF6F',
-            },
-            value: function (index, feature) {
-                return feature.properties.count;
-            },
-            opacity: [0, 1],
-            heightBezier: [0, 0.53, 0.37, 0.98]
-        });
-        loca.add(heatmap);
+                let geo2 = new Loca.GeoJSONSource({
+                    data: heatData2
+                });
+                //  let geo = new Loca.GeoJSONSource({
+                //     url: 'https://a.amap.com/Loca/static/loca-v2/demos/mock_data/tsing.json',
+                // });
+                heatmap.setSource(geo2, {
+                    radius: 3000,
+                    unit: 'meter',
+                    height: 2000,
+                    difference: true,
+                    gradient: {
+                        1: '#FF4C2F',
+                        0.8: '#FAA53F',
+                        0.6: '#FFF100',
+                        0.5: '#7DF675',
+                        0.4: '#5CE182',
+                        0.2: '#29CF6F',
+                    },
+                    value: function (index, feature) {
+                        return feature.properties.count;
+                    },
+                    opacity: [0, 1],
+                    heightBezier: [0, 0.53, 0.37, 0.98]
+                });
+                loca.add(heatmap);
 
                 // 添加街道名称标注
                 // streets.forEach((street, index) => {
@@ -772,7 +772,7 @@ const initMap = async () => {
             }
         })
 
-     
+
 
         // 生长动画
         map.value.on('click', function () {

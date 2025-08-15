@@ -13,7 +13,7 @@ onMounted(() => {
   <div>
 
     <div
-      style="position: fixed; top: 10px; left: 10px; right: 20px; z-index: 1000; background-color: #fff; padding: 10px; border-radius: 5px;">
+      style="position: fixed; top: 10px; left: 10px; right: 20px; z-index: 1000; background-color: #fff; padding: 10px; border-radius: 5px;border:1px solid #ccc;">
       <template v-for="route in routes" :key="route.path">
         <RouterLink :to="route.path">
           {{ route.name }}
@@ -24,12 +24,12 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
+<style>
 html,
 body {
   height: 100%;
   margin: 0;
-  padding: 0;
+  padding: 30px 10px 0 10px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
 }
 </style>
