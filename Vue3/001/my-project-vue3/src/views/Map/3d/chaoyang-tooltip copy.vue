@@ -31,7 +31,7 @@ const chartMap = () => {
     visualMap: [
       {
         type: "continuous",
-        text: ["低", "高"],
+        text: ["高", "低"],
         show: true, // 隐藏视觉映射组件，但仍然应用其配置
         calculable: true,
         max: 100000,

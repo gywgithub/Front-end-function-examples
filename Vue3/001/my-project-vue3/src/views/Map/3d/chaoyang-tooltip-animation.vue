@@ -1,15 +1,24 @@
 <template>
   <div class="map" id="mapEchart" style="width:100%;height:calc(100vh - 100px) ;"></div>
+
+  <div class="animation-controls">
+    <button @click="toggleAnimation">
+      {{ isAnimating ? '暂停' : '开始' }}
+    </button>
+  </div>
 </template>
 
 <script setup>
 import geoJson from "./json/chaoyang_street.json";
 import * as echarts from "echarts";
 import "echarts-gl";
-import { onMounted } from "vue";
+import { onMounted, ref, onUnmounted } from "vue";
 
+const isAnimating = ref(true);
+let animationId = null;
+let myChart = null;
 const chartMap = () => {
-  var myChart = echarts.init(document.getElementById("mapEchart"));
+  myChart = echarts.init(document.getElementById("mapEchart"));
   echarts.registerMap("chaoyang", geoJson);
 
   // 缓存地图实例，避免重复初始化
@@ -20,13 +29,13 @@ const chartMap = () => {
       show: true,
       trigger: 'item',
       formatter: function (params) {
-        return `${params.name}<br/> 数值: ${params.value ? params.value[0] : '未知'} <br/> 日期: ${params.value ? params.value[1] : '未知'}`;
+        return `${params.name}<br/> 人数: ${params.value ? params.value[0] : '未知'} <br/> 日期: ${params.value ? params.value[1] : '未知'}`;
       }
     },
     visualMap: [
       {
         type: "continuous",
-        text: ["低", "高"],
+        text: ["高", "低"],
         show: true,
         calculable: true,
         max: 100000,
@@ -102,16 +111,58 @@ const chartMap = () => {
           },
         },
         data: [
-          { name: '和平街街道', value: [75506, '2025-01-01'] },
+          { name: '和平街街道', value: [77127, '2025-01-01'] },
           { name: '大屯街道', value: [95506, '2025-01-01'] },
           { name: '崔各庄乡', value: [27348, '2025-01-01'] },
-          { name: '六里屯街道', value: [100, '2025-01-01'] },
-        ]
+          { name: '六里屯街道', value: [58536, '2025-01-01'] },
+          { name: '潘家园街道', value: [75282, '2025-01-01'] },
+          { name: '十八里店乡', value: [46408, '2025-01-01'] },
+          { name: '东湖街道', value: [46728, '2025-01-01'] },
+          { name: '三里屯街道', value: [35514, '2025-01-01'] },
+          { name: '将台乡', value: [30240, '2025-01-01'] },
+          { name: '孙河乡', value: [23013, '2025-01-01'] },
+          { name: '呼家楼街道', value: [60807, '2025-01-01'] },
+          { name: '金盏乡', value: [28512, '2025-01-01'] },
+          { name: '劲松街道', value: [77722, '2025-01-01'] },
+          { name: '酒仙桥街道', value: [66878, '2025-01-01'] },
+          { name: '左家庄街道', value: [62770, '2025-01-01'] },
+          { name: '三间房乡', value: [65694, '2025-01-01'] },
+          { name: '亚运村街道', value: [46839, '2025-01-01'] },
+          { name: '团结湖街道', value: [30862, '2025-01-01'] },
+          { name: '双井街道', value: [75585, '2025-01-01'] },
+          { name: '朝外街道', value: [41730, '2025-01-01'] },
+          { name: '首都机场街道', value: [22245, '2025-01-01'] },
+          { name: '豆各庄乡', value: [22097, '2025-01-01'] },
+          { name: '建外街道', value: [34536, '2025-01-01'] },
+          { name: '王四营乡', value: [20952, '2025-01-01'] },
+          { name: '太阳宫乡', value: [70526, '2025-01-01'] },
+          { name: '南磨房乡', value: [72129, '2025-01-01'] },
+          { name: '来广营乡', value: [82011, '2025-01-01'] },
+          { name: '奥运村街道', value: [71422, '2025-01-01'] },
+          { name: '小红门乡', value: [31887, '2025-01-01'] },
+          { name: '常营回族乡', value: [44028, '2025-01-01'] },
+          { name: '管庄乡', value: [66207, '2025-01-01'] },
+          { name: '望京街道', value: [98233, '2025-01-01'] },
+          { name: '东坝乡', value: [73832, '2025-01-01'] },
+          { name: '小关街道', value: [43134, '2025-01-01'] },
+          { name: '垡头街道', value: [39590, '2025-01-01'] },
+          { name: '黑庄户乡', value: [22132, '2025-01-01'] },
+          { name: '麦子店街道', value: [23224, '2025-01-01'] },
+          { name: '八里庄街道', value: [79887, '2025-01-01'] },
+          { name: '东风乡', value: [37200, '2025-01-01'] },
+          { name: '平房乡', value: [46959, '2025-01-01'] },
+          { name: '香河园街道', value: [33278, '2025-01-01'] },
+          { name: '安贞街道', value: [41944, '2025-01-01'] },
+          { name: '高碑店乡', value: [56268, '2025-01-01'] },
+        ],
       }
     ],
   };
 
   myChart.setOption(option);
+
+  // 启动光照动画
+  startLightAnimation();
 
   // 优化 resize 事件，避免频繁触发
   let resizeTimer = null;
@@ -123,8 +174,59 @@ const chartMap = () => {
   });
 };
 
+// onMounted(() => {
+//   chartMap();
+// });
+
+// 添加光照动画函数
+const startLightAnimation = () => {
+  const animateLight = () => {
+    if (!isAnimating.value || !myChart) return;
+
+    const time = Date.now() / 2000;
+    const alpha = 55 + Math.sin(time) * 30;
+    const beta = 10 + Math.cos(time) * 30;
+
+    const currentOption = myChart.getOption();
+    if (currentOption && currentOption.series && currentOption.series[0]) {
+      currentOption.series[0].light.main.alpha = alpha;
+      currentOption.series[0].light.main.beta = beta;
+
+      myChart.setOption(currentOption, {
+        replace: false,
+        silent: true
+      });
+    }
+
+    animationId = requestAnimationFrame(animateLight);
+  };
+
+  animateLight();
+};
+
+// 添加控制动画的函数
+const toggleAnimation = () => {
+  isAnimating.value = !isAnimating.value;
+  if (isAnimating.value) {
+    startLightAnimation();
+  } else if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+};
+
+// 修改 onMounted
 onMounted(() => {
   chartMap();
+});
+
+// 添加清理函数
+onUnmounted(() => {
+  if (animationId) {
+    cancelAnimationFrame(animationId);
+  }
+  if (myChart) {
+    myChart.dispose();
+  }
 });
 </script>
 

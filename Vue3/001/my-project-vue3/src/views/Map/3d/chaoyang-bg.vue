@@ -37,7 +37,7 @@ const chartMap = () => {
     visualMap: [
       {
         type: "continuous",
-        text: ["低", "高"],
+        text: ["高", "低"],
         show: false, // 隐藏视觉映射组件，但仍然应用其配置
         calculable: true,
         dimension: 2, // 使用数据的第3个维度（Z轴数值）进行映射
@@ -71,7 +71,9 @@ const chartMap = () => {
         // autoRotate: true,
         autoRotate: false, // 关闭自动旋转
         autoRotateAfterStill: 3,
-        distance: 190,// 增加距离值来缩小视图 (原值: 120)
+        distance: 190,// 增加距离值来缩小视图
+        minDistance: 170, // 设置最小距离，限制最大放大层级
+        maxDistance: 220, // 设置最大距离，限制最小缩小层级
         minAlpha: 5, // 上下旋转的最小 alpha 值。即视角能旋转到达最上面的角度。[ default: 5 ]
         maxAlpha: 90, // 上下旋转的最大 alpha 值。即视角能旋转到达最下面的角度。[ default: 90 ]
         minBeta: -360, // 左右旋转的最小 beta 值。即视角能旋转到达最左的角度。[ default: -80 ]
@@ -81,6 +83,7 @@ const chartMap = () => {
         animationEasingUpdate: "cubicInOut", // 过渡动画的缓动效果。[ default: cubicInOut ]
         // alpha: 45, // 调整上下角度，让地图更往上一点 (新增)
         // beta: 10,   // 左右角度 (新增)
+        center: [0, -10, 0] // 将地图整体上移
       },
 
 

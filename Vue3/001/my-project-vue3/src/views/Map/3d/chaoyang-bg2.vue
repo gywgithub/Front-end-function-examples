@@ -40,7 +40,7 @@ const chartMap = () => {
     visualMap: [
       {
         type: "continuous",
-        text: ["低", "高"],
+        text: ["高", "低"],
         show: false, // 隐藏视觉映射组件，但仍然应用其配置
         calculable: true,
         dimension: 2, // 使用数据的第3个维度（Z轴数值）进行映射

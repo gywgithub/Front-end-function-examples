@@ -17,12 +17,12 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import('../views/AboutView.vue')
     },
-     {
+    {
       path: '/Table1',
       name: 'Table1',
       component: () => import('../views/Table1.vue')
     },
-     {
+    {
       path: '/Table2',
       name: 'Table2',
       component: () => import('../views/Table2.vue')
@@ -97,6 +97,16 @@ const router = createRouter({
       name: 'map-3d-chaoyang-tooltip-animation',
       component: () => import('../views/Map/3d/chaoyang-tooltip-animation.vue')
     },
+    {
+      path: '/chaoyang-heatmap',
+      name: 'chaoyang-heatmap',
+      component: () => import('../views/Map/3d/chaoyang-heatmap.vue')
+    },
+    {
+      path: '/chaoyang-animation-2',
+      name: 'chaoyang-animation-2',
+      component: () => import('../views/Map/3d/chaoyang-animation-2.vue')
+    }
   ]
 })
 

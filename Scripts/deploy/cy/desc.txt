@@ -1,0 +1,6 @@
+使用node脚本帮我实现一个自动化发布的功能，具体需求如下：
+1. 进入项目根目录 D:\project\01ChaoYangBigScreen
+2. 执行 nvm use 20 切换到node20环境
+3. 执行 pnpm run build 打包项目
+4. 进入 D:\project\01ChaoYangBigScreen\dist 目录把当前dist目录下的所有文件上传到服务器 /data/exam/report 目录下, 将 dist目录所有文件上传到服务器对应为止，如果文件重复则执行覆盖操作
+5. 服务器信息内容读取当前目录下的 userinfo.json 文件，用户名读取文件中的 username 属性值，ip 读取 ip 属性值，密码读取 password 属性

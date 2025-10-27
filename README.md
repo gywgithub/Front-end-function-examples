@@ -163,3 +163,10 @@ WebRTC 相机在线拍照
 - MapStreet: 实现了北京市朝阳区街道的3D效果
 - heatmap1: 
 - heatmap2: 3D热力—青岛交通拥堵指数
+
+#### 001/my-project-vue3/src/views/Map/3d
+
+基于echarts-gl 实现的一些3d地图效果
+
+- zhejiang: 浙江省的3D地图效果
+- chaoyang*: 北京市朝阳区街道的3D地图效果

@@ -1,0 +1,14 @@
+{
+  "name": "gcj-02_to_wgs-84",
+  "version": "1.0.0",
+  "main": "conver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "gcoord": "^1.0.7"
+  }
+}

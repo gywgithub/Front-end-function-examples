@@ -7,6 +7,7 @@
 // 关于geoJSON 数据，可以访问 https://geojson.io 创建，或者在里面验证数据是否正常
 
 import geoJson from "./json/chaoyang_street.json"; //该文件路径改成自己项目中的文件路径即可
+// import geoJson from "./json/chaoyang_street_origin.json"; //原始文件，体积很大，性能差
 import * as echarts from "echarts";
 import "echarts-gl"; //3D地图插件
 import { onMounted } from "vue";
@@ -36,7 +37,7 @@ const chartMap = () => {
     visualMap: [
       {
         type: "continuous",
-        text: ["xxx"],
+        text: ["高", "低"],
         show: false, // 隐藏视觉映射组件，但仍然应用其配置
         calculable: true,
         max: 250,
@@ -56,13 +57,6 @@ const chartMap = () => {
         borderColor: "#000",
         // areaColor: '#fff'
       },
-      // tooltip: {
-      //   show: true,
-      //   formatter: function (params) {
-      //     console.log('geo3D tooltip params: ', params);
-      //     return params.name || '未知区域';
-      //   }
-      // },
       viewControl: {
         // autoRotate: true,
         autoRotate: false, // 关闭自动旋转

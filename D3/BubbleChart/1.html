@@ -1,0 +1,204 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>流感易感人群分布</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .chart-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            border-radius: 4px;
+            pointer-events: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="chart-container">
+        <h1>流行性感冒易感人群分布</h1>
+        <svg id="bubble-chart" width="900" height="500"></svg>
+    </div>
+
+    <script>
+        // 示例数据
+        const data = [
+            { name: "学生", count: 300000, color: "#4e79a7" },
+            { name: "农民", count: 250000, color: "#f28e2b" },
+            { name: "工人", count: 150000, color: "#e15759" },
+            { name: "教师", count: 120000, color: "#76b7b2" },
+            { name: "医务人员", count: 80000, color: "#59a14f" },
+            { name: "服务业人员", count: 180000, color: "#edc948" },
+            { name: "公务员", count: 70000, color: "#b07aa1" },
+            { name: "退休人员", count: 90000, color: "#ff9da7" }
+        ];
+
+        // 设置SVG和边距
+        const margin = { top: 40, right: 30, bottom: 60, left: 60 };
+        const width = 900 - margin.left - margin.right;
+        const height = 500 - margin.top - margin.bottom;
+
+        // 创建SVG元素
+        const svg = d3.select("#bubble-chart")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // 创建比例尺
+        const radiusScale = d3.scaleSqrt()
+            .domain([0, d3.max(data, d => d.count)])
+            .range([5, 80]);
+
+        // 创建力导向布局
+        const simulation = d3.forceSimulation(data)
+            .force("x", d3.forceX(width/2).strength(0.05))
+            .force("y", d3.forceY(height/2).strength(0.05))
+            .force("collide", d3.forceCollide().radius(d => radiusScale(d.count) + 1))
+            .force("charge", d3.forceManyBody().strength(5));
+
+        // 创建气泡
+        const bubbles = svg.append("g")
+            .selectAll("circle")
+            .data(data)
+            .enter().append("circle")
+            .attr("r", d => radiusScale(d.count))
+            .attr("fill", d => d.color)
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .call(drag(simulation));
+
+        // 添加职业标签
+        const labels = svg.append("g")
+            .selectAll("text")
+            .data(data)
+            .enter().append("text")
+            .text(d => d.name)
+            .attr("font-size", "12px")
+            .attr("text-anchor", "middle")
+            .attr("dy", ".3em");
+
+        // 添加人数标签
+        const counts = svg.append("g")
+            .selectAll("text")
+            .data(data)
+            .enter().append("text")
+            .text(d => d3.format(".1s")(d.count).replace("G", "B"))
+            .attr("font-size", "10px")
+            .attr("text-anchor", "middle")
+            .attr("dy", "1.5em")
+            .attr("fill", "#555");
+
+        // 创建图例
+        const legend = svg.append("g")
+            .attr("transform", `translate(${width - 150}, 20)`);
+
+        legend.selectAll("rect")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", 0)
+            .attr("y", (d, i) => i * 20)
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", d => d.color);
+
+        legend.selectAll("text")
+            .data(data)
+            .enter().append("text")
+            .attr("x", 20)
+            .attr("y", (d, i) => i * 20 + 12)
+            .text(d => d.name)
+            .attr("font-size", "12px");
+
+        // 添加标题
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", -10)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "16px")
+            .text("各职业人群流感易感人数分布");
+
+        // 添加拖拽功能
+        function drag(simulation) {
+            function dragstarted(event) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                event.subject.fx = event.subject.x;
+                event.subject.fy = event.subject.y;
+            }
+            
+            function dragged(event) {
+                event.subject.fx = event.x;
+                event.subject.fy = event.y;
+            }
+            
+            function dragended(event) {
+                if (!event.active) simulation.alphaTarget(0);
+                event.subject.fx = null;
+                event.subject.fy = null;
+            }
+            
+            return d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended);
+        }
+
+        // 更新气泡和标签位置
+        simulation.on("tick", () => {
+            bubbles
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+            
+            labels
+                .attr("x", d => d.x)
+                .attr("y", d => d.y);
+                
+            counts
+                .attr("x", d => d.x)
+                .attr("y", d => d.y);
+        });
+
+        // 添加工具提示
+        const tooltip = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        bubbles.on("mouseover", function(event, d) {
+            tooltip.transition()
+                .duration(200)
+                .style("opacity", .9);
+            tooltip.html(`<strong>${d.name}</strong><br/>发病人数: ${d3.format(",")(d.count)}`)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 28) + "px");
+            })
+            .on("mouseout", function() {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+    </script>
+</body>
+</html>

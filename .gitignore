@@ -2,6 +2,9 @@
 node_modules/
 package-lock.json
 
+userinfo.json
+*.zip
+
 # Editor directories and files
 .idea
 .vscode
