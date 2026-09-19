@@ -14,7 +14,7 @@ CSS 动画 - 左右移动,360°旋转
 
 ### choose-video
 
-视频选择
+摄像头选择
 
 ### css-filter-gray
 
